@@ -6,17 +6,17 @@
 		<meta name="_token" content="{{ csrf_token() }}" />
 		<title>PrintedCart: Shop</title>
 		<style type="text/css">
-		#wrapper{ width: 80%; text-align: center; margin: 0 auto; }
-		.thumbimage {
-			float:left;
-			width:100px;
-			position:relative;
-			padding:5px;
-		}
-		nav.navbar:before, nav.navbar:after, nav.navbar .container:before, nav.navbar .container:after{display:none;}
-		html{
-			//font-size:inherit !important;
-		}
+			#wrapper{ width: 80%; text-align: center; margin: 0 auto; }
+			.thumbimage {
+				float:left;
+				width:100px;
+				position:relative;
+				padding:5px;
+			}
+			nav.navbar:before, nav.navbar:after, nav.navbar .container:before, nav.navbar .container:after{display:none;}
+			html{
+				//font-size:inherit !important;
+			}
 		</style>
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -27,24 +27,22 @@
 			
 		<!-- Bootstrap Script -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-migrate-3.0.1.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="{{ URL::asset('public/js/jquery-3.2.1.slim.min.js') }}"></script>
 		<script type="text/javascript" src="{{ URL::asset('public/js/popper.min.js') }}"></script>
 		
-		
 		<script type="text/javascript">
-		$(document).ready(function() {
-			$("div.bhoechie-tab-menu>div.list-group>a").click(function(e){
-				e.preventDefault();
-				$(this).siblings('a.active').removeClass("active");
-				$(this).addClass("active");
-				var index = $(this).index();
-				$("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
-				$("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+			$(document).ready(function() {
+				$("div.bhoechie-tab-menu>div.list-group>a").click(function(e){
+					e.preventDefault();
+					$(this).siblings('a.active').removeClass("active");
+					$(this).addClass("active");
+					var index = $(this).index();
+					$("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+					$("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+				});
 			});
-		});
-
-		
 		</script>
 	</head>
 	<!-- model -->
@@ -58,29 +56,27 @@
 		</div>
 	</div>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
 	<script>
-	$(function(){
-		$("#signout_idDialog").dialog({
-			autoOpen: false,
-			width: $(window).width() > 500 ? 500 : 'auto',
-			height: 'auto',
-			fluid: true,
-			responsive: true,
-			show: {
-				//effect: "blind",
-				duration: 1000
-			},
-			hide: {
-				//effect: "explode",
-				duration: 1000
-			}
+		$(function(){
+			$("#signout_idDialog").dialog({
+				autoOpen: false,
+				width: $(window).width() > 500 ? 500 : 'auto',
+				height: 'auto',
+				fluid: true,
+				responsive: true,
+				show: {
+					//effect: "blind",
+					duration: 1000
+				},
+				hide: {
+					//effect: "explode",
+					duration: 1000
+				}
+			});
+			$( "#signout_id" ).on( "click", function() {
+				$("#signout_idDialog").dialog( "open" );
+			});
 		});
-		$( "#signout_id" ).on( "click", function() {
-			$("#signout_idDialog").dialog( "open" );
-		});
-	});
 	</script>
 	<body class="calendar-main">
 		<header>
@@ -352,367 +348,231 @@
 			});
 			</script>
 		@endif
-		
-<!-- 		<footer>
-<div id="preview-uploaded-image" class="drag-elements droppable multipleChildren hasChild" style="height: 100px;"></div>
-		</footer> -->
- <!-- Modal for upload image -->
-  <!--<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-        <h4 class="modal-title">Upload Photos</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          
-        </div>
-        <div class="modal-body">
-          <form id="UploadImgForm" name="UploadImgForm" enctype="multipart/form-data">
-          <div class="form-group"> 
-            <label for="albums">Select Album:</label>
-            <select id="albums" name="albums" class="form-control" required="">
-              <option value="">Select Album</option>
-              @foreach($albums as $album)
-              <option value="{{$album->id}}">{{$album->album_name}}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="form-group"> 
-            <a class="nav-link btn-sm btn-primary btn" href="#" data-toggle="modal" data-target="#NewAlbum"><i class="fa fa-picture-o" aria-hidden="true"></i> New Album</a>
-          </div>
-          <div class="form-group"> 
-            <label for="imageupload">Select Image:</label>
-            <input id="imageupload" type="file" name="files[]" multiple  class="form-control"/>
-          </div>
-          <div class="form-group"> 
-              <div id="preview-image" style="height: 100px;display:none;"></div>
-          </div>
-          <div class="form-group"> 
-              <input type="submit" name="Upload" class="btn btn-sm btn-primary" id="Upload" value="Upload" style="display: block;">
-          </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>-->
-
-<!-- Modal for new album -->
-<!--<div class="modal fade" id="NewAlbum" role="dialog" style="background: #000">
-    <div class="modal-dialog modal-lg">
-      <form id="NewAlbumForm" name="NewAlbumForm" enctype="multipart/form-data">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">New Album</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>          
-          </div>
-          <div class="modal-body"> 
-            <div class="form-group">  
-                <label for="albumName">Name:</label>      
-                <input type="text" name="albumName" id="albumName" class="form-control" required="">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <input type="submit"  class="btn btn-sm btn-primary" name="Upload" id="Upload" value="OK" >
-            <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>-->
-<!--<script type="text/javascript" src="{{ URL::asset('public/js/jquery.min.js') }}"></script>	
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>-->
-<style>
-#addPhotoDirection .socialSieText{padding:15px 0; background: #f5f5f5; font-size:14px;}
-#addPhotoDirection .socialBtn{color:#fff;width:100%;}
-#addPhotoDirection .socialBtn.instaBtn{background:#275f8e;}
-#addPhotoDirection .socialBtn.googleBtn{background:#dc483c;}
-#addPhotoDirection .socialBtn.facebookBtn{background:#3a5897;}
-#addPhotoDirection .socialBtn i{margin-right:5px;display:inline-block;}
-</style>
-<script type="text/javascript">
-function show_error(){
-	$(".show_error_info").attr("style","display:block");
-}
-function hide_error(){
-	$(".show_error_info").attr("style","display:none");
-}
-var base_path = "<?php echo config('app.url');?>";
-$(function(){
-	$("#addPhotoDialog").dialog({
-		autoOpen: false,
-		width: $(window).width() > 500 ? 500 : 'auto',
-		height: 'auto',
-		fluid: true,
-		responsive: true,
-		show: {
-			//effect: "blind",
-			duration: 1000
-		},
-		hide: {
-			//effect: "explode",
-			duration: 1000
+		<style>
+		#addPhotoDirection .socialSieText{padding:15px 0; background: #f5f5f5; font-size:14px;}
+		#addPhotoDirection .socialBtn{color:#fff;width:100%;}
+		#addPhotoDirection .socialBtn.instaBtn{background:#275f8e;}
+		#addPhotoDirection .socialBtn.googleBtn{background:#dc483c;}
+		#addPhotoDirection .socialBtn.facebookBtn{background:#3a5897;}
+		#addPhotoDirection .socialBtn i{margin-right:5px;display:inline-block;}
+		</style>
+		<script type="text/javascript">
+		function show_error(){
+			$(".show_error_info").attr("style","display:block");
 		}
-	});
-	/* $( "#btnPopover" ).on( "click", function() {
-		$("#addPhotoDialog").dialog( "open" );
-	}); */
-	$("#addPhotoDirection").dialog({
-		autoOpen: false,
-		width: $(window).width() > 650 ? 650 : 'auto',
-		height: 'auto',
-		fluid: true,
-		responsive: true,
-		show: {
-			//effect: "blind",
-			duration: 1000
-		},
-		hide: {
-			//effect: "explode",
-			duration: 1000
+		function hide_error(){
+			$(".show_error_info").attr("style","display:none");
 		}
-	});
-	$( "#btnPopover" ).on( "click", function() {
-		$("#addPhotoDirection").dialog( "open" );
-	}); 
-	$("#my_computer").on('click', function(){
-		$("#addPhotoDialog").dialog( "open" );
-		$("#addPhotoDirection").dialog( "close" );
-	});
-	$("#photoUploadButton").on('click',function(){
-		var files = $('input#input_files')[0].files;
-		if(files.length < 1){
-			swal("Oops!", "Please browse atleast one image...!", "error");
-		}else{
-			swal("Please Wait...!", "Photo Uploading...!", "warning");
-		}
-	});
-	
-	$("#addAlbumDialog").dialog({
-		autoOpen: false,
-		width: $(window).width() > 500 ? 500 : 'auto',
-		height: 'auto',
-		fluid: true,
-		responsive: true,
-		show: {
-			//effect: "blind",
-			duration: 1000
-		},
-		hide: {
-			//effect: "explode",
-			duration: 1000
-		}
-	});
-	$("#addalbum_inphotodialog").on("click", function(){
-		$("#addPhotoDialog").dialog( "close" );
-		$("#addAlbumDialog").dialog( "open" );
-	});
-	
-	$("#album_button").click(function(){
-		if($('#album_name').val() == ''){
-			$('#album_name').css('border','1px solid red');
-			$('#album_name').after("<span style='color:red'>Field can't be empty</span>");
-		}else{
-			var album_name = $('#album_name').val();
-			var base_path = "<?php echo config('app.url');?>";
-			$.ajaxSetup({ 
-				headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')} 
-			});
-			$.ajax({
-				url : base_path + 'user/my_photos/getExistAlbum',            
-				type : 'post',
-				data : {album_name:album_name},
-				beforeSend: function(){
-					//$('#img_loader').css('display','block');
-					//$('#img_loader').html("<img src='https://printedcart.com/printedcart/public/images/loader.gif'>");
-					swal("Please Wait...!", "Loading Data...!", "warning");
+		var base_path = "<?php echo config('app.url');?>";
+		$(function(){
+			$("#addPhotoDialog").dialog({
+				autoOpen: false,
+				width: $(window).width() > 500 ? 500 : 'auto',
+				height: 'auto',
+				fluid: true,
+				responsive: true,
+				show: {
+					//effect: "blind",
+					duration: 1000
 				},
-				success : function(data){
-					//$('#img_loader').css('display','none');
-					if(data=='yes'){
-						var error_msg = '<p class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close" style="cursor:pointer;"><span aria-hidden="true">×</span></button>Oops! You already have an album with that name. Please try again with a different name.</p>';
-						$('#album_form .row').before(error_msg);
-					}else{
-						$('#album_form').submit();
-					} 
+				hide: {
+					//effect: "explode",
+					duration: 1000
+				}
+			});
+			/* $( "#btnPopover" ).on( "click", function() {
+				$("#addPhotoDialog").dialog( "open" );
+			}); */
+			$("#addPhotoDirection").dialog({
+				autoOpen: false,
+				width: $(window).width() > 650 ? 650 : 'auto',
+				height: 'auto',
+				fluid: true,
+				responsive: true,
+				show: {
+					//effect: "blind",
+					duration: 1000
+				},
+				hide: {
+					//effect: "explode",
+					duration: 1000
+				}
+			});
+			$( "#btnPopover" ).on( "click", function() {
+				$("#addPhotoDirection").dialog( "open" );
+			}); 
+			$("#my_computer").on('click', function(){
+				$("#addPhotoDialog").dialog( "open" );
+				$("#addPhotoDirection").dialog( "close" );
+			});
+			$("#photoUploadButton").on('click',function(){
+				var files = $('input#input_files')[0].files;
+				if(files.length < 1){
+					swal("Oops!", "Please browse atleast one image...!", "error");
+				}else{
+					swal("Please Wait...!", "Photo Uploading...!", "warning");
 				}
 			});
 			
-		}
-	});
-	
-	setTimeout(function(){
-        $('.alert-success').fadeOut('fast');
-    }, 10000); 
-	setTimeout(function(){
-        $('.alert-danger').fadeOut('fast');
-    }, 50000);
-	
-});
-/*preview image on upload */
-/*  $("#imageupload").on('change', function () { 
-    var countFiles = $(this)[0].files.length; 
-     var imgPath = $(this)[0].value;
-     var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
-     var image_holder = $("#preview-image");
-     image_holder.empty();
- 
-     if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
-          if (typeof (FileReader) != "undefined") {
-			for (var i = 0; i < countFiles; i++) {
- 
-                 var reader = new FileReader();
-                 reader.onload = function (e) {
-                     $("<img />", {
-                         "src": e.target.result,
-                             "class": "thumbimage"
-                     }).appendTo(image_holder);
-                 }
- 
-                 image_holder.show();
-                 $("#Upload").show();
-                 reader.readAsDataURL($(this)[0].files[i]);
-             }
- 
-         } else {
-             alert("This browser does not support FileReader.");
-         }
-     } else {
-         alert("Pls select only images");
-     }
- });
-$("#UploadImgForm").submit(function(){
-    var frmData = new FormData($(this)[0]); 
-    $.ajaxSetup({ 
-		headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') } 
-    });
-    $.ajax({
-            url : base_path+'photobooks/upload_new_images',            
-            type : 'POST',
-            data : frmData,
-            processData: false,
-            contentType: false,
-            cache:false,
-            success : function(data){
-                $("#preview-image").html("");
-                $("#UploadImgForm").trigger("reset");
-                $('.ui-dialog-titlebar-close').trigger('click');
-				window.location.reload();
-			}
-        });
+			$("#addAlbumDialog").dialog({
+				autoOpen: false,
+				width: $(window).width() > 500 ? 500 : 'auto',
+				height: 'auto',
+				fluid: true,
+				responsive: true,
+				show: {
+					//effect: "blind",
+					duration: 1000
+				},
+				hide: {
+					//effect: "explode",
+					duration: 1000
+				}
+			});
+			$("#addalbum_inphotodialog").on("click", function(){
+				$("#addPhotoDialog").dialog( "close" );
+				$("#addAlbumDialog").dialog( "open" );
+			});
+			
+			$("#album_button").click(function(){
+				if($('#album_name').val() == ''){
+					$('#album_name').css('border','1px solid red');
+					$('#album_name').after("<span style='color:red'>Field can't be empty</span>");
+				}else{
+					var album_name = $('#album_name').val();
+					var base_path = "<?php echo config('app.url');?>";
+					$.ajaxSetup({ 
+						headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')} 
+					});
+					$.ajax({
+						url : base_path + 'user/my_photos/getExistAlbum',            
+						type : 'post',
+						data : {album_name:album_name},
+						beforeSend: function(){
+							//$('#img_loader').css('display','block');
+							//$('#img_loader').html("<img src='https://printedcart.com/printedcart/public/images/loader.gif'>");
+							swal("Please Wait...!", "Loading Data...!", "warning");
+						},
+						success : function(data){
+							//$('#img_loader').css('display','none');
+							if(data=='yes'){
+								var error_msg = '<p class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close" style="cursor:pointer;"><span aria-hidden="true">×</span></button>Oops! You already have an album with that name. Please try again with a different name.</p>';
+								$('#album_form .row').before(error_msg);
+							}else{
+								$('#album_form').submit();
+							} 
+						}
+					});
+					
+				}
+			});
+			
+			setTimeout(function(){
+				$('.alert-success').fadeOut('fast');
+			}, 10000); 
+			setTimeout(function(){
+				$('.alert-danger').fadeOut('fast');
+			}, 50000);
+			
+		});
+		$("#albumListsLi li").click(function(){
+			var cid = $(this).attr("label");
+			var cln = $("#"+cid).html();
+			$("#SelectAlbumPics").html(cln);  
+		}); 
+		</script>
 
-    return false;
-
-})
-$("#NewAlbumForm").submit(function(){
-    var frmData = new FormData($(this)[0]); 
-    $.ajaxSetup({ 
-		headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') } 
-    });
-    $.ajax({
-		url : base_path+'photobooks/add_new_album',            
-		type : 'POST',
-		data : frmData,
-		processData: false,
-		contentType: false,
-		cache:false,
-		success : function(data){
-			$("#albums").append(data); 
-			$("#NewAlbumForm").trigger("reset");
-			$('#NewAlbumForm .close').trigger('click');
-		}
-	});
-    return false;
-}); */
-
-$("#albumListsLi li").click(function(){
-    var cid = $(this).attr("label");
-    var cln = $("#"+cid).html();
-    $("#SelectAlbumPics").html(cln);  
-}); 
-</script>
-
-@if(session('album_id'))
-	<script>
-	$(function(){
-		//toastr.success("Album Added Successfully");
-		swal("Done", "Album Added Successfully", "success")
-		.then((value) => {
+		@if(session('album_id'))
+		<script>
+		$(function(){
+			//toastr.success("Album Added Successfully");
+			swal("Done", "Album Added Successfully", "success")
+			.then((value) => {
+				$("#addPhotoDialog").dialog( "open" );
+			});
+		});
+		</script>
+		@endif
+		<script>
+		var errors_massage = [];
+		</script>
+		@if(session('message'))
+		<?php 
+		$response = session('message');
+		?>
+		@if(isset($response['success']) && !empty($response['success']))
+			<script>
+			var success = "<?php echo $response['success'];?>";
+			var success_msg = '<p class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close" style="cursor:pointer;"><span aria-hidden="true">×</span></button>'+success+'</p>';
+			errors_massage.push(success_msg);
+			</script>
+		@endif
+		@if(isset($response['error']) && !empty($response['error']))
+			<script>
+			var m_error = "<?php echo $response['err_msg'];?>";
+			var m_error_msg = '<p class="alert alert-danger"><a href="#" onclick="show_error()" class="show_error" style="color:#721c24;text-decoration:none;">'+m_error+'</a></p>';
+			errors_massage.push(m_error_msg);
+			
+			var error_info = '<div class="show_error_info alert alert-danger" style="display:none;"><span onclick="hide_error()" style="cursor:pointer;position:absolute;right:5px;top:5px;">X</span>';
+			</script>
+			@foreach($response['error'] as $k => $error)
+				<script>
+				var error = "<?php echo $error;?>";
+				error_info += '<p class="alert alert-danger">'+error+'</p>';
+				</script>
+			@endforeach
+			<script>
+			error_info += "</div>";
+			errors_massage.push(error_info);
+			</script>
+		@endif
+		<script>
+		$(function(){
+			$('#addPhotoDialog .row').before(errors_massage);
 			$("#addPhotoDialog").dialog( "open" );
 		});
-	});
-	</script>
-@endif
-<script>
-var errors_massage = [];
-</script>
-@if(session('message'))
-	<?php 
-	$response = session('message');
-	?>
-	@if(isset($response['success']) && !empty($response['success']))
-		<script>
-		var success = "<?php echo $response['success'];?>";
-		var success_msg = '<p class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close" style="cursor:pointer;"><span aria-hidden="true">×</span></button>'+success+'</p>';
-		errors_massage.push(success_msg);
 		</script>
-	@endif
-	@if(isset($response['error']) && !empty($response['error']))
-		<script>
-		var m_error = "<?php echo $response['err_msg'];?>";
-		var m_error_msg = '<p class="alert alert-danger"><a href="#" onclick="show_error()" class="show_error" style="color:#721c24;text-decoration:none;">'+m_error+'</a></p>';
-		errors_massage.push(m_error_msg);
-		
-		var error_info = '<div class="show_error_info alert alert-danger" style="display:none;"><span onclick="hide_error()" style="cursor:pointer;position:absolute;right:5px;top:5px;">X</span>';
-		</script>
-		@foreach($response['error'] as $k => $error)
+		@endif
+		@if(session('photo_upload') && session('photo_upload')=='ok')
 			<script>
-			var error = "<?php echo $error;?>";
-			error_info += '<p class="alert alert-danger">'+error+'</p>';
+			$(function(){
+				//toastr.success("Photo Added Successfully");
+				swal("Done", "Photo Added Successfully", "success");
+			});
 			</script>
-		@endforeach
-		<script>
-		error_info += "</div>";
-		errors_massage.push(error_info);
-		</script>
-	@endif
-	<script>
-	$(function(){
-		$('#addPhotoDialog .row').before(errors_massage);
-		$("#addPhotoDialog").dialog( "open" );
-	});
-	</script>
-@endif
-@if(session('photo_upload') && session('photo_upload')=='ok')
-	<script>
-	$(function(){
-		//toastr.success("Photo Added Successfully");
-		swal("Done", "Photo Added Successfully", "success");
-	});
-	</script>
-@endif
+		@endif
 
-<style>
-#img_loader img {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translateY(-50%) translateX(-50%);
-	-moz-transform: translateY(-50%) translateX(-50%);
-	-webkit-transform: translateY(-50%) translateX(-50%);
-	-ms-transform: translateY(-50%) translateX(-50%);
-	-o-transform: translateY(-50%) translateX(-50%);
-}
-#img_loader {
-	position: fixed;
-	top: 0;
-	height: 100%;
-	left: 0;
-	width: 100%;
-	background-color: rgba(0,0,0,0.1);
-	z-index: 99999;
-}
-</style>
+		<style>
+		#img_loader img {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translateY(-50%) translateX(-50%);
+			-moz-transform: translateY(-50%) translateX(-50%);
+			-webkit-transform: translateY(-50%) translateX(-50%);
+			-ms-transform: translateY(-50%) translateX(-50%);
+			-o-transform: translateY(-50%) translateX(-50%);
+		}
+		#img_loader {
+			position: fixed;
+			top: 0;
+			height: 100%;
+			left: 0;
+			width: 100%;
+			background-color: rgba(0,0,0,0.1);
+			z-index: 99999;
+		}
+		</style>
+		<!-- Include CSS for JQuery Frontier Calendar plugin (Required for calendar plugin) -->
+		<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/frontierCalendar/jquery-frontier-cal-1.3.2.css') }}" />
+		<!-- Include CSS for color picker plugin (Not required for calendar plugin. Used for example.) -->
+		<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/colorpicker/colorpicker.css') }}" />
+		<link href='https://fonts.googleapis.com/css?family=Merienda+One|Aldrich|Nothing+You+Could+Do|Crete+Round|Karla:400,700|Original+Surfer|Salsa|Marmelad|Averia+Sans+Libre:700|Righteous|Sancreek|Alegreya+SC:900' rel='stylesheet' type='text/css'>
+		
+		<script type="text/javascript" src="{{ URL::asset('public/js/colorpicker/colorpicker.js') }}"></script>
+		<script type="text/javascript" src="{{ URL::asset('public/js/jquery-qtip-1.0.0-rc3140944/jquery.qtip-1.0.js') }}"></script>
+		<script type="text/javascript" src="{{ URL::asset('public/js/lib/jshashtable-2.1.js') }}"></script>
+		<script type="text/javascript" src="{{ URL::asset('public/js/frontierCalendar/jquery-frontier-cal-1.3.2.min.js') }}"></script>
+		
 	</body>
 </html>
