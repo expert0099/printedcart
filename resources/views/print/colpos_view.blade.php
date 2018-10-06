@@ -4,7 +4,7 @@
 
 <div class="container">
 
-	@include('calendar.banner')
+	@include('print.banner')
 	
 	<!-- Calendars form Start -->
 	@if(Session::has('success'))
@@ -38,10 +38,7 @@
 			<div class="calendar-month-form px-3 px-md-5 px-lg-3 pl-6 pr-6 py-3" style="width:425px;">
 				<h6 class="font-weight-light mb-4">Start your poster size and year</h6>
 				<div class="form-row">
-					<?php 
-					echo '<pre>';
-					print_r($college_poster_sizes);exit;
-					?>
+					
 					<div class="col-12 col-sm-6 mb-3 mb-sm-0">
 						<label class="col-12 mb-1" for="exampleInputEmail1">Size</label>
 						<select id="size_id" name='size_id' class="form-control rounded-0">
@@ -53,7 +50,7 @@
 							<?php 
 							}else{
 								?>
-								<option value="<?php echo $val['id'];?>" rel="<?php echo $val['Size']['Size'];?>" p="<?php echo $val['price'];?>"><?php echo $val['Size']['Size'];?></option>
+								<option value="<?php echo $val['id'];?>" rel="<?php echo $val['Size'];?>" p="<?php echo $val['price'];?>"><?php echo $val['Size'];?></option>
 								<?php
 							} 
 						}
@@ -89,8 +86,8 @@
 			<div class="px-3 px-md-5 px-lg-3 pl-6 pr-6 py-3 callegePosterSection" style="width:425px;">
 				<h6 class="font-weight-light">College Poster Pricing</h6>
 				<div style="width:100%">
-					<div style="width:70%;float:left;"><strong>Item</strong><br>College Poster <span id="poster_size">{{$college_poster_sizes[0]['Size']['Size']}}</span></div>
-					<div><strong>Price</strong><br>{{$default_currency['currencysymbol']}}<span id="poster_price">{{$college_poster_sizes[0]['Size']['price']}}</span></div>
+					<div style="width:70%;float:left;"><strong>Item</strong><br>College Poster <span id="poster_size">{{$college_poster_sizes[0]['Size']}}</span></div>
+					<div><strong>Price</strong><br>{{$default_currency['currencysymbol']}}<span id="poster_price">{{$college_poster_sizes[0]['price']}}</span></div>
 				</div>
 			</div>
 			
