@@ -5,6 +5,7 @@
 <?php 
 //$calendar_size = '5x11';
 $ex = explode('x',$calendar_size);
+
 if($ex[0]>$ex[1]){
 	$ratio = $ex[1]/$ex[0]*100;
 	$calendar_frame_width = 100;
@@ -14,6 +15,7 @@ if($ex[0]>$ex[1]){
 	$calendar_frame_width = round($ratio);
 	$calendar_frame_height = 100;
 } 
+
 $cal_part_actual_height = (40/100)*$calendar_frame_height;
 $addClass = 'cal_'.$calendar_size;
 ?>
@@ -163,10 +165,9 @@ $addClass = 'cal_'.$calendar_size;
 									{!! $page->page_content !!}
 									<script>
 									$(function(){
-										setCaldup({{$year}},{{$key-1}},'item_{{$page->id}}');
+										setCal({{$year}},{{$key-1}},'item_{{$page->id}}');
 									});
 									</script>
-									
 								</div>
 							@endforeach
 						@endif
@@ -175,95 +176,10 @@ $addClass = 'cal_'.$calendar_size;
 					<!-- Controls -->
 				</div>
 			</div>
-				<!-- Calender functionality starts -->
-					
-
-					<!-- debugging-->
-					<div id="calDebug"></div>
-
-					<!-- Add event modal form -->
-					<div id="add-event-form" title="Add New Event">
-						<p class="validateTips">All form fields are required.</p>
-						<form>
-							<fieldset>
-								<label for="name">What?</label>
-								<input type="text" name="what" id="what" class="form-control" style="margin-bottom:12px; font-size: 10px; padding: .4em;"/>
-								<table style="width:100%; padding:5px;">
-									<tr>
-										<td>
-											<label>Start Date</label>
-											<input type="text" name="startDate" id="startDate" value="" class="form-control" style="margin-bottom:12px; font-size: 10px; padding: .4em;"/>				
-										</td>
-										<td>&nbsp;</td>
-									</tr>
-									<tr>
-										<td>
-											<label>End Date</label>
-											<input type="text" name="endDate" id="endDate" value="" class="form-control" style="margin-bottom:12px; font-size: 10px; padding: .4em;"/>				
-										</td>
-										<td>&nbsp;</td>				
-									</tr>			
-								</table>
-								<table>
-									<tr>
-										<td>
-											<label>Background Color</label>
-										</td>
-										<td>
-											<div id="colorSelectorBackground"><div style="background-color: #333333; width:30px; height:30px; border: 2px solid #000000;"></div></div>
-											<input type="hidden" id="colorBackground" value="#333333">
-										</td>
-										<tr>&nbsp;&nbsp;&nbsp;</tr>
-										<td>
-											<label>Text Color</label>
-										</td>
-										<td>
-											<div id="colorSelectorForeground"><div style="background-color: #ffffff; width:30px; height:30px; border: 2px solid #000000;"></div></div>
-											<input type="hidden" id="colorForeground" value="#ffffff">
-										</td>
-										<tr>&nbsp;&nbsp;&nbsp;</tr>
-										<td id="font">
-											<label>Font Size</label>
-											<input type="text" name="font" value="15" class="form-control" /> px
-											<br /><br /><span id="warning"></span>
-										</td>
-										<tr>&nbsp;&nbsp;&nbsp;</tr>
-										<td id="sample" class="dropdown">
-											<label>Change Font: </label>
-											<select id="fontsense" class="form-control" style="font-size: 10px;">
-												<option>Select Font</option>
-												<!--default fonts-->
-												<option>Arial</option>
-												<option>Comic Sans MS</option>
-												<option>Trebuchet MS</option>
-												<option>Verdana</option>
-												
-												<!--google fonts-->
-												<option>Averia Sans Libre</option>
-												<option>Righteous</option>
-												<option>Sancreek</option>
-												<option>Alegreya SC </option>
-												<option>Merienda One</option>
-												<option>Aldrich</option>
-												<option>Nothing You Could Do</option>
-											</select>
-										</td>
-									</tr>				
-								</table>
-							</fieldset>
-						</form>
-					</div>
-
-					<div id="display-event-form" title="View Agenda Item"></div>		
-
-					<p>&nbsp;</p>
-				<!-- Ends -->
-				
-			</div>
 		</div>
 		<!-- end implement new calendar editor -->
 		
-	
+	</div>
 	
 	<!-- preview dialog -->
 	<div id="preview_dialog" title="Printed Cart :: Calendar Preview" style="display:none;"></div>
@@ -341,7 +257,29 @@ $addClass = 'cal_'.$calendar_size;
 		</form>
 	</div>
 	<!-- end project dialog -->
-
+	
+	
+	<!-- image crop dialog -->
+	<!--<div id="crop_dialog" title="Printed Cart : Crop Image" style="display:none;">
+		<link rel="stylesheet" type="text/css" href="{{URL::asset('public/css/crop/styles.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{URL::asset('public/css/crop/jquery.Jcrop.css')}}">
+		<script type="text/javascript" src="{{URL::asset('public/js/crop/jquery.Jcrop.js')}}"></script>
+		<div id="wrappers">
+			<div class="jc-demo-box">
+				<img src="{{URL::asset('public/images/cropimg.jpg')}}" id="target" class="target" alt="Default Image" onclick="rotateBy10Deg(this)"/>
+				<div id="form-container">
+					<form id="cropimg" name="cropimg" method="post">
+						<input type="hidden" id="tId" name="tId">
+						<input type="hidden" id="x" name="x">
+						<input type="hidden" id="y" name="y">
+						<input type="hidden" id="w" name="w">
+						<input type="hidden" id="h" name="h">
+						<input type="button" id="crop_submit" value="Crop Image!">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>-->
 	<form id="cropimg" name="cropimg" method="post">
 		<input type="hidden" id="tId" name="tId">
 	</form>	
@@ -459,24 +397,100 @@ $addClass = 'cal_'.$calendar_size;
                 </span>
               </button>
             </div>
-
+			
+			
+			
 			<div class="modal-footer">
 				
 				<div id="loading_cropper" style="display:none;"></div>
 				<button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+				
+				<!--<button type="button" class="btn btn-success" data-method="getCroppedCanvas2" data-option="{ 'maxWidth': 4096, 'maxHeight': 4096 }">
+				<span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper('getCroppedCanvas', { maxWidth: 4096, maxHeight: 4096 })">
+				  Get Cropped Canvas
+				</span>
+			  </button>-->
 				
 				<button type="button" id="save_changes" class="btn btn-primary" data-method="getCroppedCanvas">Save changes</button>
 			
 				
 			  </div>  
 			  <img src="" id="croped_image"/>
+    
+            <!--<div class="btn-group">
+              <button type="button" class="btn btn-primary" data-method="disable" title="Disable">
+                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;disable&quot;)">
+                  <span class="fa fa-lock"></span>
+                </span>
+              </button>
+              <button type="button" class="btn btn-primary" data-method="enable" title="Enable">
+                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;enable&quot;)">
+                  <span class="fa fa-unlock"></span>
+                </span>
+              </button>
+            </div>
+    
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary" data-method="reset" title="Reset">
+                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;reset&quot;)">
+                  <span class="fa fa-refresh"></span>
+                </span>
+              </button>
+              <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+                <input type="file" class="sr-only" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Import image with Blob URLs">
+                  <span class="fa fa-upload"></span>
+                </span>
+              </label>
+              <button type="button" class="btn btn-primary" data-method="destroy" title="Destroy">
+                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;destroy&quot;)">
+                  <span class="fa fa-power-off"></span>
+                </span>
+              </button>
+            </div>-->
+    
 
-             </div><!-- /.docs-buttons -->
-
+    
+           
+           <!-- <div class="modal fade docs-cropped" id="getCroppedCanvasModal" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" role="dialog" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body"></div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-dismiss="modal">Close</button>
+                    <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">Download</a>
+                  </div>
+                </div>
+              </div>
+            </div>-->
+    
+            
+            <!--<textarea type="text" class="form-control" id="putData" rows="1" placeholder="Get data to here or set data with this value"></textarea>-->
+          </div><!-- /.docs-buttons -->
+    
+          
+    
+           
+    
             <div class="dropdown dropup docs-options">
-
+             
+            
+			  
+			
+			  
+			  
+		  
+		  
             </div><!-- /.dropdown -->
-
+    
+           
+    
           </div><!-- /.docs-toggles -->
 			<!-- end crop section body part -->
 			
@@ -502,6 +516,7 @@ function rotateBy10Deg(ele){
 	ele.style.webkitTransform="rotate("+delta+"deg)";
 	delta+=10;
 }
+
 var basePath = "<?php echo env('APP_URL');?>";
 <!-- for undo and redu -->
 var undoRedo = new UndoRedo('.carousel-inner',{});
@@ -562,6 +577,7 @@ $pcnt = $('#preview-pane .preview-container'),
 $pimg = $('#preview-pane .preview-container img'),
 xsize = $pcnt.width(),
 ysize = $pcnt.height();
+
 function allowDrop(ev) {
 	ev.preventDefault();
 	undoRedo.saveState();
@@ -573,6 +589,7 @@ function drag(ev) {
 	$('.upper-canvas').css('height','0px');
 	undoRedo.saveState();
 }
+
 function drop(ev){
     ev.preventDefault();
 	var data = ev.dataTransfer.getData("text");
@@ -618,10 +635,13 @@ function drop(ev){
 			strict: true,
 			// Re-render the cropper when resize the window
 			responsive: true,
+
 			// Restore the cropped area after resize the window
 			restore: true,
+
 			// Check if the current image is a cross-origin image
 			checkCrossOrigin: true,
+
 			// Check the current image's Exif Orientation information
 			checkOrientation: true,
 			crop: function (e) {
@@ -687,8 +707,10 @@ function drop(ev){
 				
 				
 				data = $.extend({}, data); // Clone a new one
+
 				if (typeof data.target !== 'undefined') {
 					$target = $(data.target);
+
 					if (typeof data.option === 'undefined') {
 						try {
 							data.option = JSON.parse($target.val());
@@ -704,6 +726,7 @@ function drop(ev){
 						$image.cropper('clear');
 					}
 					break;
+
 					case 'getCroppedCanvas':
 					if (uploadedImageType === 'image/jpeg') {
 						if (!data.option) {
@@ -716,12 +739,15 @@ function drop(ev){
 				result = $image.cropper(data.method, data.option, data.secondOption);
 				
 				
+
+
 				switch (data.method) {
 					case 'rotate':
 					if (cropped && options.viewMode > 0) {
 						$image.cropper('crop');
 					}
 					break;
+
 					case 'scaleX':
 					case 'scaleY':
 						$(this).data('option', -data.option);
@@ -736,6 +762,7 @@ function drop(ev){
 								$('#croped_image').attr('src', result.toDataURL(uploadedImageType));
 								console.log(result.toDataURL(uploadedImageType));
 						} */
+
 					case 'getCroppedCanvas':
 						if (result) {
 			
@@ -780,6 +807,7 @@ function drop(ev){
 							return false;
 						}
 						break;
+
 					case 'destroy':
 					if (uploadedImageURL) {
 						URL.revokeObjectURL(uploadedImageURL);
@@ -788,6 +816,7 @@ function drop(ev){
 					}
 					break;
 				}
+
 				if ($.isPlainObject(result) && $target) {
 					try {
 						$target.val(JSON.stringify(result));
@@ -797,6 +826,7 @@ function drop(ev){
 				}
 			}
 		});
+
 		$('#cropModal').on('hidden.bs.modal',function(){
 			$image.cropper('destroy');
 			$('#image2').attr('src', '');
@@ -808,42 +838,53 @@ function drop(ev){
 			if (!$image.data('cropper') || this.scrollTop > 300) {
 				return;
 			}
+
 			switch (e.which) {
 				case 37:
 					e.preventDefault();
 					$image.cropper('move', -1, 0);
 					break;
+
 				case 38:
 					e.preventDefault();
 					$image.cropper('move', 0, -1);
 					break;
+
 				case 39:
 					e.preventDefault();
 					$image.cropper('move', 1, 0);
 					break;
+
 				case 40:
 					e.preventDefault();
 					$image.cropper('move', 0, 1);
 					break;
 			}
 		});
+
 		// Import image
 		var $inputImage = $('#inputImage');
+
 		if (URL) {
 			$inputImage.change(function () {
 				var files = this.files;
 				var file;
+
 				if (!$image.data('cropper')) {
 					return;
 				}
+
 				if (files && files.length) {
 					file = files[0];
+
 					if (/^image\/\w+$/.test(file.type)) {
 						uploadedImageName = file.name;
 						uploadedImageType = file.type;
+
 						if (uploadedImageURL) {
 							URL.revokeObjectURL(uploadedImageURL);
 						}
+
 						uploadedImageURL = URL.createObjectURL(file);
 						$image.cropper('destroy').attr('src', uploadedImageURL).cropper(options);
 						$inputImage.val('');
@@ -856,7 +897,152 @@ function drop(ev){
 			$inputImage.prop('disabled', true).parent().addClass('disabled');
 		}
 	});
+	/* if(ev.target.id == ""){
+		var tId = ev.target.parentNode.parentNode.id;
+		if(tId == ""){
+			var tId = ev.target.parentNode.id;
+		}
+		$('#'+tId+' .bg-img').remove();
+		var parentdv = document.createElement("div");
+		parentdv.className = "bg-img";
+		var subparent = document.createElement("div");
+		subparent.className = "bg-img-inner";
+		subparent.onclick = function() { crop(src,tId);};
+		subparent.style.cssText = 'background: url("'+src+'");background-repeat: no-repeat;background-size:100% 100%;';
+		parentdv.append("", subparent);
+		$('#'+tId).append(parentdv);
+		undoRedo.saveState();
+	}else{
+		var parentdv = document.createElement("div");
+		parentdv.className = "bg-img";
+		var subparent = document.createElement("div");
+		subparent.className = "bg-img-inner";
+		subparent.onclick = function() { crop(src,ev.target.id);};
+		subparent.style.cssText = 'background: url("'+src+'");background-repeat: no-repeat;background-size:100% 100%;';
+		parentdv.append("", subparent);
+		ev.target.append(parentdv);
+		$("#"+ev.target.id+" .textinside").hide();
+		undoRedo.saveState();
+	}  */
 }
+/* function crop(src,tId){
+	$("#crop_dialog").dialog({
+		autoOpen  : false,
+		width     : 1000,
+		height	  : 650,
+		modal     : false,
+		resizable : false,
+		close     : function (event, ui){ $('#target').Jcrop('destroy'); }
+	}).dialog('open');
+	loadBasic(src,tId);
+	
+	$("#crop_submit").on('click',function(event){
+		event.preventDefault();
+		var base_path = "<?php echo config('app.url');?>";
+		var x = $('#x').val();
+		var y = $('#y').val();
+		var w = $('#w').val();
+		var h = $('#h').val();
+		
+		if(w < 500 || h < 400){
+			toastr.error("Sorry! Crop image low dimension! Please crop more wide area...!");
+			return false;
+		}else{
+			var imgsrc = $('#target').attr('src');
+			var tw = $('#target').width();
+			var th = $('#target').height();
+			var tId = $('#tId').val();
+			if(x == ''){
+				toastr.error("Sorry! Please select a crop area...!!");
+			}
+			$.ajaxSetup({ 
+				headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')} 
+			});
+			$.ajax({
+				url : base_path + 'calendars/crop_image',            
+				type : 'POST',
+				data : {imgsrc:imgsrc,x:x,y:y,w:w,h:h,tw:tw,th:th},
+				success : function(data){
+					src2 = base_path+data;
+					$('#'+tId+' .bg-img').remove();				
+					var parentdv = document.createElement("div");
+					parentdv.className = "bg-img";
+					var subparent = document.createElement("div");
+					subparent.className = "bg-img-inner";
+					subparent.onclick = function() { crop(src,tId); };
+					subparent.style.cssText = 'background: url("'+src2+'");background-size:100% 100%;';
+					parentdv.append("", subparent);
+					$('#'+tId).append(parentdv);
+					$("#crop_dialog").dialog('close').dialog('destroy');
+					jcrop_api.destroy();
+				}
+			});
+			return false;
+		}
+	});
+	$('.for_crop .ui-dialog-titlebar-close').click(function(){
+		$('#'+tId+' .bg-img').remove();	
+		var parentdv = document.createElement("div");
+		parentdv.className = "bg-img";
+		var subparent = document.createElement("div");
+		subparent.className = "bg-img-inner";
+		subparent.onclick = function() { crop(src,tId); };
+		subparent.style.cssText = 'background: url("'+src+'");background-size:100% 100%;';
+		parentdv.append("", subparent);
+		$('#'+tId).append(parentdv);
+		jcrop_api.destroy();
+	}); 
+	return false;
+} 
+
+function updatePreview(c) {
+	if (parseInt(c.w) > 0) {
+		var rx = xsize / c.w;
+		var ry = ysize / c.h;
+	
+		$('#x').val(c.x);
+		$('#y').val(c.y);
+		$('#w').val(c.w);
+		$('#h').val(c.h);
+
+		$pimg.css({
+			width: Math.round(rx * boundx) + 'px',
+			height: Math.round(ry * boundy) + 'px',
+			marginLeft: '-' + Math.round(rx * c.x) + 'px',
+			marginTop: '-' + Math.round(ry * c.y) + 'px'
+		});
+	}
+}
+function loadBasic(src,tId){
+	$(".jc-demo-box .target").attr('src',src);
+	$(".jcrop-preview").attr('src',src);
+	$(".jcrop-holder img").attr('src',src);
+	$('#crop_dialog').parent().addClass('for_crop');
+	$('#tId').val(tId);
+	
+	var jcrop_api = $.Jcrop('#target', {
+		onChange: updatePreview,
+		onSelect: updatePreview,
+		bgOpacity: 0.5,
+		aspectRatio: xsize / ysize,
+		setSelect: [0, 0, 200, 200],
+		boxWidth: 350, 
+		boxHeight: 350
+	},function(){
+		var bounds = this.getBounds();
+		boundx = bounds[0];
+		boundy = bounds[1];
+		jcrop_api = this; // Store the API in the jcrop_api variable
+		// Move the preview into the jcrop container for css positioning
+		$preview.appendTo(jcrop_api.ui.holder);
+	}); 
+	$('.jcrop-holder').each(function(e){
+		if(e>0){
+			$(this).remove();
+		}
+	}); 
+} */
+
 </script>
 
 <style>
@@ -867,17 +1053,16 @@ function drop(ev){
 </style>
 
 <link rel="stylesheet" href="{{URL::asset('public/css/lightslider.css')}}"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="{{ URL::asset('public/js/bootstrap.min.js') }}"></script>
-<script src="https://code.jquery.com/ui/1.12.0-rc.2/jquery-ui.js"
-  integrity="sha256-6HSLgn6Ao3PKc5ci8rwZfb//5QUu3ge2/Sw9KfLuvr8="
-  crossorigin="anonymous"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{URL::asset('public/js/crop/cropper.min.js')}}"></script>
 <script src="{{URL::asset('public/js/lightslider.js')}}"></script> 
 
 <link rel="stylesheet" href="{{URL::asset('public/css/photobook_custom_editor.css')}}"/>
 <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/redmond/jquery-ui.min.css" rel="stylesheet">
+<script type="text/javascript" src="{{ URL::asset('public/js/bootstrap.min.js') }}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
 <script>
 if (top !== self) {
 	$.ui.dialog.prototype._focusTabbable = $.noop;
@@ -1322,12 +1507,14 @@ $(function(){
 #redo.disabled{
   color: #ccc;
 }
+
 .canvas-container{
 	position: absolute!important;
 	-moz-user-select: none!important;
 	z-index: 9;
 	overflow:visible;
 }
+
 .upper-canvas{
 	position: absolute!important;
 	left: 0px!important;
@@ -1342,16 +1529,13 @@ $(function(){
 
 <!-- show calendar under calendar layout -->
 <script>
-function setCaldup(yr,mth,id){
-	var html = "<div id='mycal'></div>";
-	$('#'+id+' .calendaer').html(html);
-}
 function leapYear(year){
 	if(year % 4 == 0) // basic rule
     return true // is leap year
     /* else */ // else not needed when statement is "return"
 	return false // is not leap year
 }
+
 function getDays(month, year){
 	var ar = new Array(12);
 	ar[0] = 31; // January
@@ -1368,6 +1552,7 @@ function getDays(month, year){
 	ar[11] = 31; // December
 	return ar[month];
 }
+
 function getMonthName(month){
 	var ar = new Array(12);
 	ar[0] = "January";
@@ -1384,6 +1569,7 @@ function getMonthName(month){
 	ar[11] = "December";
 	return ar[month];
 }
+
 function setCal(yr,mth,id){
 	var now = new Date();
 	var year = yr;
@@ -1396,8 +1582,9 @@ function setCal(yr,mth,id){
 	firstDayInstance = null;
 	var days = getDays(month, year);
 	var calElement = drawCal(firstDay + 1, days, date, monthName, year);
-	$('#'+id+' .calendaer ').html(calElement);
+	$('#'+id+' .calendaer').html(calElement);
 }
+
 function drawCal(firstDay, lastDate, date, monthName, year) {
   var headerHeight = 25 // height of the table's header cell
   var border = 0 // 3D height of table's border
@@ -1413,8 +1600,9 @@ function drawCal(firstDay, lastDate, date, monthName, year) {
   var borderColor = "darkgray";
   var tableWidth = 100;
   var tableAlign = "center";
+
   // create basic table structure
-  var text = "<div class='JFrontierCal' id='mycal' style='width:100%;float:left;'>"; // initialize accumulative variable to empty string
+  var text = "<div class='mainDivFirst' style='width:100%;float:left;'>"; // initialize accumulative variable to empty string
   text += '<CENTER>'
   text += '<TABLE ALIGN='+ tableAlign +' BORDER=' + border + ' CELLSPACING=' + cellspacing + ' style=border-color:'+ borderColor +' WIDTH='+ tableWidth +'%>' // table settings
   text += '<TH COLSPAN=7 HEIGHT=' + headerHeight + ' style=text-align:center;>' // create table header cell
@@ -1422,10 +1610,12 @@ function drawCal(firstDay, lastDate, date, monthName, year) {
   text += monthName + ' ' + year
   text += '</FONT>' // close table header's font settings
   text += '</TH>' // close header cell
+
   // variables to hold constant settings
   var openCol = '<TD WIDTH=' + colWidth + ' HEIGHT=' + dayCellHeight + '>'
   openCol += '<FONT COLOR="' + dayColor + '">'
   var closeCol = '</FONT></TD>'
+
   // create array of abbreviated day names
   var weekDay = new Array(7)
   weekDay[0] = "Sun"
@@ -1435,15 +1625,18 @@ function drawCal(firstDay, lastDate, date, monthName, year) {
   weekDay[4] = "Thu"
   weekDay[5] = "Fri"
   weekDay[6] = "Sat"
+
   // create first row of table to set column width and specify week day
   text += '<TR ALIGN="center" VALIGN="center">'
   for (var dayNum = 0; dayNum < 7; ++dayNum) {
     text += openCol + weekDay[dayNum] + closeCol
   }
   text += '</TR>'
+
   // declaration and initialization of two variables to help with tables
   var digit = 1
   var curCell = 1
+
   for (var row = 1; row <= Math.ceil((lastDate + firstDay - 1) / 7); ++row) {
     text += '<TR ALIGN="center" VALIGN="center">'
     for (var col = 1; col <= 7; ++col) {
@@ -1469,9 +1662,11 @@ function drawCal(firstDay, lastDate, date, monthName, year) {
     }
     text += '</TR>'
   }
+
   // close all basic table tags
   text += '</TABLE>'
   text += '</CENTER>'
+
   // print accumulative HTML string
   //document.write(text)
   return text;
@@ -1481,6 +1676,7 @@ function drawCal(firstDay, lastDate, date, monthName, year) {
 table{
 	font-family: arial;
 }
+
 #ModalCarousel .modal-dialog{
 	max-width:1000px;
 }
@@ -1517,6 +1713,8 @@ table{
 	color: #fff;
 	border: 1px solid #0099cc;
 }
+
+
 #fruitscarousel.cal_11x5 {
 	border: 1px solid #ccc;
 	margin: 20px 40px;
@@ -1552,522 +1750,5 @@ table{
 }
 </style>
 <!-- end show calendar under calendar layout -->
-<script type="text/javascript">
-		$(document).ready(function(){	
 
-			var clickDate = "";
-			var clickAgendaItem = "";
-			var id = "";
-			
-			/**
-			 * Initializes calendar with current year & month
-			 * specifies the callbacks for day click & agenda item click events
-			 * then returns instance of plugin object
-			 */
-			var jfcalplugin = $("#mycal").jFrontierCal({
-				date: new Date(),
-				dayClickCallback: myDayClickHandler,
-				agendaClickCallback: myAgendaClickHandler,
-				agendaDropCallback: myAgendaDropHandler,
-				agendaMouseoverCallback: myAgendaMouseoverHandler,
-				applyAgendaTooltipCallback: myApplyTooltip,
-				agendaDragStartCallback : myAgendaDragStart,
-				agendaDragStopCallback : myAgendaDragStop,
-				dragAndDropEnabled: true
-			}).data("plugin");
-			
-			/**
-			 * Do something when dragging starts on agenda div
-			 */
-			function myAgendaDragStart(eventObj,divElm,agendaItem){
-				// destroy our qtip tooltip
-				if(divElm.data("qtip")){
-					divElm.qtip("destroy");
-				}	
-			};
-			
-			/**
-			 * Do something when dragging stops on agenda div
-			 */
-			function myAgendaDragStop(eventObj,divElm,agendaItem){
-				//alert("drag stop");
-			};
-			
-			/**
-			 * Custom tooltip - use any tooltip library you want to display the agenda data.
-			 * for this example we use qTip - http://craigsworks.com/projects/qtip/
-			 *
-			 * @param divElm - jquery object for agenda div element
-			 * @param agendaItem - javascript object containing agenda data.
-			 */
-			function myApplyTooltip(divElm,agendaItem){
-
-				// Destroy currrent tooltip if present
-				if(divElm.data("qtip")){
-					divElm.qtip("destroy");
-				}
-				
-				var displayData = "";
-				
-				var title = agendaItem.title;
-				var startDate = agendaItem.startDate;
-				var endDate = agendaItem.endDate;
-				var allDay = agendaItem.allDay;
-				var data = agendaItem.data;
-				displayData += "<br><b>" + title+ "</b><br><br>";
-				if(allDay){
-					displayData += "(All day event)<br><br>";
-				}else{
-					displayData += "<b>Starts:</b> " + startDate + "<br>" + "<b>Ends:</b> " + endDate + "<br><br>";
-				}
-				for (var propertyName in data) {
-					displayData += "<b>" + propertyName + ":</b> " + data[propertyName] + "<br>"
-				}
-				// use the user specified colors from the agenda item.
-				var backgroundColor = agendaItem.displayProp.backgroundColor;
-				var foregroundColor = agendaItem.displayProp.foregroundColor;
-				var myStyle = {
-					border: {
-						width: 5,
-						radius: 10
-					},
-					padding: 10, 
-					textAlign: "left",
-					tip: true,
-					name: "dark" // other style properties are inherited from dark theme		
-				};
-				if(backgroundColor != null && backgroundColor != ""){
-					myStyle["backgroundColor"] = backgroundColor;
-				}
-				if(foregroundColor != null && foregroundColor != ""){
-					myStyle["color"] = foregroundColor;
-				}
-				// apply tooltip
-				divElm.qtip({
-					content: displayData,
-					position: {
-						corner: {
-							tooltip: "bottomMiddle",
-							target: "topMiddle"			
-						},
-						adjust: { 
-							mouse: true,
-							x: 0,
-							y: -15
-						},
-						target: "mouse"
-					},
-					show: { 
-						when: { 
-							event: 'mouseover'
-						}
-					},
-					style: myStyle
-				});
-
-			};
-
-			/**
-			 * Make the day cells roughly 3/4th as tall as they are wide. this makes our calendar wider than it is tall. 
-			 */
-			jfcalplugin.setAspectRatio("#mycal",0.75);
-
-			/**
-			 * Called when user clicks day cell
-			 * use reference to plugin object to add agenda item
-			 */
-			function myDayClickHandler(eventObj){
-				// Get the Date of the day that was clicked from the event object
-				var date = eventObj.data.calDayDate;
-				// store date in our global js variable for access later
-				clickDate = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
-				// open our add event dialog
-				$('#add-event-form').dialog('open');
-			};
-			
-			/**
-			 * Called when user clicks and agenda item
-			 * use reference to plugin object to edit agenda item
-			 */
-			function myAgendaClickHandler(eventObj){
-				// Get ID of the agenda item from the event object
-				var agendaId = eventObj.data.agendaId;		
-				// pull agenda item from calendar
-				var agendaItem = jfcalplugin.getAgendaItemById("#mycal",agendaId);
-				clickAgendaItem = agendaItem;
-				$("#display-event-form").dialog('open');
-			};
-			
-			/**
-			 * Called when user drops an agenda item into a day cell.
-			 */
-			function myAgendaDropHandler(eventObj){
-				// Get ID of the agenda item from the event object
-				var agendaId = eventObj.data.agendaId;
-				// date agenda item was dropped onto
-				var date = eventObj.data.calDayDate;
-				// Pull agenda item from calendar
-				var agendaItem = jfcalplugin.getAgendaItemById("#mycal",agendaId);		
-				alert("You dropped agenda item " + agendaItem.title + 
-					" onto " + date.toString() + ". Here is where you can make an AJAX call to update your database.");
-			};
-			
-			/**
-			 * Called when a user mouses over an agenda item	
-			 */
-			function myAgendaMouseoverHandler(eventObj){
-				var agendaId = eventObj.data.agendaId;
-				var agendaItem = jfcalplugin.getAgendaItemById("#mycal",agendaId);
-				//alert("You moused over agenda item " + agendaItem.title + " at location (X=" + eventObj.pageX + ", Y=" + eventObj.pageY + ")");
-			};
-			/**
-			 * Initialize jquery ui datepicker. set date format to yyyy-mm-dd for easy parsing
-			 */
-			$("#dateSelect").datepicker({
-				showOtherMonths: true,
-				selectOtherMonths: true,
-				changeMonth: true,
-				changeYear: true,
-				showButtonPanel: true,
-				dateFormat: 'yy-mm-dd'
-			});
-			
-			/**
-			 * Set datepicker to current date
-			 */
-			$("#dateSelect").datepicker('setDate', new Date());
-			/**
-			 * Use reference to plugin object to a specific year/month
-			 */
-			$("#dateSelect").bind('change', function() {
-				var selectedDate = $("#dateSelect").val();
-				var dtArray = selectedDate.split("-");
-				var year = dtArray[0];
-				// jquery datepicker months start at 1 (1=January)		
-				var month = dtArray[1];
-				// strip any preceeding 0's		
-				//month = month.replace(/^[0]+/g,"")		
-				var day = dtArray[2];
-				// plugin uses 0-based months so we subtrac 1
-				jfcalplugin.showMonth("#mycal",year,parseInt(month-1).toString());
-			});	
-			/**
-			 * Initialize previous month button
-			 */
-			
-			$(".left.carousel-control").click(function() {
-				jfcalplugin.showPreviousMonth("#mycal");
-				// update the jqeury datepicker value
-				var calDate = jfcalplugin.getCurrentDate("#mycal"); // returns Date object
-				var cyear = calDate.getFullYear();
-				// Date month 0-based (0=January)
-				var cmonth = calDate.getMonth();
-				var cday = calDate.getDate();
-				// jquery datepicker month starts at 1 (1=January) so we add 1
-				$("#dateSelect").datepicker("setDate",cyear+"-"+(cmonth+1)+"-"+cday);
-				return false;
-			});
-			/**
-			 * Initialize next month button
-			 */
-			
-			$(".right.carousel-control").click(function() {
-				jfcalplugin.showNextMonth("#mycal");
-				// update the jqeury datepicker value
-				var calDate = jfcalplugin.getCurrentDate("#mycal"); // returns Date object
-				var cyear = calDate.getFullYear();
-				// Date month 0-based (0=January)
-				var cmonth = calDate.getMonth();
-				var cday = calDate.getDate();
-				// jquery datepicker month starts at 1 (1=January) so we add 1
-				$("#dateSelect").datepicker("setDate",cyear+"-"+(cmonth+1)+"-"+cday);		
-				return false;
-			});
-			
-			/**
-			 * Initialize delete all agenda items button
-			 */
-			$("#BtnDeleteAll").button();
-			$("#BtnDeleteAll").click(function() {	
-				jfcalplugin.deleteAllAgendaItems("#mycal");	
-				return false;
-			});		
-			
-			/**
-			 * Initialize iCal test button
-			 */
-			$("#BtnICalTest").button();
-			$("#BtnICalTest").click(function() {
-				// Please note that in Google Chrome this will not work with a local file. Chrome prevents AJAX calls
-				// from reading local files on disk.		
-				jfcalplugin.loadICalSource("#mycal",$("#iCalSource").val(),"html");	
-				return false;
-			});	
-
-			/**
-			 * Initialize add event modal form
-			 */
-			$("#add-event-form").dialog({
-				autoOpen: false,
-				height: 400,
-				width: 400,
-				modal: true,
-				buttons: {
-					'Add Event': function() {
-
-						var what = jQuery.trim($("#what").val());
-						var font = jQuery.trim($("#font").val());
-						var fontsense = jQuery.trim($("#fontsense").val());
-						
-						if(what == ""){
-							alert("Please enter a short event description into the \"what\" field.");
-						}else{
-						
-							var startDate = $("#startDate").val();
-							var startDtArray = startDate.split("-");
-							var startYear = startDtArray[0];
-							// jquery datepicker months start at 1 (1=January)		
-							var startMonth = startDtArray[1];		
-							var startDay = startDtArray[2];
-							// strip any preceeding 0's		
-							//startMonth = startMonth.replace(/^[0]+/g,"");
-							//startDay = startDay.replace(/^[0]+/g,"");
-							//var startHour = jQuery.trim($("#startHour").val());
-							//var startMin = jQuery.trim($("#startMin").val());
-							//var startMeridiem = jQuery.trim($("#startMeridiem").val());
-							//startHour = parseInt(startHour.replace(/^[0]+/g,""));
-							/*if(startMin == "0" || startMin == "00"){
-								startMin = 0;
-							}else{
-								startMin = parseInt(startMin.replace(/^[0]+/g,""));
-							}*/
-							/*if(startMeridiem == "AM" && startHour == 12){
-								startHour = 0;
-							}else if(startMeridiem == "PM" && startHour < 12){
-								startHour = parseInt(startHour) + 12;
-							}*/
-
-							var endDate = $("#endDate").val();
-							var endDtArray = endDate.split("-");
-							var endYear = endDtArray[0];
-							// jquery datepicker months start at 1 (1=January)		
-							var endMonth = endDtArray[1];		
-							var endDay = endDtArray[2];
-							// strip any preceeding 0's		
-							//endMonth = endMonth.replace(/^[0]+/g,"");
-
-							//endDay = endDay.replace(/^[0]+/g,"");
-							//var endHour = jQuery.trim($("#endHour").val());
-							//var endMin = jQuery.trim($("#endMin").val());
-							//var endMeridiem = jQuery.trim($("#endMeridiem").val());
-							//endHour = parseInt(endHour.replace(/^[0]+/g,""));
-							/*if(endMin == "0" || endMin == "00"){
-								endMin = 0;
-							}else{
-								endMin = parseInt(endMin.replace(/^[0]+/g,""));
-							}*/
-							/*if(endMeridiem == "AM" && endHour == 12){
-								endHour = 0;
-							}else if(endMeridiem == "PM" && endHour < 12){
-								endHour = parseInt(endHour) + 12;
-							}*/
-							
-							//alert("Start time: " + startHour + ":" + startMin + " " + startMeridiem + ", End time: " + endHour + ":" + endMin + " " + endMeridiem);
-
-							// Dates use integers
-							var startDateObj = new Date(parseInt(startYear),parseInt(startMonth)-1,parseInt(startDay),0,0);
-							var endDateObj = new Date(parseInt(endYear),parseInt(endMonth)-1,parseInt(endDay),0,0);
-
-							// add new event to the calendar
-							jfcalplugin.addAgendaItem(
-								"#mycal",
-								what,
-								//font,
-								startDateObj,
-								endDateObj,
-								false,
-								{
-									fname: "Santa",
-									lname: "Claus",
-									leadReindeer: "Rudolph",
-									myDate: new Date(),
-									myNum: 42
-								},
-								{
-									backgroundColor: $("#colorBackground").val(),
-									foregroundColor: $("#colorForeground").val()
-								}
-							);
-
-							$(this).dialog('close');
-
-						}
-						
-					},
-					Cancel: function() {
-						$(this).dialog('close');
-					}
-				},
-				open: function(event, ui){
-					// initialize start date picker
-					$("#startDate").datepicker({
-						showOtherMonths: true,
-						selectOtherMonths: true,
-						changeMonth: true,
-						changeYear: true,
-						showButtonPanel: true,
-						dateFormat: 'yy-mm-dd'
-					});
-					// initialize end date picker
-					$("#endDate").datepicker({
-						showOtherMonths: true,
-						selectOtherMonths: true,
-						changeMonth: true,
-						changeYear: true,
-						showButtonPanel: true,
-						dateFormat: 'yy-mm-dd'
-					});
-					// initialize with the date that was clicked
-					$("#startDate").val(clickDate);
-					$("#endDate").val(clickDate);
-					// initialize color pickers
-					$("#colorSelectorBackground").ColorPicker({
-						color: "#333333",
-						onShow: function (colpkr) {
-							$(colpkr).css("z-index","10000");
-							$(colpkr).fadeIn(500);
-							return false;
-						},
-						onHide: function (colpkr) {
-							$(colpkr).fadeOut(500);
-							return false;
-						},
-						onChange: function (hsb, hex, rgb) {
-							$("#colorSelectorBackground div").css("backgroundColor", "#" + hex);
-							$("#colorBackground").val("#" + hex);
-						}
-					});
-					//$("#colorBackground").val("#1040b0");		
-					$("#colorSelectorForeground").ColorPicker({
-						color: "#ffffff",
-						onShow: function (colpkr) {
-							$(colpkr).css("z-index","10000");
-							$(colpkr).fadeIn(500);
-							return false;
-						},
-						onHide: function (colpkr) {
-							$(colpkr).fadeOut(500);
-							return false;
-						},
-						onChange: function (hsb, hex, rgb) {
-							$("#colorSelectorForeground div").css("backgroundColor", "#" + hex);
-							$("#colorForeground").val("#" + hex);
-						}
-					});
-					//$("#colorForeground").val("#ffffff");				
-					// put focus on first form input element
-					$("#what").focus();
-					$("#font").focus();
-					$("#fontsense").focus();
-				},
-				close: function() {
-					// reset form elements when we close so they are fresh when the dialog is opened again.
-					$("#startDate").datepicker("destroy");
-					$("#endDate").datepicker("destroy");
-					$("#startDate").val("");
-					$("#endDate").val("");
-					//$("#startHour option:eq(0)").attr("selected", "selected");
-					//$("#startMin option:eq(0)").attr("selected", "selected");
-					//$("#startMeridiem option:eq(0)").attr("selected", "selected");
-					//$("#endHour option:eq(0)").attr("selected", "selected");
-					//$("#endMin option:eq(0)").attr("selected", "selected");
-					//$("#endMeridiem option:eq(0)").attr("selected", "selected");			
-					$("#what").val("");
-					$("#font").val("");
-					$("#fontsense").val("");
-					//$("#colorBackground").val("#1040b0");
-					//$("#colorForeground").val("#ffffff");
-				}
-			});
-			
-			/**
-			 * Initialize display event form.
-			 */
-			$("#display-event-form").dialog({
-				autoOpen: false,
-				height: 400,
-				width: 400,
-				modal: true,
-				buttons: {		
-					Cancel: function() {
-						$(this).dialog('close');
-					},
-					'Edit': function() {
-						alert("Make your own edit screen or dialog!");
-					},
-					'Delete': function() {
-						if(confirm("Are you sure you want to delete this agenda item?")){
-							if(clickAgendaItem != null){
-								jfcalplugin.deleteAgendaItemById("#mycal",clickAgendaItem.agendaId);
-								//jfcalplugin.deleteAgendaItemByDataAttr("#mycal","myNum",42);
-							}
-							$(this).dialog('close');
-						}
-					}			
-				},
-				open: function(event, ui){
-					if(clickAgendaItem != null){
-						var title = clickAgendaItem.title;
-						var startDate = clickAgendaItem.startDate;
-						var endDate = clickAgendaItem.endDate;
-						var allDay = clickAgendaItem.allDay;
-						var data = clickAgendaItem.data;
-						// in our example add agenda modal form we put some fake data in the agenda data. we can retrieve it here.
-						$("#display-event-form").append(
-							"<br><b>" + title+ "</b><br><br>"		
-						);				
-						if(allDay){
-							$("#display-event-form").append(
-								"(All day event)<br><br>"				
-							);				
-						}else{
-							$("#display-event-form").append(
-								"<b>Starts:</b> " + startDate + "<br>" +
-								"<b>Ends:</b> " + endDate + "<br><br>"				
-							);				
-						}
-						for (var propertyName in data) {
-							$("#display-event-form").append("<b>" + propertyName + ":</b> " + data[propertyName] + "<br>");
-						}			
-					}		
-				},
-				close: function() {
-					// clear agenda data
-					$("#display-event-form").html("");
-				}
-			});
-			
-			$("input").keyup(function(){
-				if( parseInt($(this).val()) < 10 ) {
-					$("#warning").text("Your font is smaller than 10px");
-				} else {
-					$("#warning").text("");
-					$('.JFrontierCal-Week-Header-Cell').css('font-size', $(this).val() + 'px');
-				}
-			});
-			
-			$("#fontsense").change(function () {
-				var str = "";
-				$("#fontsense option:selected").each(function () {
-					str += $(this).text() + " ";
-				});
-				$("#what").css('font-family', str);
-			}); 
-			
-			function nextMonthCal(str){
-				alert(str);
-			}
-			
-		});
-		</script>
 @endsection
