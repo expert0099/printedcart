@@ -18,7 +18,7 @@
 				</div>
 			</div>
 		</div>
-		<a href="#"><h6 class="fz-14 d-flex align-items-center justify-content-center text-center py-2">{!! $val['calendar_category'] !!}</h6></a>
+		<!--<a href="#"><h6 class="fz-14 d-flex align-items-center justify-content-center text-center py-2">{!! $val['calendar_category'] !!}</h6></a>-->
 	</div>
 	@endforeach
 	<div class="cal-product-list-pagination w-100 py-5">

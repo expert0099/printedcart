@@ -318,4 +318,27 @@ class PrintController extends Controller
 		}
 		return view('print.ajax_college_poster',compact('coll_pos_cal'));exit;
 	}
+	
+	public function colposview($poster_id=null){
+		$help_group_pages = $this->help_group_pages;
+		$resource_group_pages = $this->resource_group_pages;
+		$corporate_group_pages = $this->corporate_group_pages;
+		
+		$college_poster = SizeGroup::where('sizegroup','=','College Poster')->first();
+		$calendar_image = $college_poster['photo'];
+		$upload = DB::table('uploads')->select('path','hash')->where('id',$calendar_image)->first();
+		$upDataArr = explode("uploads",$upload->path);
+		$college_poster['college_poster_img'] = 'storage/uploads'.$upDataArr[1];
+		
+		$college_poster_sizes = Size::where('sizegroup',$college_poster['id'])->get();
+		
+		$default_currency = Currency::select('id','currencyname','currencysymbol','currencycode','convertratio')->where('isDefault',1)->first();
+		
+		/** cart items **/
+		$cartItems = DB::table('carts')->whereRaw("user_id='". Auth::user()->id ."' AND status = '0'")->get();
+		$item_count = count($cartItems);
+		/** end cart items **/
+		
+		return view('print.colpos_view',compact('help_group_pages','resource_group_pages','corporate_group_pages','poster_id','college_poster','college_poster_sizes','default_currency','item_count'));
+	}
 }
