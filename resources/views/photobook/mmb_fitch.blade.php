@@ -1,0 +1,1 @@
+<iframe width="650" height="325" src="{{$video_url}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>

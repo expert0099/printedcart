@@ -1,0 +1,36 @@
+Array
+(
+    [mc_gross] => 42.36
+    [protection_eligibility] => Ineligible
+    [payer_id] => 68GGGFXUW8GNJ
+    [tax] => 0.00
+    [payment_date] => 06:55:08 Jul 19, 2018 PDT
+    [payment_status] => Pending
+    [charset] => windows-1252
+    [first_name] => red
+    [mc_fee] => 1.53
+    [notify_version] => 3.9
+    [custom] => 45,329,363
+    [payer_status] => verified
+    [business] => hetram-facilitator@redsymboltechnologies.com
+    [quantity] => 1
+    [verify_sign] => AC4L.om9RdvsJ275OO1P6hHeLVBHA-7K5paWFfqX-FXAnxNOsd1l6jNk
+    [payer_email] => hetram_buyer@redsymboltechnologies.com
+    [txn_id] => 3J8429122U782245E
+    [payment_type] => instant
+    [last_name] => sym
+    [receiver_email] => hetram-facilitator@redsymboltechnologies.com
+    [payment_fee] => 1.53
+    [receiver_id] => F38M9AS7CQ5E8
+    [pending_reason] => paymentreview
+    [txn_type] => web_accept
+    [item_name] => live-custom-photo - 7x9,live-custom-photo - 11x8,@1,1
+    [mc_currency] => USD
+    [item_number] => 
+    [residence_country] => US
+    [test_ipn] => 1
+    [transaction_subject] => 
+    [payment_gross] => 42.36
+    [shipping] => 1.79
+    [ipn_track_id] => 984a5a71de41
+)

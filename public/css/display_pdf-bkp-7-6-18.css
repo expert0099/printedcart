@@ -1,0 +1,1270 @@
+.bg-img-inner {
+	z-index: 2;
+}
+.page_item .imageContent .inputBox {
+	height: 10%;
+}
+.page_item .imageContent .inputBox > div {
+	height:100%;
+	display: flex;
+}
+.box_height {
+	background-color:green;
+}
+/* add custom css for pdf print view */
+.page_item .imageContent .rowHeight .col-sm-6 {
+	width:50% !important;
+	float:left;
+	display: block !important;
+} 
+.page_item .row.rowHeight{
+	width: 100%;
+    float: left;
+}
+.page_item .main-calendar {
+	height: 60vh !important;
+	width: 100% !important;
+	float: left;
+}
+.textinside {
+	display:none;
+}
+/* .mainDivSecond{
+	height:160px;
+} */
+
+/* poster */
+
+/* poster 20x30 */
+#page-content_CollegePoster_20x30.content-body .page_item .row.rowHeight{
+    height: 40% !important;
+}
+#page-content_CollegePoster_20x30 .page_item .custom_layout .rowHeight .bg-img .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 40% !important;
+}
+#page-content_CollegePoster_20x30.content-body .page_item {
+    display: flex;
+    width: 100%;
+    float: left;
+}
+#page-content_CollegePoster_20x30 .imageContent{
+    float: none;
+}
+#page-content_CollegePoster_20x30 .main-calendar {
+    width: 100%;
+    float: left;
+}
+#page-content_CollegePoster_20x30 .main-calendar table{
+    width:90%;
+    margin:10px 10px;
+}
+#page-content_CollegePoster_20x30 .main-calendar table td {
+    line-height: 65px;
+    font-family: 'Open Sans', sans-serif;
+    font-size:23px; 
+    font-weight:600;
+    color:#000;
+}
+#page-content_CollegePoster_20x30 .calendar-imgs .main-calendar .mainDivFirst .mainDivSecond{
+    height:19% !important;
+    border:1px solid #fff;
+}
+#page-content_CollegePoster_20x30 .mainDivSecond table {
+    overflow: wrap;
+}
+#page-content_CollegePoster_20x30 .page_item .crop-border .imageContent {
+    border: 2px dotted red !important;
+}
+#page-content_CollegePoster_20x30 .mainDivSecond {
+    height: 200px;
+}
+#page-content_CollegePoster_20x30 .calendar-imgs.imageContent{
+    width: 100% !important;
+}
+#page-content_CollegePoster_20x30 .page_item .custom_layout .col-sm-8 {
+    width: 66.9% !important;
+    float: left !important;
+}
+#page-content_CollegePoster_20x30 .page_item .custom_layout .col-sm-4 {
+    width: 33% !important;
+    float: left !important;
+}
+#page-content_CollegePoster_20x30 .page_item .custom_layout .col-sm-4 .bg-img-inner {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+}
+#page-content_CollegePoster_20x30 .col-sm-4 .col-sm-12 .bg-img .bg-img-inner {
+    height: 20% !important;
+}
+#page-content_CollegePoster_20x30 .col-sm-6 .bg-img .bg-img-inner,
+#page-content_CollegePoster_20x30 .drop_event_1 .bg-img .bg-img-inner {
+    height: 40.6% !important;
+}
+#page-content_CollegePoster_20x30 .custom_layout .drop_event_1x1_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_20x30 .custom_layout .drop_event_1x1_2 .bg-img .bg-img-inner {
+    height: 40.7% !important;
+}
+#page-content_CollegePoster_20x30 .drop_event_1 .bg-img .bg-img-inner{
+    height: 40.7% !important;
+}
+#page-content_CollegePoster_20x30 .custom_layout .drop_event_2x2_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_20x30 .custom_layout .drop_event_2x2_2 .bg-img .bg-img-inner,
+#page-content_CollegePoster_20x30 .custom_layout .drop_event_2x2_3 .bg-img .bg-img-inner,
+#page-content_CollegePoster_20x30 .custom_layout .drop_event_2x2_4 .bg-img .bg-img-inner {
+    height: 20.35% !important;
+}
+#page-content_CollegePoster_20x30 .drop_event_1v1_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_20x30 .drop_event_1v1_2 .bg-img .bg-img-inner {
+    height: 20.3% !important;
+}
+#page-content_CollegePoster_20x30 .col-sm-8 .drop_event_2x3_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_20x30 .col-sm-8 .drop_event_2x3_2 .bg-img .bg-img-inner {
+	height: 20.38% !important;
+}
+#page-content_CollegePoster_20x30 .col-sm-4 .customRow3 .col-sm-12 .bg-img .bg-img-inner {
+    height: 13.59% !important;
+}
+#page-content_CollegePoster_20x30 .col-sm-4 .drop_event_1x2_2 .bg-img .bg-img-inner,
+#page-content_CollegePoster_20x30 .col-sm-4 .drop_event_1x2_3 .bg-img .bg-img-inner {
+    height: 20.35% !important;
+}
+#page-content_CollegePoster_20x30 .drop_event_1x2_1 .bg-img .bg-img-inner {
+    height: 40.70% !important;
+}
+#page-content_CollegePoster_20x30 .calendar-imgs .main-calendar .mainDivFirst .mainDivSecond {
+    width: 47% !important;
+}
+#page-content_CollegePoster_20x30 .main-calendar table{
+    font-size: 20px !important;
+    margin-top: 20px;
+}
+#page-content_CollegePoster_20x30 .main-calendar th font {
+    font-size: 17px !important;
+}
+#page-content_CollegePoster_20x30 .calendar-imgs .main-calendar .mainDivFirst .mainDivSecond{
+    border:1px solid #fff;
+}
+/* end poster 20x30 */
+
+/* poster 16x20 */
+#page-content_CollegePoster_16x20.content-body .page_item .row.rowCoverHeight{
+    height: 100% !important;
+}
+#page-content_CollegePoster_16x20.content-body .page_item .row.rowHeight{
+    height: 40vh !important;
+}
+#page-content_CollegePoster_16x20.content-body .page_item {
+    display: flex;
+    width:100%;
+	float:left;
+}
+#page-content_CollegePoster_16x20 .imageContent{
+	float: none;
+}
+#page-content_CollegePoster_16x20 .main-calendar {
+	width: 100%;
+	float: left;
+}
+#page-content_CollegePoster_16x20 .main-calendar table{
+	width:90%;
+	margin:5px 5px;
+}
+#page-content_CollegePoster_16x20 .main-calendar table td {
+    line-height: 42px;
+}
+#page-content_CollegePoster_16x20 .calendar-imgs .main-calendar .mainDivFirst .mainDivSecond{
+	height:19.35% !important;
+	border:1px solid #fff;
+}
+#page-content_CollegePoster_16x20 .mainDivSecond table {
+	overflow: wrap;
+}
+#page-content_CollegePoster_16x20 .page_item .crop-border .imageContent {
+    border: 2px dotted red !important;
+}
+#page-content_CollegePoster_16x20 .mainDivSecond {
+    height: 200px;
+}
+#page-content_CollegePoster_16x20 .calendar-imgs.imageContent{
+	width: 100% !important;
+}
+#page-content_CollegePoster_16x20 .page_item .custom_layout .col-sm-8 {
+    width: 66.9% !important;
+    float: left !important;
+}
+#page-content_CollegePoster_16x20 .page_item .custom_layout .col-sm-4 {
+    width: 33% !important;
+    float: left !important;
+}
+#page-content_CollegePoster_16x20 .page_item .custom_layout .col-sm-4 .bg-img-inner {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+}
+#page-content_CollegePoster_16x20 .col-sm-4 .col-sm-12 .bg-img .bg-img-inner {
+    height: 20% !important;
+}
+#page-content_CollegePoster_16x20 .col-sm-6 .bg-img .bg-img-inner,
+#page-content_CollegePoster_16x20 .drop_event_1 .bg-img .bg-img-inner {
+    height: 40.6% !important;
+}
+#page-content_CollegePoster_16x20 .custom_layout .drop_event_1x1_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_16x20 .custom_layout .drop_event_1x1_2 .bg-img .bg-img-inner {
+    height: 40.7% !important;
+}
+#page-content_CollegePoster_16x20 .drop_event_1 .bg-img .bg-img-inner
+{
+    height: 40.7% !important;
+}
+#page-content_CollegePoster_16x20 .custom_layout .drop_event_2x2_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_16x20 .custom_layout .drop_event_2x2_2 .bg-img .bg-img-inner,
+#page-content_CollegePoster_16x20 .custom_layout .drop_event_2x2_3 .bg-img .bg-img-inner,
+#page-content_CollegePoster_16x20 .custom_layout .drop_event_2x2_4 .bg-img .bg-img-inner {
+    height: 20.35% !important;
+}
+#page-content_CollegePoster_16x20 .drop_event_1v1_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_16x20 .drop_event_1v1_2 .bg-img .bg-img-inner {
+    height: 20.3% !important;
+}
+#page-content_CollegePoster_16x20 .col-sm-8 .drop_event_2x3_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_16x20 .col-sm-8 .drop_event_2x3_2 .bg-img .bg-img-inner {
+height: 20.38% !important;
+}
+
+#page-content_CollegePoster_16x20 .col-sm-4 .customRow3 .col-sm-12 .bg-img .bg-img-inner {
+    height: 13.59% !important;
+}
+#page-content_CollegePoster_16x20 .col-sm-4 .drop_event_1x2_2 .bg-img .bg-img-inner,
+#page-content_CollegePoster_16x20 .col-sm-4 .drop_event_1x2_3 .bg-img .bg-img-inner {
+    height: 20.35% !important;
+}
+#page-content_CollegePoster_16x20 .drop_event_1x2_1 .bg-img .bg-img-inner {
+    height: 40.70% !important;
+}
+#page-content_CollegePoster_16x20 .calendar-imgs .main-calendar .mainDivFirst .mainDivSecond {
+    width: 47% !important;
+}
+#page-content_CollegePoster_16x20 .main-calendar table{
+	font-size: 20px !important;
+	margin-top: 20px;
+}
+/* end poster 16x20 */
+
+/*poster 12x12 */
+#page-content_CollegePoster_12x12.content-body .page_item .row.rowCoverHeight{
+    height: 100% !important;
+}
+#page-content_CollegePoster_12x12.content-body .page_item .row.rowHeight{
+    height: 40% !important;
+}
+#page-content_CollegePoster_12x12.content-body .page_item {
+    display: flex;
+    width:100%;
+	float:left;
+}
+#page-content_CollegePoster_12x12 .imageContent{
+	float: none;
+}
+#page-content_CollegePoster_12x12 .main-calendar {
+	width: 100%;
+	float: left;
+}
+#page-content_CollegePoster_12x12 .main-calendar table{
+	width:90%;
+	margin:10px 10px;
+}
+#page-content_CollegePoster_12x12 .main-calendar table td {
+    line-height: 22px;
+}
+#page-content_CollegePoster_12x12 .calendar-imgs .main-calendar .mainDivFirst .mainDivSecond{
+	height:19.52% !important;
+	border:1px solid #fff;
+}
+#page-content_CollegePoster_12x12 .drop_event_1v1_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_12x12 .drop_event_1v1_2 .bg-img .bg-img-inner {
+    height: 20% !important;
+}
+#page-content_CollegePoster_12x12 .page_item .custom_layout .col-sm-8 {
+    width: 66.9% !important;
+    float: left !important;
+}
+#page-content_CollegePoster_12x12 .page_item .custom_layout .col-sm-4 {
+    width: 33% !important;
+    float: left !important;
+}
+#page-content_CollegePoster_12x12 .col-sm-4 .drop_event_1x2_2 .bg-img .bg-img-inner,
+#page-content_CollegePoster_12x12 .col-sm-4 .drop_event_1x2_3 .bg-img .bg-img-inner,
+#page-content_CollegePoster_12x12 .custom_layout .drop_event_2x2_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_12x12 .custom_layout .drop_event_2x2_2 .bg-img .bg-img-inner,
+#page-content_CollegePoster_12x12 .custom_layout .drop_event_2x2_3 .bg-img .bg-img-inner,
+#page-content_CollegePoster_12x12 .custom_layout .drop_event_2x2_4 .bg-img .bg-img-inner {
+    height: 20% !important;
+}
+#page-content_CollegePoster_12x12 .drop_event_1x2_1 .bg-img .bg-img-inner {
+    height: 40% !important;
+}
+#page-content_CollegePoster_12x12 .col-sm-8 .drop_event_2x3_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_12x12 .col-sm-8 .drop_event_2x3_2 .bg-img .bg-img-inner {
+	height: 20% !important;
+}
+
+#page-content_CollegePoster_12x12 .col-sm-4 .customRow3 .col-sm-12 .bg-img .bg-img-inner {
+    height: 13.33% !important;
+}
+/*poster 12x12*/
+
+/*poster 11x14*/
+#page-content_CollegePoster_11x14.content-body .page_item .row.rowHeight{
+    height: 40% !important;
+}
+#page-content_CollegePoster_11x14.content-body .page_item {
+    display: flex;
+    width:100%;
+	float:left;
+}
+#page-content_CollegePoster_11x14 .imageContent{
+	float: none;
+}
+#page-content_CollegePoster_11x14 .main-calendar {
+	width: 100%;
+	float: left;
+}
+#page-content_CollegePoster_11x14 .main-calendar table{
+	width:90%;
+	margin:10px 10px;
+}
+#page-content_CollegePoster_11x14 .main-calendar table td{
+    line-height: 28px;
+}
+#page-content_CollegePoster_11x14 .calendar-imgs .main-calendar .mainDivFirst .mainDivSecond{
+	height:19.52% !important;
+	border:1px solid #fff;
+}
+#page-content_CollegePoster_11x14 .drop_event_1v1_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_11x14 .drop_event_1v1_2 .bg-img .bg-img-inner {
+    height: 20% !important;
+}
+#page-content_CollegePoster_11x14 .page_item .custom_layout .col-sm-8 {
+    width: 66.9% !important;
+    float: left !important;
+}
+#page-content_CollegePoster_11x14 .page_item .custom_layout .col-sm-4 {
+    width: 33% !important;
+    float: left !important;
+}
+#page-content_CollegePoster_11x14 .col-sm-4 .drop_event_1x2_2 .bg-img .bg-img-inner,
+#page-content_CollegePoster_11x14 .col-sm-4 .drop_event_1x2_3 .bg-img .bg-img-inner,
+#page-content_CollegePoster_11x14 .custom_layout .drop_event_2x2_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_11x14 .custom_layout .drop_event_2x2_2 .bg-img .bg-img-inner,
+#page-content_CollegePoster_11x14 .custom_layout .drop_event_2x2_3 .bg-img .bg-img-inner,
+#page-content_CollegePoster_11x14 .custom_layout .drop_event_2x2_4 .bg-img .bg-img-inner {
+    height: 20% !important;
+}
+#page-content_CollegePoster_11x14 .drop_event_1x2_1 .bg-img .bg-img-inner {
+    height: 40% !important;
+}
+#page-content_CollegePoster_11x14 .col-sm-8 .drop_event_2x3_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_11x14 .col-sm-8 .drop_event_2x3_2 .bg-img .bg-img-inner {
+	height: 20% !important;
+}
+#page-content_CollegePoster_11x14 .col-sm-4 .customRow3 .col-sm-12 .bg-img .bg-img-inner {
+    height: 13.33% !important;
+}
+/*end poster 11x14*/
+
+/*poster 8x10*/
+#page-content_CollegePoster_8x10.content-body .page_item .row.rowHeight{
+    height: 40% !important;
+}
+#page-content_CollegePoster_8x10.content-body .page_item {
+    display: flex;
+    width:100%;
+	float:left;
+}
+#page-content_CollegePoster_8x10 .imageContent{
+	float: none;
+}
+#page-content_CollegePoster_8x10 .main-calendar {
+	width: 100%;
+	float: left;
+}
+#page-content_CollegePoster_8x10 .main-calendar table{
+	width:100%;
+	margin:10px 10px;
+    font-family: 'Open Sans', sans-serif;
+}
+#page-content_CollegePoster_8x10 .main-calendar table td {
+    line-height: 18px;
+}
+#page-content_CollegePoster_8x10 .calendar-imgs .main-calendar .mainDivFirst .mainDivSecond{
+	height:19.30% !important;
+	border:1px solid #fff;
+}
+#page-content_CollegePoster_8x10 .drop_event_1v1_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_8x10 .drop_event_1v1_2 .bg-img .bg-img-inner {
+    height: 20% !important;
+}
+#page-content_CollegePoster_8x10 .page_item .custom_layout .col-sm-8 {
+    width: 66.9% !important;
+    float: left !important;
+}
+#page-content_CollegePoster_8x10 .page_item .custom_layout .col-sm-4 {
+    width: 33% !important;
+    float: left !important;
+}
+#page-content_CollegePoster_8x10 .col-sm-4 .drop_event_1x2_2 .bg-img .bg-img-inner,
+#page-content_CollegePoster_8x10 .col-sm-4 .drop_event_1x2_3 .bg-img .bg-img-inner,
+#page-content_CollegePoster_8x10 .custom_layout .drop_event_2x2_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_8x10 .custom_layout .drop_event_2x2_2 .bg-img .bg-img-inner,
+#page-content_CollegePoster_8x10 .custom_layout .drop_event_2x2_3 .bg-img .bg-img-inner,
+#page-content_CollegePoster_8x10 .custom_layout .drop_event_2x2_4 .bg-img .bg-img-inner {
+    height: 20% !important;
+}
+#page-content_CollegePoster_8x10 .drop_event_1x2_1 .bg-img .bg-img-inner {
+    height: 40% !important;
+}
+#page-content_CollegePoster_8x10 .col-sm-8 .drop_event_2x3_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_8x10 .col-sm-8 .drop_event_2x3_2 .bg-img .bg-img-inner {
+	height: 20% !important;
+}
+#page-content_CollegePoster_8x10 .col-sm-4 .customRow3 .col-sm-12 .bg-img .bg-img-inner {
+    height: 13.33% !important;
+}
+#page-content_CollegePoster_8x10 .main-calendar table{
+    font-size: 12px !important;
+}
+#page-content_CollegePoster_8x10 .mainDivSecond table tr th {
+    font-size: 30px !important;
+}
+/*end poster 8x10*/
+
+/* poster 8x8 */
+#page-content_CollegePoster_8x8.content-body .page_item .row.rowCoverHeight{
+    height: 100% !important;
+}
+#page-content_CollegePoster_8x8.content-body .page_item .row.rowHeight{
+    height: 40% !important;
+}
+#page-content_CollegePoster_8x8.content-body .page_item {
+    display: flex;
+    width:100%;
+	float:left;
+}
+#page-content_CollegePoster_8x8 .imageContent{
+	float: none;
+}
+#page-content_CollegePoster_8x8 .main-calendar {
+	width: 100%;
+	float: left;
+}
+#page-content_CollegePoster_8x8 .main-calendar table{
+	width:90%;
+	margin:5px 5px;
+}
+#page-content_CollegePoster_8x8 .main-calendar table td {
+    line-height: 15px;
+}
+#page-content_CollegePoster_8x8 .calendar-imgs .main-calendar .mainDivFirst .mainDivSecond{
+	height:19% !important;
+	border:1px solid #fff;
+}
+#page-content_CollegePoster_8x8 .drop_event_1v1_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_8x8 .drop_event_1v1_2 .bg-img .bg-img-inner {
+    height: 20% !important;
+}
+#page-content_CollegePoster_8x8 .page_item .custom_layout .col-sm-8 {
+    width: 66.9% !important;
+    float: left !important;
+}
+#page-content_CollegePoster_8x8 .page_item .custom_layout .col-sm-4 {
+    width: 33% !important;
+    float: left !important;
+}
+#page-content_CollegePoster_8x8 .col-sm-4 .drop_event_1x2_2 .bg-img .bg-img-inner,
+#page-content_CollegePoster_8x8 .col-sm-4 .drop_event_1x2_3 .bg-img .bg-img-inner,
+#page-content_CollegePoster_8x8 .custom_layout .drop_event_2x2_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_8x8 .custom_layout .drop_event_2x2_2 .bg-img .bg-img-inner,
+#page-content_CollegePoster_8x8 .custom_layout .drop_event_2x2_3 .bg-img .bg-img-inner,
+#page-content_CollegePoster_8x8 .custom_layout .drop_event_2x2_4 .bg-img .bg-img-inner {
+    height: 20% !important;
+}
+#page-content_CollegePoster_8x8 .drop_event_1x2_1 .bg-img .bg-img-inner {
+    height: 40% !important;
+}
+#page-content_CollegePoster_8x8 .col-sm-8 .drop_event_2x3_1 .bg-img .bg-img-inner,
+#page-content_CollegePoster_8x8 .col-sm-8 .drop_event_2x3_2 .bg-img .bg-img-inner {
+	height: 20% !important;
+}
+#page-content_CollegePoster_8x8 .col-sm-4 .customRow3 .col-sm-12 .bg-img .bg-img-inner {
+    height: 13.33% !important;
+}
+#page-content_CollegePoster_8x8 .main-calendar table{
+    font-size: 9px !important;
+}
+/* end poster 8x8 */
+/* end poster */
+
+/* Calendar */
+/* calendar 12x12 */
+#page-content_Calendar_12x12 .page_item .imageContent .rowCoverHeight{
+    height: 98% !important;
+}
+#page-content_Calendar_12x12 .page_item .imageContent .rowCoverHeight .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 98% !important;
+}
+#page-content_Calendar_12x12 .page_item .imageContent .rowHeight{
+    height: 40% !important;
+}
+#page-content_Calendar_12x12 .page_item .imageContent .rowHeight .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 40% !important;
+}
+#page-content_Calendar_12x12 .page_item {
+    display: flex;
+    width: 100%;
+	float: left;
+}
+#page-content_Calendar_12x12 .page_item .imageContent{
+	float: none;
+} 
+#page-content_Calendar_12x12 .page_item .main-calendar {
+	width: 100%;
+	float: left;
+	height: 58.5% !important;
+}
+#page-content_Calendar_12x12 .page_item .main-calendar table{
+	width:90%;
+	margin:10px 10px;
+	font-family: 'Open Sans', sans-serif;
+}
+#page-content_Calendar_12x12 .page_item .main-calendar table td{
+    line-height: 80px;
+	text-align: center;
+}
+#page-content_Calendar_12x12 .page_item .main-calendar .mainDivFirst .mainDivSecond{
+	height:60% !important;
+	border:1px solid #fff;
+} 
+#page-content_Calendar_12x12 .drop_event_1v1_1 .bg-img .bg-img-inner,
+#page-content_Calendar_12x12 .drop_event_1v1_2 .bg-img .bg-img-inner {
+    height: 20% !important;
+}
+#page-content_Calendar_12x12 .page_item .custom_layout .col-sm-8 {
+    width: 66.6% !important;
+    float: left !important;
+}
+#page-content_Calendar_12x12 .page_item .custom_layout .col-sm-4 {
+    width: 33.3% !important;
+    float: left !important;
+}
+#page-content_Calendar_12x12 .col-sm-4 .drop_event_1x2_2 .bg-img .bg-img-inner,
+#page-content_Calendar_12x12 .col-sm-4 .drop_event_1x2_3 .bg-img .bg-img-inner,
+#page-content_Calendar_12x12 .custom_layout .drop_event_2x2_1 .bg-img .bg-img-inner,
+#page-content_Calendar_12x12 .custom_layout .drop_event_2x2_2 .bg-img .bg-img-inner,
+#page-content_Calendar_12x12 .custom_layout .drop_event_2x2_3 .bg-img .bg-img-inner,
+#page-content_Calendar_12x12 .custom_layout .drop_event_2x2_4 .bg-img .bg-img-inner {
+    height: 20% !important;
+}
+#page-content_Calendar_12x12 .drop_event_1x2_1 .bg-img .bg-img-inner {
+    height: 40% !important;
+}
+#page-content_Calendar_12x12 .col-sm-8 .drop_event_2x3_1 .bg-img .bg-img-inner,
+#page-content_Calendar_12x12 .col-sm-8 .drop_event_2x3_2 .bg-img .bg-img-inner {
+	height: 20% !important;
+}
+#page-content_Calendar_12x12 .col-sm-4 .customRow3 .col-sm-12 .bg-img .bg-img-inner {
+    height: 13.33% !important;
+}
+
+/* calendar 8x11 */
+#page-content_Calendar_8x11 .page_item .imageContent .row.rowHeight.custom_layout .textinside {
+	display: none!important;
+}
+#page-content_Calendar_8x11 .page_item .imageContent .rowCoverHeight{
+    height: 98% !important;
+}
+#page-content_Calendar_8x11 .page_item .imageContent .rowCoverHeight .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 98% !important;
+}
+#page-content_Calendar_8x11 .page_item .imageContent .rowHeight{
+    height: 40% !important;
+}
+#page-content_Calendar_8x11 .page_item .imageContent .rowHeight .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 40% !important;
+}
+#page-content_Calendar_8x11 .page_item {
+    display: flex;
+    width: 100%;
+	float: left;
+}
+#page-content_Calendar_8x11 .page_item .imageContent{
+	float: none;
+} 
+#page-content_Calendar_8x11 .page_item .main-calendar {
+	width: 100%;
+	float: left;
+	height: 57% !important;
+}
+#page-content_Calendar_8x11 .page_item .main-calendar table{
+	width:90%;
+	margin:10px 10px;
+	font-family: 'Open Sans', sans-serif;
+}
+#page-content_Calendar_8x11 .page_item .main-calendar table td{
+    line-height: 75px;
+	text-align: center;
+}
+#page-content_Calendar_8x11 .page_item .main-calendar .mainDivFirst .mainDivSecond{
+	height:60% !important;
+	border:1px solid #fff;
+} 
+#page-content_Calendar_8x11 .drop_event_1v1_1 .bg-img .bg-img-inner,
+#page-content_Calendar_8x11 .drop_event_1v1_2 .bg-img .bg-img-inner {
+    height: 20% !important;
+}
+#page-content_Calendar_8x11 .page_item .custom_layout .col-sm-8 {
+    width: 66.6% !important;
+    float: left !important;
+}
+#page-content_Calendar_8x11 .page_item .custom_layout .col-sm-4 {
+    width: 33.3% !important;
+    float: left !important;
+}
+#page-content_Calendar_8x11 .col-sm-4 .drop_event_1x2_2 .bg-img .bg-img-inner,
+#page-content_Calendar_8x11 .col-sm-4 .drop_event_1x2_3 .bg-img .bg-img-inner,
+#page-content_Calendar_8x11 .custom_layout .drop_event_2x2_1 .bg-img .bg-img-inner,
+#page-content_Calendar_8x11 .custom_layout .drop_event_2x2_2 .bg-img .bg-img-inner,
+#page-content_Calendar_8x11 .custom_layout .drop_event_2x2_3 .bg-img .bg-img-inner,
+#page-content_Calendar_8x11 .custom_layout .drop_event_2x2_4 .bg-img .bg-img-inner {
+    height: 20% !important;
+}
+#page-content_Calendar_8x11 .drop_event_1x2_1 .bg-img .bg-img-inner {
+    height: 40% !important;
+}
+#page-content_Calendar_8x11 .col-sm-8 .drop_event_2x3_1 .bg-img .bg-img-inner,
+#page-content_Calendar_8x11 .col-sm-8 .drop_event_2x3_2 .bg-img .bg-img-inner {
+	height: 20% !important;
+}
+#page-content_Calendar_8x11 .col-sm-4 .customRow3 .col-sm-12 .bg-img .bg-img-inner {
+    height: 13.33% !important;
+}
+/* end calendar 8x11 */
+
+/* calendar 11x5 */
+#page-content_Calendar_11x5 .page_item .textinside {
+	display: none!important;
+}
+#page-content_Calendar_11x5 .rowCoverHeight .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+    height: 100% !important;
+}
+#page-content_Calendar_11x5 .imageContent{
+	width: 100% !important;
+	float: left;
+}
+#page-content_Calendar_11x5 .imageContent .rowHeight{
+	width: 50% !important;
+	float: left;
+}
+#page-content_Calendar_11x5 .imageContent .main-calendar {
+    width: 50%;
+    float: left;
+}
+#page-content_Calendar_11x5 .imageContent .main-calendar table{
+	width:80%;
+	margin:5px 5px;
+	font-family: 'Open Sans', sans-serif;
+	overflow: wrap;
+}
+#page-content_Calendar_11x5 .main-calendar table td {
+    line-height: 50px;
+	text-align:center;
+}
+#page-content_Calendar_11x5 .col-sm-12 .bg-img .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height:96.5% !important;
+}
+#page-content_Calendar_11x5 .drop_event_1v1_1 .bg-img .bg-img-inner,
+#page-content_Calendar_11x5 .drop_event_1v1_2 .bg-img .bg-img-inner {
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+    height: 48% !important;
+}
+#page-content_Calendar_11x5 .page_item .custom_layout .col-sm-8 {
+    width: 66.6% !important;
+    float: left !important;
+}
+#page-content_Calendar_11x5 .page_item .custom_layout .col-sm-4 {
+    width: 33.3% !important;
+    float: left !important;
+}
+#page-content_Calendar_11x5 .custom_layout .drop_event_1x1_1 .bg-img .bg-img-inner,
+#page-content_Calendar_11x5 .custom_layout .drop_event_1x1_2 .bg-img .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+    height: 96% !important;
+}
+#page-content_Calendar_11x5 .col-sm-4 .drop_event_1x2_2 .bg-img .bg-img-inner,
+#page-content_Calendar_11x5 .col-sm-4 .drop_event_1x2_3 .bg-img .bg-img-inner,
+#page-content_Calendar_11x5 .custom_layout .drop_event_2x2_1 .bg-img .bg-img-inner,
+#page-content_Calendar_11x5 .custom_layout .drop_event_2x2_2 .bg-img .bg-img-inner,
+#page-content_Calendar_11x5 .custom_layout .drop_event_2x2_3 .bg-img .bg-img-inner,
+#page-content_Calendar_11x5 .custom_layout .drop_event_2x2_4 .bg-img .bg-img-inner {
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+    height: 48% !important;
+}
+#page-content_Calendar_11x5 .drop_event_1x2_1 .bg-img .bg-img-inner {
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+    height: 96% !important;
+}
+#page-content_Calendar_11x5 .col-sm-8 .drop_event_2x3_1 .bg-img .bg-img-inner,
+#page-content_Calendar_11x5 .col-sm-8 .drop_event_2x3_2 .bg-img .bg-img-inner {
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 48% !important;
+}
+#page-content_Calendar_11x5 .col-sm-4 .customRow3 .col-sm-12 .bg-img .bg-img-inner {
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+    height: 32% !important;
+}
+/* end calendar 11x5 */
+
+/* end calendar */
+
+/* photobook */
+/* photo-book-11x14 */
+#page-content_Photobook_11x14 .content-body .page_item .inner_page {
+    width: 50% !important;
+    border-right: 3px solid #fff;
+    float: left !important;
+}
+#page-content_Photobook_11x14 .page_item .inner_page {
+    float: left;
+    width: 50%;
+}
+#page-content_Photobook_11x14 .page_count{
+	text-align: center;
+	float:left;
+    width: 100%;
+    line-height: 11px;
+}
+#page-content_Photobook_11x14 .page_content {
+    width: 100%;
+    float: left;
+}
+#page-content_Photobook_11x14 .page_item .page_content{
+	height:100% !important;
+	float: left;
+}
+#page-content_Photobook_11x14 .imageContent .layoutbox-cover .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 97.5% !important;
+}
+#page-content_Photobook_11x14 .imageContent .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 87% !important;
+}
+/* css added by hetram on 6-6-18 */
+#page-content_Photobook_11x14 .drop_event_1v1_1 .bg-img .bg-img-inner,
+#page-content_Photobook_11x14 .drop_event_1v1_2 .bg-img .bg-img-inner {
+    height: 43.5% !important;
+}
+#page-content_Photobook_11x14 .page_item .custom_layout .col-sm-8 {
+    width: 66.6% !important;
+    float: left !important;
+}
+#page-content_Photobook_11x14 .page_item .custom_layout .col-sm-4 {
+    width: 33.3% !important;
+    float: left !important;
+}
+#page-content_Photobook_11x14 .col-sm-4 .drop_event_1x2_2 .bg-img .bg-img-inner,
+#page-content_Photobook_11x14 .col-sm-4 .drop_event_1x2_3 .bg-img .bg-img-inner,
+#page-content_Photobook_11x14 .custom_layout .drop_event_2x2_1 .bg-img .bg-img-inner,
+#page-content_Photobook_11x14 .custom_layout .drop_event_2x2_2 .bg-img .bg-img-inner,
+#page-content_Photobook_11x14 .custom_layout .drop_event_2x2_3 .bg-img .bg-img-inner,
+#page-content_Photobook_11x14 .custom_layout .drop_event_2x2_4 .bg-img .bg-img-inner {
+    height: 43.5% !important;
+}
+#page-content_Photobook_11x14 .drop_event_1x2_1 .bg-img .bg-img-inner {
+    height: 87% !important;
+}
+#page-content_Photobook_11x14 .col-sm-8 .drop_event_2x3_1 .bg-img .bg-img-inner,
+#page-content_Photobook_11x14 .col-sm-8 .drop_event_2x3_2 .bg-img .bg-img-inner {
+	height: 43.5% !important;
+}
+#page-content_Photobook_11x14 .col-sm-4 .customRow3 .col-sm-12 .bg-img .bg-img-inner {
+    height: 28.99% !important;
+}
+/* end css added by hetram on 6-6-18 */
+/* end photo-book-11x14 */
+
+/* photo-book-12x12 */
+#page-content_Photobook_12x12 .content-body .page_item .inner_page {
+    width: 50% !important;
+    border-right: 3px solid #fff;
+    float: left !important;
+}
+#page-content_Photobook_12x12 .page_item .inner_page {
+    float: left;
+    width: 50%;
+}
+#page-content_Photobook_12x12 .page_count{
+	text-align: center;
+	float:left;
+    width: 100%;
+    line-height: 11px;
+}
+#page-content_Photobook_12x12 .page_content {
+    width: 100%;
+    float: left;
+}
+#page-content_Photobook_12x12 .page_item .page_content{
+	height:100% !important;
+	float: left;
+}
+#page-content_Photobook_12x12 .imageContent .layoutbox-cover .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 97% !important;
+}
+#page-content_Photobook_12x12 .imageContent .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 87% !important;
+}
+/* css added by hetram on 6-6-18 */
+#page-content_Photobook_12x12 .drop_event_1v1_1 .bg-img .bg-img-inner,
+#page-content_Photobook_12x12 .drop_event_1v1_2 .bg-img .bg-img-inner {
+    height: 43.5% !important;
+}
+#page-content_Photobook_12x12 .page_item .custom_layout .col-sm-8 {
+    width: 66.6% !important;
+    float: left !important;
+}
+#page-content_Photobook_12x12 .page_item .custom_layout .col-sm-4 {
+    width: 33.3% !important;
+    float: left !important;
+}
+#page-content_Photobook_12x12 .col-sm-4 .drop_event_1x2_2 .bg-img .bg-img-inner,
+#page-content_Photobook_12x12 .col-sm-4 .drop_event_1x2_3 .bg-img .bg-img-inner,
+#page-content_Photobook_12x12 .custom_layout .drop_event_2x2_1 .bg-img .bg-img-inner,
+#page-content_Photobook_12x12 .custom_layout .drop_event_2x2_2 .bg-img .bg-img-inner,
+#page-content_Photobook_12x12 .custom_layout .drop_event_2x2_3 .bg-img .bg-img-inner,
+#page-content_Photobook_12x12 .custom_layout .drop_event_2x2_4 .bg-img .bg-img-inner {
+    height: 43.5% !important;
+}
+#page-content_Photobook_12x12 .drop_event_1x2_1 .bg-img .bg-img-inner {
+    height: 87% !important;
+}
+#page-content_Photobook_12x12 .col-sm-8 .drop_event_2x3_1 .bg-img .bg-img-inner,
+#page-content_Photobook_12x12 .col-sm-8 .drop_event_2x3_2 .bg-img .bg-img-inner {
+	height: 43.5% !important;
+}
+#page-content_Photobook_12x12 .col-sm-4 .customRow3 .col-sm-12 .bg-img .bg-img-inner {
+    height: 28.99% !important;
+}
+/* end css added by hetram on 6-6-18 */
+/* end photo-book-12x12 */
+
+/* photo-book-10x10 */
+#page-content_Photobook_10x10 .content-body .page_item .inner_page {
+    width: 50% !important;
+    border-right: 3px solid #fff;
+    float: left !important;
+}
+#page-content_Photobook_10x10 .page_item .inner_page {
+    float: left;
+    width: 50%;
+}
+#page-content_Photobook_10x10 .page_count{
+	text-align: center;
+	float:left;
+    width: 100%;
+    line-height: 11px;
+}
+#page-content_Photobook_10x10 .page_content {
+    width: 100%;
+    float: left;
+}
+#page-content_Photobook_10x10 .page_item .page_content{
+	height:100% !important;
+	float: left;
+}
+#page-content_Photobook_10x10 .imageContent .layoutbox-cover .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 95% !important;
+}
+#page-content_Photobook_10x10 .imageContent .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 85% !important;
+}
+/* css added by hetram on 6-6-18 */
+#page-content_Photobook_10x10 .drop_event_1v1_1 .bg-img .bg-img-inner,
+#page-content_Photobook_10x10 .drop_event_1v1_2 .bg-img .bg-img-inner {
+    height: 42.5% !important;
+}
+#page-content_Photobook_10x10 .page_item .custom_layout .col-sm-8 {
+    width: 66.6% !important;
+    float: left !important;
+}
+#page-content_Photobook_10x10 .page_item .custom_layout .col-sm-4 {
+    width: 33.3% !important;
+    float: left !important;
+}
+#page-content_Photobook_10x10 .col-sm-4 .drop_event_1x2_2 .bg-img .bg-img-inner,
+#page-content_Photobook_10x10 .col-sm-4 .drop_event_1x2_3 .bg-img .bg-img-inner,
+#page-content_Photobook_10x10 .custom_layout .drop_event_2x2_1 .bg-img .bg-img-inner,
+#page-content_Photobook_10x10 .custom_layout .drop_event_2x2_2 .bg-img .bg-img-inner,
+#page-content_Photobook_10x10 .custom_layout .drop_event_2x2_3 .bg-img .bg-img-inner,
+#page-content_Photobook_10x10 .custom_layout .drop_event_2x2_4 .bg-img .bg-img-inner {
+    height: 42.5% !important;
+}
+#page-content_Photobook_10x10 .drop_event_1x2_1 .bg-img .bg-img-inner {
+    height: 85% !important;
+}
+#page-content_Photobook_10x10 .col-sm-8 .drop_event_2x3_1 .bg-img .bg-img-inner,
+#page-content_Photobook_10x10 .col-sm-8 .drop_event_2x3_2 .bg-img .bg-img-inner {
+	height: 42.5% !important;
+}
+#page-content_Photobook_10x10 .col-sm-4 .customRow3 .col-sm-12 .bg-img .bg-img-inner {
+    height: 28.33% !important;
+}
+/* end css added by hetram on 6-6-18 */
+/* end photo-book-10x10 */
+
+/* photo-book-11x8 */
+#page-content_Photobook_11x8 .content-body .page_item .inner_page {
+    width: 50% !important;
+    border-right: 3px solid #fff;
+    float: left !important;
+}
+#page-content_Photobook_11x8 .page_item .inner_page {
+    float: left;
+    width: 50%;
+}
+#page-content_Photobook_11x8 .page_count{
+	text-align: center;
+	float:left;
+    width: 100%;
+    line-height: 11px;
+}
+#page-content_Photobook_11x8 .page_content {
+    width: 100%;
+    float: left;
+}
+#page-content_Photobook_11x8 .page_item .page_content{
+	height:100% !important;
+	float: left;
+}
+#page-content_Photobook_11x8 .imageContent .layoutbox-cover .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 95.5% !important;
+}
+#page-content_Photobook_11x8 .imageContent .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 85.5% !important;
+}
+/* css added by hetram on 6-6-18 */
+#page-content_Photobook_11x8 .drop_event_1v1_1 .bg-img .bg-img-inner,
+#page-content_Photobook_11x8 .drop_event_1v1_2 .bg-img .bg-img-inner {
+    height: 42.5% !important;
+}
+#page-content_Photobook_11x8 .page_item .custom_layout .col-sm-8 {
+    width: 66.9% !important;
+    float: left !important;
+}
+#page-content_Photobook_11x8 .page_item .custom_layout .col-sm-4 {
+    width: 33% !important;
+    float: left !important;
+}
+#page-content_Photobook_11x8 .col-sm-4 .drop_event_1x2_2 .bg-img .bg-img-inner,
+#page-content_Photobook_11x8 .col-sm-4 .drop_event_1x2_3 .bg-img .bg-img-inner,
+#page-content_Photobook_11x8 .custom_layout .drop_event_2x2_1 .bg-img .bg-img-inner,
+#page-content_Photobook_11x8 .custom_layout .drop_event_2x2_2 .bg-img .bg-img-inner,
+#page-content_Photobook_11x8 .custom_layout .drop_event_2x2_3 .bg-img .bg-img-inner,
+#page-content_Photobook_11x8 .custom_layout .drop_event_2x2_4 .bg-img .bg-img-inner {
+    height: 42.5% !important;
+}
+#page-content_Photobook_11x8 .drop_event_1x2_1 .bg-img .bg-img-inner {
+    height: 85% !important;
+}
+#page-content_Photobook_11x8 .col-sm-8 .drop_event_2x3_1 .bg-img .bg-img-inner,
+#page-content_Photobook_11x8 .col-sm-8 .drop_event_2x3_2 .bg-img .bg-img-inner {
+	height: 42.5% !important;
+}
+#page-content_Photobook_11x8 .col-sm-4 .customRow3 .col-sm-12 .bg-img .bg-img-inner {
+    height: 28.33% !important;
+}
+/* end css added by hetram on 6-6-18 */
+/* end photo-book-11x8 */
+
+/* photo-book-8x11 */
+#page-content_Photobook_8x11 .content-body .page_item .inner_page {
+    width: 50% !important;
+    border-right: 3px solid #fff;
+    float: left !important;
+}
+#page-content_Photobook_8x11 .page_item .inner_page {
+    float: left;
+    width: 50%;
+}
+#page-content_Photobook_8x11 .page_count{
+	text-align: center;
+	float:left;
+    width: 100%;
+    line-height: 11px;
+}
+#page-content_Photobook_8x11 .page_content {
+    width: 100%;
+    float: left;
+}
+#page-content_Photobook_8x11 .page_item .page_content{
+	height:100% !important;
+	float: left;
+}
+#page-content_Photobook_8x11 .imageContent .layoutbox-cover .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 96.8% !important;
+}
+#page-content_Photobook_8x11 .imageContent .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 85% !important;
+}
+/* css added by hetram on 6-6-18 */
+#page-content_Photobook_8x11 .drop_event_1v1_1 .bg-img .bg-img-inner,
+#page-content_Photobook_8x11 .drop_event_1v1_2 .bg-img .bg-img-inner {
+    height: 42.5% !important;
+}
+#page-content_Photobook_8x11 .page_item .custom_layout .col-sm-8 {
+    width: 66.9% !important;
+    float: left !important;
+}
+#page-content_Photobook_8x11 .page_item .custom_layout .col-sm-4 {
+    width: 33% !important;
+    float: left !important;
+}
+#page-content_Photobook_8x11 .col-sm-4 .drop_event_1x2_2 .bg-img .bg-img-inner,
+#page-content_Photobook_8x11 .col-sm-4 .drop_event_1x2_3 .bg-img .bg-img-inner,
+#page-content_Photobook_8x11 .custom_layout .drop_event_2x2_1 .bg-img .bg-img-inner,
+#page-content_Photobook_8x11 .custom_layout .drop_event_2x2_2 .bg-img .bg-img-inner,
+#page-content_Photobook_8x11 .custom_layout .drop_event_2x2_3 .bg-img .bg-img-inner,
+#page-content_Photobook_8x11 .custom_layout .drop_event_2x2_4 .bg-img .bg-img-inner {
+    height: 42.5% !important;
+}
+#page-content_Photobook_8x11 .drop_event_1x2_1 .bg-img .bg-img-inner {
+    height: 85% !important;
+}
+#page-content_Photobook_8x11 .col-sm-8 .drop_event_2x3_1 .bg-img .bg-img-inner,
+#page-content_Photobook_8x11 .col-sm-8 .drop_event_2x3_2 .bg-img .bg-img-inner {
+	height: 42.5% !important;
+}
+#page-content_Photobook_8x11 .col-sm-4 .customRow3 .col-sm-12 .bg-img .bg-img-inner {
+    height: 28.33% !important;
+}
+/* end css added by hetram on 6-6-18 */
+/* end photo-book-8x11 */
+
+/* photo-book-8x8 */
+#page-content_Photobook_8x8 .content-body .page_item .inner_page {
+    width: 50% !important;
+    border-right: 3px solid #fff;
+    float: left !important;
+}
+#page-content_Photobook_8x8 .page_item .inner_page {
+    float: left;
+    width: 50%;
+}
+#page-content_Photobook_8x8 .page_count{
+	text-align: center;
+	float:left;
+    width: 100%;
+    line-height: 11px;
+}
+#page-content_Photobook_8x8 .page_content {
+    width: 100%;
+    float: left;
+}
+#page-content_Photobook_8x8 .page_item .page_content{
+	height:100% !important;
+	float: left;
+}
+#page-content_Photobook_8x8 .imageContent .layoutbox-cover .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 95% !important;
+}
+#page-content_Photobook_8x8 .imageContent .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 85% !important;
+}
+/* added by hetram on 6-6-18 */
+#page-content_Photobook_8x8 .drop_event_1v1_1 .bg-img .bg-img-inner,
+#page-content_Photobook_8x8 .drop_event_1v1_2 .bg-img .bg-img-inner {
+    height: 42.5% !important;
+}
+#page-content_Photobook_8x8 .page_item .custom_layout .col-sm-8 {
+    width: 66.9% !important;
+    float: left !important;
+}
+#page-content_Photobook_8x8 .page_item .custom_layout .col-sm-4 {
+    width: 33% !important;
+    float: left !important;
+}
+#page-content_Photobook_8x8 .col-sm-4 .drop_event_1x2_2 .bg-img .bg-img-inner,
+#page-content_Photobook_8x8 .col-sm-4 .drop_event_1x2_3 .bg-img .bg-img-inner,
+#page-content_Photobook_8x8 .custom_layout .drop_event_2x2_1 .bg-img .bg-img-inner,
+#page-content_Photobook_8x8 .custom_layout .drop_event_2x2_2 .bg-img .bg-img-inner,
+#page-content_Photobook_8x8 .custom_layout .drop_event_2x2_3 .bg-img .bg-img-inner,
+#page-content_Photobook_8x8 .custom_layout .drop_event_2x2_4 .bg-img .bg-img-inner {
+    height: 42.5% !important;
+}
+#page-content_Photobook_8x8 .drop_event_1x2_1 .bg-img .bg-img-inner {
+    height: 85% !important;
+}
+#page-content_Photobook_8x8 .col-sm-8 .drop_event_2x3_1 .bg-img .bg-img-inner,
+#page-content_Photobook_8x8 .col-sm-8 .drop_event_2x3_2 .bg-img .bg-img-inner {
+	height: 42.5% !important;
+}
+#page-content_Photobook_8x8 .col-sm-4 .customRow3 .col-sm-12 .bg-img .bg-img-inner {
+    height: 28.33% !important;
+}
+/* end added by hetram 6-6-18 */
+/* end photo-book-8x8 */
+
+/* photo-book-7x9 */
+#page-content_Photobook_7x9 .content-body .page_item .inner_page {
+    width: 50% !important;
+    border-right: 3px solid #fff;
+    float: left !important;
+}
+#page-content_Photobook_7x9 .page_item .inner_page {
+    float: left;
+    width: 50%;
+}
+#page-content_Photobook_7x9 .page_count{
+	text-align: center;
+	float:left;
+    width: 100%;
+    line-height: 11px;
+}
+#page-content_Photobook_7x9 .page_content {
+    width: 100%;
+    float: left;
+}
+#page-content_Photobook_7x9 .page_item .page_content{
+	height:100% !important;
+	float: left;
+}
+#page-content_Photobook_7x9 .imageContent .layoutbox-cover .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 95% !important;
+}
+#page-content_Photobook_7x9 .imageContent .bg-img-inner{
+	background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
+	height: 85% !important;
+}
+/* css added by hetram on 6-6-18 */
+#page-content_Photobook_7x9 .drop_event_1v1_1 .bg-img .bg-img-inner,
+#page-content_Photobook_7x9 .drop_event_1v1_2 .bg-img .bg-img-inner {
+    height: 42.5% !important;
+}
+#page-content_Photobook_7x9 .page_item .custom_layout .col-sm-8 {
+    width: 66.9% !important;
+    float: left !important;
+}
+#page-content_Photobook_7x9 .page_item .custom_layout .col-sm-4 {
+    width: 33% !important;
+    float: left !important;
+}
+#page-content_Photobook_7x9 .col-sm-4 .drop_event_1x2_2 .bg-img .bg-img-inner,
+#page-content_Photobook_7x9 .col-sm-4 .drop_event_1x2_3 .bg-img .bg-img-inner,
+#page-content_Photobook_7x9 .custom_layout .drop_event_2x2_1 .bg-img .bg-img-inner,
+#page-content_Photobook_7x9 .custom_layout .drop_event_2x2_2 .bg-img .bg-img-inner,
+#page-content_Photobook_7x9 .custom_layout .drop_event_2x2_3 .bg-img .bg-img-inner,
+#page-content_Photobook_7x9 .custom_layout .drop_event_2x2_4 .bg-img .bg-img-inner {
+    height: 42.5% !important;
+}
+#page-content_Photobook_7x9 .drop_event_1x2_1 .bg-img .bg-img-inner {
+    height: 85% !important;
+}
+#page-content_Photobook_7x9 .col-sm-8 .drop_event_2x3_1 .bg-img .bg-img-inner,
+#page-content_Photobook_7x9 .col-sm-8 .drop_event_2x3_2 .bg-img .bg-img-inner {
+	height: 42.5% !important;
+}
+#page-content_Photobook_7x9 .col-sm-4 .customRow3 .col-sm-12 .bg-img .bg-img-inner {
+    height: 28.33% !important;
+}
+/* end css added by hetram on 6-6-18 */
+
+/* end photo-book-7x9 */
+
+/* end photobook */
+
+/* end added custom css */
+
+

@@ -1,0 +1,111 @@
+.content-body .ui-widget-header {
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  padding: 0 !important
+}
+.content-body #tabs #address_book, .content-body #order_history {
+  background: #f8f6f6;
+   padding: 20px !important;
+
+}
+.content-body #tabs #my_project {
+  border: 0 !important;
+  padding: 34px 5px 20px 20px !important;
+}
+.content-body #tabs {
+  border: 0;
+}
+.content-body .ui-widget-content #my_project {
+  border: 1px solid #cfdbdb !important;
+  margin-top: 1px;
+  background: #f8f6f6;
+}
+.porject-box-pagination {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+.porject-box-pagination .pagination {
+  justify-content: center;
+  -webkit-justify-content: center;
+}
+.ui-dialog-titlebar-close {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  border-radius: 50% !important;
+  height: 25px !important;
+  width: 25px !important;
+  top: 44% !important;
+}
+
+/*.ui-button-icon-only .ui-icon {
+	margin-left: -9px !important;
+}
+button:focus {
+	outline: none !important;
+}
+.ui-tabs .ui-tabs-panel, .box-btn {
+display: inline-block !important;
+width: 100%;
+}*/
+
+
+
+
+
+
+
+
+
+.ui-tabs .ui-tabs-nav li { cursor: pointer; }
+
+.ui-state-active, 
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active {
+  border: 1px solid #79b7e7;
+    background-color: #0099cc !important;
+  background-image: none !important;
+  font-weight: bold;
+  color: #fff !important;
+}
+.ui-state-active a, 
+.ui-widget-content .ui-state-active a,
+.ui-widget-header .ui-state-active a {
+  color: #fff !important;
+}
+.box-style {
+  text-align: left;
+  border-radius: 5px;
+  margin: 0 6% 0 0;
+  background-color: #e1e1e1;
+  display: inline-block;
+  width: 94%;
+  padding: 16px;
+  border-radius: 0 6px 6px 6px;
+  position: relative;
+}
+.box-style ::before {
+  content: '';
+  width: 50%;
+  height: 12px;
+  border-radius: 0 20px 0 0;
+  background-color: #e1e1e1;
+  position: absolute;
+  top: -12px;
+  left: 0px;
+}
+.project-box .albumBack {
+  width: 25%;
+}
+.ui-widget {
+  font-family: 'Open Sans', sans-serif !important;
+}
+#order_history th {
+  font-size: 16px;
+}
+#order_history td {
+  font-size: 15px;
+}
+.w-auto { width: auto; }
+

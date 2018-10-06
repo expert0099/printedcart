@@ -1,0 +1,91 @@
+#crop_dialog #wrappers {
+  width: 900px;
+  margin: 0 auto;
+}
+
+#imagecrop {
+  display: block;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+#form-container {
+    display: block;
+    position: absolute;
+    bottom: 104px;
+    right: 36px;
+}
+.ui-widget-content {
+    border: 1px solid transparent !important;
+    background: #fff !important;
+}
+#crop_submit {
+    color: #fff;
+    font-size: 1em;
+    text-shadow: transparent;
+    border: 0px solid #b0e49f;
+    padding: 7px 14px;
+    cursor: pointer;
+    background-color: #62be46;
+    float: right;
+    position: absolute;
+    top: 62px;
+    right: -36px;
+}
+
+#crop_submit:hover {
+  background-color: #72ce54;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#72ce54), to(#49b233));
+  background-image: -webkit-linear-gradient(top, #72ce54, #49b233);
+  background-image: -moz-linear-gradient(top, #72ce54, #49b233);
+  background-image: -ms-linear-gradient(top, #72ce54, #49b233);
+  background-image: -o-linear-gradient(top, #72ce54, #49b233);
+  background-image: linear-gradient(top, #72ce54, #49b233);
+}
+#crop_submit:active {
+  -webkit-box-shadow: inset 0 2px 13px -1px rgba(0,0,0,0.35);
+  -moz-box-shadow: inset 0 2px 13px -1px rgba(0,0,0,0.35);
+  box-shadow: inset 0 2px 13px -1px rgba(0,0,0,0.35);
+}
+
+
+/* jcrop styles */
+.jc-demo-box {
+  position: relative;
+  text-align: left;
+  margin: 1.5em auto;
+  background: #fff;
+  -webkit-box-shadow: 0 3px 9px -1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0 3px 9px -1px rgba(0,0,0,0.75);
+  box-shadow: 0 3px 9px -1px rgba(0,0,0,0.75);
+  /* padding: 1em 2em 5em; */
+}
+
+
+/* Apply these styles only when #preview-pane has
+   been placed within the Jcrop widget */
+.jcrop-holder #preview-pane {
+  display: block;
+  position: absolute;
+  z-index: 2000;
+  top: 10px;
+  right: -210px;
+  background-color: #fff;
+  padding: 6px;
+  border: 1px solid #bcbcbc;
+}
+
+/* The Javascript code will set the aspect ratio of the crop
+   area based on the size of the thumbnail preview,
+   specified here */
+#preview-pane .preview-container {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+}
+/* #preview-pane{
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 10px;
+} */

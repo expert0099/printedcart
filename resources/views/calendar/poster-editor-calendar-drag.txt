@@ -1,0 +1,176 @@
+if(ev.target.id == ""){
+		alert('if');
+		
+		/* crop */
+		$("#target").attr('src',src);
+		$(".jcrop-preview").attr('src',src);
+		$('.jcrop-holder img').attr('src', src);
+		$("#crop_dialog").dialog({
+			width: 700,
+			height: 500,
+			modal: true,
+			resizable: false
+		});
+			//open: function(){
+				$('#crop_dialog').parent().addClass('for_crop');
+				$("#crop_submit").on('click',function(){
+					var base_path = "<?php echo config('app.url');?>";
+					var x = $('#x').val();
+					var y = $('#y').val();
+					var w = $('#w').val();
+					var h = $('#h').val();
+					var imgsrc = $('#target').attr('src');
+					if(x == ''){
+						alert('Please select a crop area.');
+					}
+					$.ajaxSetup({ 
+						headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')} 
+					});
+					$.ajax({
+						url : base_path + 'calendars/crop_image',            
+						type : 'POST',
+						data : {imgsrc:imgsrc,x:x,y:y,w:w,h:h},
+						success : function(data){
+							src2 = base_path+data;
+							var parentdv = document.createElement("div");
+							parentdv.className = "bg-img";
+							var subparent = document.createElement("div");
+							subparent.className = "bg-img-inner";
+							subparent.style.cssText = 'background: url("'+src2+'");background-size:100% 100%';
+							parentdv.append("", subparent);
+							ev.target.parentNode.prepend(parentdv);
+							//$("#"+ev.target.parentNode.id+" .textinside").hide();
+							$.noConflict();
+							$("#crop_dialog").dialog('close');
+							$('#cropimg').trigger("reset");
+						}
+					});
+				});
+				$('.for_crop .ui-dialog-titlebar-close').click(function(){
+					var parentdv = document.createElement("div");
+					parentdv.className = "bg-img";
+					var subparent = document.createElement("div");
+					subparent.className = "bg-img-inner";
+					subparent.style.cssText = 'background: url("'+src+'");background-size:100% 100%';
+					parentdv.append("", subparent);
+					ev.target.parentNode.prepend(parentdv);
+					$("#"+ev.target.parentNode.id+" .textinside").hide();
+				});
+			//}
+		//}); 
+		/* end crop */
+		/* var parentdv = document.createElement("div");
+		parentdv.className = "bg-img";
+		var subparent = document.createElement("div");
+		subparent.className = "bg-img-inner";
+		subparent.style.cssText = 'background: url("'+src+'");background-size:100% 100%';
+		parentdv.append("", subparent);
+		ev.target.parentNode.prepend(parentdv);
+		$("#"+ev.target.parentNode.id+" .textinside").hide(); */
+	}else{
+		alert('else');
+		/* crop */
+		
+		$("#target").attr('src',src);
+		$(".jcrop-preview").attr('src',src);
+		$("#crop_dialog").dialog({
+			width: 700,
+			height: 500,
+			modal: true,
+			resizable: false,
+			open: function(){
+				$('#crop_dialog').parent().addClass('for_crop');
+				$("#crop_submit").on('click',function(){
+					var base_path = "<?php echo config('app.url');?>";
+					var x = $('#x').val();
+					var y = $('#y').val();
+					var w = $('#w').val();
+					var h = $('#h').val();
+					var imgsrc = $('#target').attr('src');
+					if(x == ''){
+						alert('Please select a crop area.');
+					}
+					$.ajaxSetup({ 
+						headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')} 
+					});
+					$.ajax({
+						url : base_path + 'calendars/crop_image',            
+						type : 'POST',
+						data : {imgsrc:imgsrc,x:x,y:y,w:w,h:h},
+						success : function(data){
+							src2 = base_path+data;
+							var parentdv = document.createElement("div");
+							parentdv.className = "bg-img";
+							var subparent = document.createElement("div");
+							subparent.className = "bg-img-inner";
+							subparent.style.cssText = 'background: url("'+src2+'");background-size:100% 100%';
+							parentdv.append("", subparent);
+							$("#"+ev.target.id+" .textinside").hide();
+							ev.target.append(parentdv);
+							//$('.for_crop').hide();
+							//$('.for_crop .ui-dialog-titlebar-close').trigger('click');
+							$.noConflict();
+							$("#crop_dialog").dialog('close');
+							$('#cropimg').trigger("reset");
+						}
+					});
+				});
+				$('.for_crop .ui-dialog-titlebar-close').click(function(){
+					var parentdv = document.createElement("div");
+					parentdv.className = "bg-img";
+					var subparent = document.createElement("div");
+					subparent.className = "bg-img-inner";
+					subparent.style.cssText = 'background: url("'+src+'");background-size:100% 100%';
+					parentdv.append("", subparent);
+					$("#"+ev.target.id+" .textinside").hide();
+					ev.target.append(parentdv);
+				});
+			}
+		}); 
+		/* $("#crop_submit").bind('click',function(){
+			$("#crop_dialog").dialog('close');
+		}); */
+		
+		/* end crop */
+		/* $("#crop_submit").on('click',function(){
+			var base_path = "<?php echo config('app.url');?>";
+			var x = $('#x').val();
+			var y = $('#y').val();
+			var w = $('#w').val();
+			var h = $('#h').val();
+			var imgsrc = $('#target').attr('src');
+			if(x == ''){
+				alert('Please select a crop area.');
+			}
+			$.ajaxSetup({ 
+				headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')} 
+			});
+			$.ajax({
+				url : base_path + 'calendars/crop_image',            
+				type : 'POST',
+				data : {imgsrc:imgsrc,x:x,y:y,w:w,h:h},
+				success : function(data){
+					src = base_path+data;
+					var parentdv = document.createElement("div");
+					parentdv.className = "bg-img";
+					var subparent = document.createElement("div");
+					subparent.className = "bg-img-inner";
+					subparent.style.cssText = 'background: url("'+src+'");background-size:100% 100%';
+					parentdv.append("", subparent);
+					$("#"+ev.target.id+" .textinside").hide();
+					ev.target.append(parentdv);
+					$('.ui-dialog-titlebar-close').trigger('click');
+				}
+			});
+		}); */
+		/* $('.ui-dialog-titlebar-close').trigger('click',function(){
+			var parentdv = document.createElement("div");
+			parentdv.className = "bg-img";
+			var subparent = document.createElement("div");
+			subparent.className = "bg-img-inner";
+			subparent.style.cssText = 'background: url("'+src+'");background-size:100% 100%';
+			parentdv.append("", subparent);
+			$("#"+ev.target.id+" .textinside").hide();
+			ev.target.append(parentdv);
+		}); */
+	}
