@@ -207,6 +207,7 @@
 </style>
 <script type="text/javascript">
 $(function(){
+	var base_path = "<?php echo config('app.url');?>";
 	var loading = "{{URL::asset('public/images/loader.gif')}}";
 	var design_size = $("input:checkbox[name=design_size]:checked").map(function(){
 		return $(this).attr('rel');
@@ -225,7 +226,7 @@ $(function(){
 	});
 	$.ajax({
 		method: 'post',
-		url: 'college_poster',
+		url: base_path+'prints/college_poster',
 		data: {design_size:design_size, of_photos:of_photos, design_style:design_style, designer:designer},
 		beforeSend: function(){
 			$("#loading" ).html('<img src="'+loading+'"> <br>loading...');
@@ -261,7 +262,7 @@ $(function(){
 			return $(this).attr('rel');
 		}).get().join(",");
         $.ajax({
-            url: 'college_poster' + page,
+            url: base_path+'prints/college_poster' + page,
             type: "post",
             datatype: "html",
 			data: {design_size:design_size, of_photos:of_photos, design_style:design_style, designer:designer},
@@ -300,7 +301,7 @@ $(function(){
 		});
 		$.ajax({
 			method: 'post',
-			url: 'college_poster',
+			url: base_path+'prints/college_poster',
 			data: {design_size:design_size, of_photos:of_photos, design_style:design_style, designer:designer},
 			beforeSend: function(){
 				$("#loading" ).html('<img src="'+loading+'"> <br>loading...');
@@ -333,7 +334,7 @@ $(function(){
 		});
 		$.ajax({
 			method: 'post',
-			url: 'college_poster',
+			url: base_path+'prints/college_poster',
 			data: {design_size:design_size, of_photos:of_photos, design_style:design_style, designer:designer},
 			beforeSend: function(){
 				$("#loading" ).html('<img src="'+loading+'"> <br>loading...');
@@ -366,7 +367,7 @@ $(function(){
 		});
 		$.ajax({
 			method: 'post',
-			url: 'college_poster',
+			url: base_path+'prints/college_poster',
 			data: {design_size:design_size, of_photos:of_photos, design_style:design_style, designer:designer},
 			beforeSend: function(){
 				$("#loading" ).html('<img src="'+loading+'"> <br>loading...');
@@ -399,7 +400,7 @@ $(function(){
 		});
 		$.ajax({
 			method: 'post',
-			url: 'college_poster',
+			url: base_path+'prints/college_poster',
 			data: {design_size:design_size, of_photos:of_photos, design_style:design_style, designer:designer},
 			beforeSend: function(){
 				$("#loading" ).html('<img src="'+loading+'"> <br>loading...');

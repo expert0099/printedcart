@@ -7,13 +7,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use App\CalendarCategory;
-use App\CalendarDefaultSize;
+use App\CollegePosterLayout;
+use App\CollegePosterBackground;
 use App\Size;
 use App\SizeGroup;
 use App\Currency;
 use App\Models\SizeType;
 use App\CollegePoserStyle;
+use App\CalendarCategory;
 use DB;
 use Auth,Session;
 
@@ -340,5 +341,77 @@ class PrintController extends Controller
 		/** end cart items **/
 		
 		return view('print.colpos_view',compact('help_group_pages','resource_group_pages','corporate_group_pages','poster_id','college_poster','college_poster_sizes','default_currency','item_count'));
+	}
+	
+	public function colposter(Request $request){
+		$post_data = $request->all();
+		return redirect('prints/poster_editor/'.$post_data['poster_id'].'/'.$post_data['size_id']);
+	}
+	
+	public function poster_editor($poster_id=null,$size_id=null){
+		if(isset(Auth::user()->id)){
+			$user_id = Auth::user()->id;
+		}else{
+			return redirect('user/login');
+		}
+		
+		$project_id = '';
+		/** end check project data **/
+		
+		/* Album Lists*/
+		$albums = DB::table("albums")->where("user_id",$user_id)->where('deleted_at','=','0000-00-00 00:00:00')->get();
+		
+		$album_list = DB::table('albums')->where("user_id",$user_id)->where('deleted_at','=','0000-00-00 00:00:00')->pluck('album_name','id');
+		
+		$photos = array();
+		foreach($albums as $album){
+			$albums_ps = DB::table("user_uploads")->where("album_id",$album->id)->where('deleted_at','=','0000-00-00 00:00:00')->get();
+			$photos[$album->id] = $albums_ps;
+		}
+		/*album photos*/
+		
+		/** custom calendar layout **/
+		$layout = CollegePosterLayout::whereRaw("isActive = 1")->get();
+		foreach($layout as $k => $value){
+			$upload = DB::table('uploads')->select('path')->where('id',$value['layout_image'])->first();
+			$upDataArr = explode("uploads",$upload->path);
+			$img = $upDataArr[1];
+			$value['layout_image_path'] = 'storage/uploads'.$img;
+		}
+		/** end calendar layout **/
+		
+		/** demo content from calendar default pages **/
+		$demo_content = DB::table('collegeposterdefaultpages')->whereRaw("isActive = 1")->first();
+		/** end demo content **/
+		
+		/** background images **/
+		$pbg = CollegePosterBackground::whereRaw("isActive = 1")->first();
+		$background_ids = str_replace('[','',str_replace(']','',$pbg['background_image']));
+		if(empty($background_ids)){
+			return redirect()->back()->withErrors(['error'=>'College Poster Background Missing.']);
+		}
+		$upload_b = DB::table('uploads')->select('path')->whereRaw("id IN(".$background_ids.")")->get();
+		foreach($upload_b as $k => $value){
+			$upDataArr = explode("uploads",$value->path);
+			$img = $upDataArr[1];
+			$background_image[] = 'storage/uploads'.$img;
+		}
+		/** end background images **/
+		
+		/** calendar size **/
+		$size = Size::where('id',$size_id)->first();
+		$calendar_size = $size->Size;
+		$price = $size->price;
+		/** end calendar size **/
+		
+		if(isset(Auth::user()->email)){
+			/** cart items **/
+			$cartItems = DB::table('carts')->whereRaw("user_id='". Auth::user()->id ."' AND status = '0'")->get();
+			$item_count = count($cartItems);
+			/** end cart items **/
+			return view('print.poster_editor',compact('albums','photos','layout','background_image','demo_content','calendar_size','item_count','project_id','poster_id','size_id','price','album_list'));
+		}else{
+			return redirect('user/login');
+		}
 	}
 }

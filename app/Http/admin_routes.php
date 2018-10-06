@@ -236,4 +236,16 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	/* ================== CollegePoserStyles ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/collegeposerstyles', 'LA\CollegePoserStylesController');
 	Route::get(config('laraadmin.adminRoute') . '/collegeposerstyle_dt_ajax', 'LA\CollegePoserStylesController@dtajax');
+
+	/* ================== CollegePosterBackgrounds ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/collegeposterbackgrounds', 'LA\CollegePosterBackgroundsController');
+	Route::get(config('laraadmin.adminRoute') . '/collegeposterbackground_dt_ajax', 'LA\CollegePosterBackgroundsController@dtajax');
+
+	/* ================== CollegePosterLayouts ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/collegeposterlayouts', 'LA\CollegePosterLayoutsController');
+	Route::get(config('laraadmin.adminRoute') . '/collegeposterlayout_dt_ajax', 'LA\CollegePosterLayoutsController@dtajax');
+
+	/* ================== CollegePosterDefaultPages ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/collegeposterdefaultpages', 'LA\CollegePosterDefaultPagesController');
+	Route::get(config('laraadmin.adminRoute') . '/collegeposterdefaultpage_dt_ajax', 'LA\CollegePosterDefaultPagesController@dtajax');
 });
