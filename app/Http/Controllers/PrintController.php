@@ -13,6 +13,7 @@ use App\Size;
 use App\SizeGroup;
 use App\Currency;
 use App\Models\SizeType;
+use App\CollegePoserStyle;
 use DB;
 use Auth,Session;
 
@@ -311,10 +312,10 @@ class PrintController extends Controller
 			$img = 'storage/uploads'.$upDataArr[1];
 			$coll_pos_cal[$k]['photo'] = $img;
 			/** for image end **/
-			$size_group = SizeGroup::where('sizegroup','like','%Calendar Posters%')->first();
+			$size_group = SizeGroup::where('sizegroup','like','%College Poster%')->first();
 			$size = Size::whereRaw("Size = '".$value['design_size']."' AND sizegroup = '".$size_group['id']."'")->first();
-			$coll_pos_cal[$k]['calendar_size_id'] = $size['id'];
+			$coll_pos_cal[$k]['college_poster_size_id'] = $size['id'];
 		}
-		return view('calendar.ajax_calendar_poster',compact('coll_pos_cal'));exit;
+		return view('print.ajax_college_poster',compact('coll_pos_cal'));exit;
 	}
 }

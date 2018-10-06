@@ -213,6 +213,7 @@ Route::group(['prefix' => 'prints', 'as' => 'prints.'], function(){
 	
 	Route::get('/college_poster', 'PrintController@college_poster');
 	Route::post('/college_poster', 'PrintController@get_college_poster');
+	Route::get('/colposview/{poster_id}', 'PrintController@colposview');
 });
 
 /* ================== Custom Cart ==================== */
