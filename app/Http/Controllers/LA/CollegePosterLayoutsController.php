@@ -212,16 +212,11 @@ class CollegePosterLayoutsController extends Controller
 		$values = DB::table('collegeposterlayouts')->select($this->listing_cols)->whereNull('deleted_at');
 		$out = Datatables::of($values)->make();
 		$data = $out->getData();
-		if(!empty(env('APP_URL'))){
-			$base_path = env('APP_URL');
-		}else{
-			$base_path = config('app.url');
-		}
 		foreach($data->data as $k => $v){
 			$img = '';
 			if($v[2]!=0){
 				$upload = DB::table('uploads')->select('path','hash','name')->where('id',$v[2])->first();
-				$img = $img."<img src='". $base_path ."storage/uploads/". $upload->name ."' style='width:50px;'>";
+				$img = $img."<img src='". env('APP_URL') ."storage/uploads/". $upload->name ."' style='width:50px;'>";
 				$data->data[$k][2] = $img;
 			}else{
 				$data->data[$k][2] = '';
