@@ -259,9 +259,6 @@ class CalendarsController extends Controller
 	
 	public function save_project(Request $request){
 		$user_id = Auth::user()->id;
-		$flag = $request->get('flag');
-		$month = $request->get('cmonth');
-		$year = $request->get('cyear');
 		$explode = explode('&',$request->get('form_data'));
 		$data = array();
 		foreach($explode as $k => $value)
@@ -269,10 +266,22 @@ class CalendarsController extends Controller
 			$value1 = explode('=', $value);
 			$data[$value1[0]] = $value1[1];
 		}
+		$flag = $request->get('flag');
+		if($flag == 'College Poster'){
+			$month = 0;
+			$year = '';
+			$calendar_style_id = $data['poster_style_id'];
+			$calendar_category_id = 0;
+		}else{
+			$month = $request->get('cmonth');
+			$year = $request->get('cyear');
+			$calendar_style_id = $data['calendar_style_id'];
+			$calendar_category_id = $data['calendar_category_id'];
+		}
 		$insProArr = array(
 			'user_id' => $user_id,
-			'calendar_style_id' => $data['calendar_style_id'],
-			'calendar_category_id' => $data['calendar_category_id'],
+			'calendar_style_id' => $calendar_style_id,
+			'calendar_category_id' => $calendar_category_id,
 			'project_name' => $data['project_name'],
 			'size_id' => $data['size_id'],
 			'price' => $data['price'],

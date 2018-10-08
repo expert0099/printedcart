@@ -14,11 +14,9 @@ if($ex[0]>$ex[1]){
 	$calendar_frame_width = round($ratio);
 	$calendar_frame_height = 100;
 } 
-$cal_part_actual_height = (40/100)*$calendar_frame_height;
+$cal_part_actual_height = (100/100)*$calendar_frame_height;
 ?>
-
 <div class="container-fluid px-0 editor-holder">
-	
 	<div class="left-sidebar-section">
         <div class="tab-width px-0 left-icon-tab">
             <div class="left-one bhoechie-tab-menu float-left">
@@ -165,22 +163,6 @@ $cal_part_actual_height = (40/100)*$calendar_frame_height;
 	</div>
 	<!-- end preview dialog -->
 	
-	<!-- shipping address dialog -->
-	<div id="shipping_address" title="Printed Cart :: Shipping Address" style="display:none;">
-		{!! Form::open(['method' => 'POST','url'=>'payments/shipping_address','name'=>'style_form']) !!}
-			<div class="form-group">{!! Form::text('first_name', null, ['class'=>'form-control', 'placeholder'=>'First Name', 'required'=>'true']) !!}</div>
-			<div class="form-group">{!! Form::text('last_name', null, ['class'=>'form-control', 'placeholder'=>'Last Name', 'required'=>'true']) !!}</div>
-			<div class="form-group">{!! Form::text('street', null, ['class'=>'form-control', 'placeholder'=>'Address', 'required'=>'true']) !!}</div>
-			<div class="form-group">{!! Form::text('city', null, ['class'=>'form-control', 'placeholder'=>'City', 'required'=>'true']) !!}</div>
-			<div class="form-group">{!! Form::text('state', null, ['class'=>'form-control', 'placeholder'=>'State', 'required'=>'true']) !!}</div>
-			<div class="form-group">{!! Form::text('zipcode', null, ['class'=>'form-control', 'placeholder'=>'Zipcode', 'required'=>'true']) !!}</div>
-			<div class="form-group">{!! Form::text('country', null, ['class'=>'form-control', 'placeholder'=>'Country', 'required'=>'true']) !!}</div>
-			<div class="form-group" style="text-align:center;cursor:pointer;">{!! Form::submit('submit', null, ['class'=>'btn btn-success']) !!}</div>
-			
-		{!! Form::close() !!}
-	</div>
-	<!-- end shipping address dialog -->
-	
 	<!-- project dialog -->
 	<div id="project_dialog" title="Printed Cart : Save Project" style="display:none; text-align:center;">
 		<form name="proj_form" id="proj_form" method="post">
@@ -202,11 +184,10 @@ $cal_part_actual_height = (40/100)*$calendar_frame_height;
 	<script type="text/javascript" src="{{URL::asset('public/js/crop/cropper.min.js')}}"></script>
 	<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
 	
-
-<link rel="stylesheet" href="{{URL::asset('public/css/poster_custom_editor.css')}}"/>
-<link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/redmond/jquery-ui.min.css" rel="stylesheet">
-<script type="text/javascript" src="{{ URL::asset('public/js/bootstrap.min.js') }}"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="{{URL::asset('public/css/poster_custom_editor.css')}}"/>
+	<link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/redmond/jquery-ui.min.css" rel="stylesheet">
+	<script type="text/javascript" src="{{ URL::asset('public/js/bootstrap.min.js') }}"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
 	<!-- end include for crop -->
 	
 	<form id="cropimg" name="cropimg" method="post">
@@ -215,166 +196,126 @@ $cal_part_actual_height = (40/100)*$calendar_frame_height;
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('public/css/crop/cropper.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('public/css/crop/custom.css')}}">
 	 
-   <style>
-   .modal-dialog{
+	<style>
+	.modal-dialog{
 		max-width: 850px;
-   }
-   </style>
+	}
+	</style>
 	<div class="modal fade" id="cropModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<h5 class="modal-title" id="exampleModalLabel">Image Crop</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			  <span aria-hidden="true">&times;</span>
-			</button>
-		  </div>
-		  <div class="modal-body">
-			
-			<!-- crop section body part -->
-			<div class="row">
-			<div class="img-container">
-              <img id="image2" src="{{URL::asset('public/images/image2.jpg')}}" alt="Picture">
-            </div>
-          <div class="col-md-9 docs-buttons" style="text-align:center; max-width:100%; flex:0 0 100%">
-            <!-- <h3>Toolbar:</h3> -->
-            <div class="btn-group">
-              <button type="button" class="btn btn-primary" data-method="setDragMode" data-option="move" title="Move">
-                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Move">
-                  <span class="fa fa-arrows"></span>
-                </span>
-              </button>
-              <button type="button" class="btn btn-primary" data-method="setDragMode" data-option="crop" title="Crop">
-                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Crop">
-                  <span class="fa fa-crop"></span>
-                </span>
-              </button>
-            </div>
-    
-            <div class="btn-group">
-              <button type="button" class="btn btn-primary" data-method="zoom" data-option="0.1" title="Zoom In">
-                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Zoom In">
-                  <span class="fa fa-search-plus"></span>
-                </span>
-              </button>
-              <button type="button" class="btn btn-primary" data-method="zoom" data-option="-0.1" title="Zoom Out">
-                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Zoom Out">
-                  <span class="fa fa-search-minus"></span>
-                </span>
-              </button>
-            </div>
-    
-            <div class="btn-group">
-              <button type="button" class="btn btn-primary" data-method="move" data-option="-10" data-second-option="0" title="Move Left">
-                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Move Left">
-                  <span class="fa fa-arrow-left"></span>
-                </span>
-              </button>
-              <button type="button" class="btn btn-primary" data-method="move" data-option="10" data-second-option="0" title="Move Right">
-                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Move Right">
-                  <span class="fa fa-arrow-right"></span>
-                </span>
-              </button>
-              <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="-10" title="Move Up">
-                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Move Up">
-                  <span class="fa fa-arrow-up"></span>
-                </span>
-              </button>
-              <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="10" title="Move Down">
-                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Move Down">
-                  <span class="fa fa-arrow-down"></span>
-                </span>
-              </button>
-            </div>
-    
-            <div class="btn-group">
-              <button type="button" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
-                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Rotate Left">
-                  <span class="fa fa-rotate-left"></span>
-                </span>
-              </button>
-              <button type="button" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">
-                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Rotate Right">
-                  <span class="fa fa-rotate-right"></span>
-                </span>
-              </button>
-            </div>
-    
-            <div class="btn-group">
-              <button type="button" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">
-                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Flip Horizontal">
-                  <span class="fa fa-arrows-h"></span>
-                </span>
-              </button>
-              <button type="button" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">
-                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Flip Vertical">
-                  <span class="fa fa-arrows-v"></span>
-                </span>
-              </button>
-            </div>
-    
-            <div class="btn-group">
-              <button type="button" class="btn btn-primary" data-method="crop" title="Crop">
-                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Crop">
-                  <span class="fa fa-check"></span>
-                </span>
-              </button>
-              <button type="button" class="btn btn-primary" data-method="clear" title="Clear">
-                <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Clear">
-                  <span class="fa fa-remove"></span>
-                </span>
-              </button>
-            </div>
-			
-			
-			
-			<div class="modal-footer">
-				
-				<div id="loading_cropper" style="display:none;"></div>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-				
-				<!--<button type="button" class="btn btn-success" data-method="getCroppedCanvas2" data-option="{ 'maxWidth': 4096, 'maxHeight': 4096 }">
-				<span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper('getCroppedCanvas', { maxWidth: 4096, maxHeight: 4096 })">
-				  Get Cropped Canvas
-				</span>
-			  </button>-->
-				
-				<button type="button" id="save_changes" class="btn btn-primary" data-method="getCroppedCanvas">Save changes</button>
-			
-				
-			  </div>  
-			  <img src="" id="croped_image"/>
-    
-            
-          </div><!-- /.docs-buttons -->
-    
-          
-    
-           
-    
-            <div class="dropdown dropup docs-options">
-             
-            
-			  
-			
-			  
-			  
-		  
-		  
-            </div><!-- /.dropdown -->
-    
-           
-    
-          </div><!-- /.docs-toggles -->
-			<!-- end crop section body part -->
-			
-		  </div>
-		  
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Image Crop</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<!-- crop section body part -->
+					<div class="row">
+						<div class="img-container">
+							<img id="image2" src="{{URL::asset('public/images/image2.jpg')}}" alt="Picture">
+						</div>
+						<div class="col-md-9 docs-buttons" style="text-align:center; max-width:100%; flex:0 0 100%">
+							<!-- <h3>Toolbar:</h3> -->
+							<div class="btn-group">
+								<button type="button" class="btn btn-primary" data-method="setDragMode" data-option="move" title="Move">
+									<span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Move">
+										<span class="fa fa-arrows"></span>
+									</span>
+								</button>
+								<button type="button" class="btn btn-primary" data-method="setDragMode" data-option="crop" title="Crop">
+									<span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Crop">
+										<span class="fa fa-crop"></span>
+									</span>
+								</button>
+							</div>
+							<div class="btn-group">
+								<button type="button" class="btn btn-primary" data-method="zoom" data-option="0.1" title="Zoom In">
+									<span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Zoom In">
+										<span class="fa fa-search-plus"></span>
+									</span>
+								</button>
+								<button type="button" class="btn btn-primary" data-method="zoom" data-option="-0.1" title="Zoom Out">
+									<span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Zoom Out">
+										<span class="fa fa-search-minus"></span>
+									</span>
+								</button>
+							</div>
+							<div class="btn-group">
+								<button type="button" class="btn btn-primary" data-method="move" data-option="-10" data-second-option="0" title="Move Left">
+									<span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Move Left">
+										<span class="fa fa-arrow-left"></span>
+									</span>
+								</button>
+								<button type="button" class="btn btn-primary" data-method="move" data-option="10" data-second-option="0" title="Move Right">
+									<span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Move Right">
+										<span class="fa fa-arrow-right"></span>
+									</span>
+								</button>
+								<button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="-10" title="Move Up">
+									<span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Move Up">
+										<span class="fa fa-arrow-up"></span>
+									</span>
+								</button>
+								<button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="10" title="Move Down">
+									<span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Move Down">
+										<span class="fa fa-arrow-down"></span>
+									</span>
+								</button>
+							</div>
+							<div class="btn-group">
+								<button type="button" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
+									<span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Rotate Left">
+										<span class="fa fa-rotate-left"></span>
+									</span>
+								</button>
+								<button type="button" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">
+									<span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Rotate Right">
+										<span class="fa fa-rotate-right"></span>
+									</span>
+								</button>
+							</div>
+							<div class="btn-group">
+								<button type="button" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">
+									<span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Flip Horizontal">
+										<span class="fa fa-arrows-h"></span>
+									</span>
+								</button>
+								<button type="button" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">
+									<span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Flip Vertical">
+										<span class="fa fa-arrows-v"></span>
+									</span>
+								</button>
+							</div>
+							<div class="btn-group">
+								<button type="button" class="btn btn-primary" data-method="crop" title="Crop">
+									<span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Crop">
+										<span class="fa fa-check"></span>
+									</span>
+								</button>
+								<button type="button" class="btn btn-primary" data-method="clear" title="Clear">
+									<span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Clear">
+										<span class="fa fa-remove"></span>
+									</span>
+								</button>
+							</div>
+							<div class="modal-footer">
+								<div id="loading_cropper" style="display:none;"></div>
+								<button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+								<button type="button" id="save_changes" class="btn btn-primary" data-method="getCroppedCanvas">Save changes</button>
+							</div>  
+							<img src="" id="croped_image"/>
+						</div><!-- /.docs-buttons -->
+        
+						<div class="dropdown dropup docs-options"></div><!-- /.dropdown -->
+					</div><!-- /.docs-toggles -->
+					<!-- end crop section body part -->
+				</div>
+			</div>
 		</div>
-	  </div>
 	</div>
 	<!-- end image crop dialog -->
-	 
 </div>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -419,19 +360,18 @@ function drop(ev){
 	$('#image2').attr('src', src);
 	/* image crop */
 	if(ev.target.id == ""){
-		//$('.jcrop-holder img').attr('src', src);
 		$('#image2').attr('src', src);
 		var tId = ev.target.parentNode.parentNode.id;
 		if(tId == ""){
 			var tId = ev.target.parentNode.id;
 		}
 		$('#cropimg #tId').val(tId);
-		//$('#cropimg #tIddata').val(data);
+		
 	}else{
 		$('#image2').attr('src', src);
 		var tId = ev.target.id;
 		$('#cropimg #tId').val(tId);
-		//$('#cropimg #tIddata').val(data);
+		
 	}
 	$('#cropModal').modal('show');
 	$(function (){
@@ -571,22 +511,11 @@ function drop(ev){
 						$(this).data('option', -data.option);
 						break;
 					
-					/* case 'getBlobURL':
-		
-						if(result){
-							console.log("Result " + result);
-							// Bootstrap's Modal
-							
-								$('#croped_image').attr('src', result.toDataURL(uploadedImageType));
-								console.log(result.toDataURL(uploadedImageType));
-						} */
+					
 
 					case 'getCroppedCanvas':
 						if (result) {
 			
-							// Bootstrap's Modal
-							//$('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
-							
 							/* ajax call for save image */
 							var base_path = "<?php echo config('app.url');?>";
 							var tId = $('#tId').val();
@@ -600,8 +529,6 @@ function drop(ev){
 								type : 'POST',
 								data : {imgsrc:result.toDataURL(uploadedImageType)},
 								beforeSend: function(){
-									//$("#loading_cropper").css('display','block');
-									//$("#loading_cropper" ).html('<img src="'+loading+'"> loading...');
 									swal("Please Wait...!", "Loading Data...!", "warning");
 								},
 								success : function(data){
@@ -713,11 +640,12 @@ function drop(ev){
 			$inputImage.prop('disabled', true).parent().addClass('disabled');
 		}
 	});
+	/* end image crop */
 	
+}
 </script>
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
 
 <script>
 if (top !== self) {
@@ -763,7 +691,6 @@ $(document).ready(function() {
 	$('#proj').click(function(){
 		var base_path = "<?php echo config('app.url');?>";
 		var formData = $('#proj_form').serialize();
-		var month = 0;
 		var projV = $('#proj_form input[name=project_name]').val();
 		if(projV){
 			$.ajaxSetup({ 
@@ -774,17 +701,14 @@ $(document).ready(function() {
 				type : 'POST',
 				data : {form_data:formData,flag:'College Poster'},
 				beforeSend: function(){
-					//toastr.success("Please Wait...! Loading Data...!");
 					swal("Please Wait...!", "Loading Data...!", "warning");
 				},
 				success : function(data){
 					if(data=='error'){
-						//toastr.error("Sorry! Project not create! Please try again...!");
 						swal("Oops!", "Project not create! Please try again...!", "error");
 					}else{
 						$('#project_id').val(data);
 						$('.ui-dialog-titlebar-close').trigger('click');
-						//toastr.success("Thanks! Project created successfully! Now save your project!");
 						swal("Thanks!", "Project created successfully! Now save your project!", "success");
 					}
 				}
@@ -814,7 +738,6 @@ $(document).ready(function() {
 				}
 			});
 			if(counter == 0){
-				//toastr.error("Sorry! Please drag image first!!");
 				swal("Oops!", "Please drag image first...!", "error");
 			}else{
 				$.ajaxSetup({ 
@@ -919,7 +842,6 @@ $(document).ready(function() {
 	}
 	/** end add to cart **/
 	
-	
 });
 </script>
 <style>
@@ -937,12 +859,9 @@ $(document).ready(function() {
 </style>
 <!-- show calendar under calendar layout -->
 <script>
-
 $('.imageContent .rowHeight').each(function(index){
 	$(this).css('height','<?php echo $cal_part_actual_height;?>vh');
 });
-
-
 </script>
 <style>
 table {
