@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost/printed_carts/'),
+    'url' => env('APP_URL', 'http://localhost/printedcart/'),
 
     /*
     |--------------------------------------------------------------------------
