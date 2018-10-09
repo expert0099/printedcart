@@ -216,11 +216,18 @@ Route::group(['prefix' => 'prints', 'as' => 'prints.'], function(){
 	Route::get('/colposview/{poster_id}', 'PrintController@colposview');
 	Route::post('/colposter', 'PrintController@colposter');
 	Route::get('/poster_editor/{poster_id}/{calendar_size_id}', 'PrintController@poster_editor');
+	
+	Route::get('resend_verify_mail/{email}', 'CustomCartController@resend_verify_mail');
+	Route::get('verify_mail_confirm', 'CustomCartController@verify_mail_confirm');
+	Route::get('account_activate/{email}', 'CustomCartController@account_verify');
+	
+	Route::post('/add_to_cart', 'PrintController@add_to_cart');
 });
 
 /* ================== Custom Cart ==================== */
 Route::get('/custom_cart', 'CustomCartController@show_cart');
 Route::post('/custom_cart_remove', 'CustomCartController@custom_cart_remove');
+Route::post('/custom_payment_process', 'CustomCartController@custom_payment_process');
 
 /* ================== Pages ================== */
 Route::group(['prefix' => 'pages', 'as' => 'pages.'], function(){

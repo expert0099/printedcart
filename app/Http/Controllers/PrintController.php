@@ -87,7 +87,8 @@ class PrintController extends Controller
 		
 		/** cart items **/
 		if(Auth::check()){
-			$cartItems = DB::table('custom_carts')->whereRaw("user_id='". Auth::user()->id ."'")->get();
+			$status = 0;
+			$cartItems = DB::table('custom_carts')->whereRaw("user_id='". Auth::user()->id ."' AND status='".$status."'")->get();
 			$item_count = count($cartItems);
 		}else{
 			$item_count = 0;
@@ -418,5 +419,29 @@ class PrintController extends Controller
 		}else{
 			return redirect('user/login');
 		}
+	}
+	
+	function add_to_cart(Request $request){
+		$project_id = $request->get('project_id');
+		$_token = $request->get('_token'); 
+		$status = 0;
+		$exist = DB::table('carts')->whereRaw("user_id='". Auth::user()->id ."' AND project_id='".$project_id."' AND status = '".$status."'")->first();
+		
+		if(count($exist)>0){
+			$data['status'] = 'already_added';
+		}else{
+			$proj = DB::table('projects')->where('id',$project_id)->first();
+			$insArr = array(
+				'user_id' => Auth::user()->id,
+				'project_id' => $request->get('project_id'),
+				'session_id' => $request->get('_token'),
+				'cart_type' => $proj->flag
+			);
+			DB::table('carts')->insert($insArr);
+			$cartItems = DB::table('carts')->whereRaw("user_id='". Auth::user()->id ."' AND status = '0'")->get();
+			$data['item_count'] = count($cartItems);
+			$data['status'] = 'added'; 
+		}
+		return $data;exit; 
 	}
 }

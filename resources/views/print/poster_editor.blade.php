@@ -825,7 +825,7 @@ $(document).ready(function() {
 			headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') } 
 		});
 		$.ajax({
-            url : basePath+'calendars/add_to_cart',            
+            url : basePath+'prints/add_to_cart',            
             type : 'POST',
 			data : {project_id:project_id,_token:$('meta[name="_token"]').attr('content')},
             success : function(data){
