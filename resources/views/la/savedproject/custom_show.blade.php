@@ -2,7 +2,6 @@
 
 @section("contentheader_title", "Pdf View")
 
-
 @section('main-content')
 
 <meta name="_token" content="{{ csrf_token() }}" />
@@ -18,8 +17,14 @@
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>-->
 		
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>-->
-<script src="{{URL::asset('public/js/crop/html2canvas.min.js')}}"></script>
+
+<!--<script src="{{URL::asset('public/js/crop/html2canvas.min.js')}}"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.svg.js"></script>
 <style>
+.textinside{
+	display: none;
+}
 .bg-img-inner {
 	z-index: 2;
 }
@@ -140,9 +145,9 @@
 	height: 70vh;
 }
 
-#page-content_CollegePoster_20x30 .page_item .row.rowHeight {
+/*#page-content_CollegePoster_20x30 .page_item .row.rowHeight {
     height: 40% !important;
-}
+}*/
 /* #page-content_Calendar_8x11.content-body .page_item .row.rowHeight {
 	height: 45%;
 } */
@@ -211,11 +216,11 @@
 
 
 #page-content_Calendar_11x5.content-body .page_item .row.rowCoverHeight{
-    height: 100% !important;
+    height: 30vh !important;
 }
 #page-content_Calendar_11x5.content-body .page_item {
     display: flex;
-    height: 140vh;
+    height: 33vh;
 	width:100%;
 	float:left;
 	
@@ -229,6 +234,7 @@
 
 #page-content_Calendar_11x5 .row.rowHeight {
 	width: 50% !important;
+	height: 30vh;
 }
 #page-content_Calendar_11x5 .main-calendar {
 	width: 48%;
@@ -407,255 +413,42 @@
 	margin-bottom:15px;
 	height: 150px;
 }
+.mainDivSecond{
+	height:150px;
+}
+#page-content_CollegePoster_20x30 .page_item .crop-border .imageContent{
+	border: 2px dotted red !important;
+}
+#page-content_CollegePoster_20x30 .page_item .custom_layout .col-sm-8 {
+    width: 66.6% !important;
+    float: left !important;
+}
+#page-content_CollegePoster_20x30 .page_item .custom_layout .col-sm-4 {
+    width: 33% !important;
+    float: left !important;
+}
+#page-content_CollegePoster_20x30 .page_item .custom_layout .col-sm-8 .bg-img-inner {
+    float: left !important;
+    width: 100% !important;
+ 
+}
+
+#page-content_Photobook_11x8 .imageContent {
+    height: 100% !important;
+}
+
 </style>
 
 <div style="width:100%;float:left;">
 	<a href="{{ url(config('laraadmin.adminRoute') . '/saved_project') }}"><button class="btn btn-success">Back</button></a>
-	<a href="{{ url(config('laraadmin.adminRoute') . '/saved_project/view/pdf/'.$project_id.'/'.$order_id) }}" target="_blank"><button class="btn btn-danger">Download PDF</button></a>
-	<div id="ready" style="display:none;">PDF is ready for download...</div>
-	<div id="loading"><img src="{{URL::asset('public/images/loading_spinner.gif')}}"> Please wait...! PDF processing for download...</div>
+	<a href="{{ url(config('laraadmin.adminRoute') . '/saved_project/custom_view/pdf/'.$order_id) }}" target="_blank"><button class="btn btn-danger">Download PDF</button></a>
+	<div id="ready" style="display:block;">PDF is ready for download...</div>
 </div>
-<div id="page-content_{{$identifierClass}}" class="profile2 content-body" style="overflow-x: auto;">
-	@if($project['flag']=='Photobook')
-		@foreach($savedProj as $k => $page)
-			@if($k%2 == 0 || $k == 0)
-			<div id="cal_{{$page->id}}" class="page_item">
-			@endif
-				<div>
-				{!! $page->page_content !!}
-				</div>
-			@if($k%2 == 1)	
-			</div>
-			@endif
-		@endforeach    
-	@else
-		@foreach($savedProj as $k => $page)
-			<div id="cal_{{$page->id}}" class="page_item">
-				<div>{!! $page->page_content !!}</div>
-			</div>
-		@endforeach   
-	@endif
-	
+<div id="page-content" class="profile2 content-body" style="overflow-x: auto;">
+	@foreach($savedProj as $k => $page)
+		<div id="cal_{{$page->id}}" class="page_item">
+			<div class="crop-border"><img src="{{URL::asset('public/'.$page->image_path)}}" style="width:500px;"></div>
+		</div>
+	@endforeach   
 </div>
-
-<script language="javascript">
-$('.imageContent').each(function(){
-	var height = $(this).attr('height');
-	$(this).css('height',height+'!important');
-});
-
-var project_id = "<?php echo $project_id?>";
-var order_id = "<?php echo $order_id;?>";
-//var loading = "{{URL::asset('public/images/loading_spinner.gif')}}";
-var url = "{{ url(config('laraadmin.adminRoute').'/saved_project/dt_ajax') }}";
-
-$('.page_item').each(function(){
-	var page_id = $(this).attr('id');
-	
-	html2canvas([document.getElementById(page_id)], {
-		useCORS: true,
-		allowTaint: true,
-		letterRendering: true,
-		onrendered: function(canvas){
-			var ctx= canvas.getContext('2d');
-			ctx.scale(2, 2);
-			ctx.mozImageSmoothingEnabled = false;
-			ctx.webkitImageSmoothingEnabled = false;
-			ctx.msImageSmoothingEnabled = false;
-			ctx.imageSmoothingEnabled = false;
-			
-			var data = canvas.toDataURL('image/jpeg', 1.0);
-			console.log(data);
-			
-			var file= dataURLtoBlob(data);
-
-			var fd = new FormData();
-			fd.append('files', file);
-			fd.append('project_id', project_id);
-			fd.append('page_id', page_id);
-			fd.append('order_id', order_id);
-			var base_path = "<?php echo config('app.url');?>";
-			setTimeout(function(){
-				$('#loading').hide();
-				$('#ready').show();
-			},2000);
-			$.ajaxSetup({ 
-				headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')} 
-			});
-			$.ajax({
-				url: url,
-				type: "POST",
-				data: fd,
-				processData: false,
-				contentType: false,
-				//beforeSend: function(){$("#loading" ).html('<img src="'+loading+'"> <br>Please wait...! PDF processing for download...');},
-			}).done(function(respond){
-				//$('.profile2').css('display','none');
-				//$('#loading').hide();
-				//$('#ready').show();
-				//alert(respond);
-				//$(".return-data").html("Uploaded Canvas image link: <a href="+respond+">"+respond+"</a>").hide().fadeIn("fast");
-			});
-		}
-	});
-	//$(this).removeClass('x2');
-});
-function dataURLtoBlob(dataURL) {
-	// Decode the dataURL    
-	var binary = atob(dataURL.split(',')[1]);
-	// Create 8-bit unsigned array
-	var array = [];
-	for(var i = 0; i < binary.length; i++) {
-		array.push(binary.charCodeAt(i));
-	}
-	// Return our Blob object
-	return new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
-}
-
-</script>
-
-<script>
-function leapYear(year){
-	if(year % 4 == 0) // basic rule
-    return true // is leap year
-    /* else */ // else not needed when statement is "return"
-	return false // is not leap year
-}
-
-function getDays(month, year){
-	var ar = new Array(12);
-	ar[0] = 31; // January
-	ar[1] = (leapYear(year)) ? 29 : 28; // February
-	ar[2] = 31; // March
-	ar[3] = 30; // April
-	ar[4] = 31; // May
-	ar[5] = 30; // June
-	ar[6] = 31; // July
-	ar[7] = 31; // August
-	ar[8] = 30; // September
-	ar[9] = 31; // October
-	ar[10] = 30; // November
-	ar[11] = 31; // December
-	return ar[month];
-}
-
-function getMonthName(month){
-	var ar = new Array(12);
-	ar[0] = "January";
-	ar[1] = "February";
-	ar[2] = "March";
-	ar[3] = "April";
-	ar[4] = "May";
-	ar[5] = "June";
-	ar[6] = "July";
-	ar[7] = "August";
-	ar[8] = "September";
-	ar[9] = "October";
-	ar[10] = "November";
-	ar[11] = "December";
-	return ar[month];
-}
-
-function setCal(yr,mth,id){
-	var now = new Date();
-	var year = yr;
-	var month = mth;
-	var monthName = getMonthName(month);
-	var date = now.getDate();
-	now = null;
-	var firstDayInstance = new Date(year, month, 1);
-	var firstDay = firstDayInstance.getDay();
-	firstDayInstance = null;
-	var days = getDays(month, year);
-	var calElement = drawCal(firstDay + 1, days, date, monthName, year);
-	$('#'+id+' .calendaer').html(calElement);
-}
-
-function drawCal(firstDay, lastDate, date, monthName, year) {
-  var headerHeight = 25 // height of the table's header cell
-  var border = 0 // 3D height of table's border
-  var cellspacing = 0 // width of table's border
-  var headerColor = "midnightblue" // color of table's header
-  var headerSize = "+1" // size of tables header font
-  var colWidth = 40 // width of columns in table
-  var dayCellHeight = 25 // height of cells containing days of the week
-  var dayColor = "darkblue" // color of font representing week days
-  var cellHeight = 30 // height of cells representing dates in the calendar
-  var todayColor = "red" // color specifying today's date in the calendar
-  var timeColor = "purple" // color of font representing current time
-  var borderColor = "darkgray";
-  var tableWidth = 100;
-
-  // create basic table structure
-  var text = "" // initialize accumulative variable to empty string
-  text += '<CENTER>'
-  text += '<TABLE BORDER=' + border + ' CELLSPACING=' + cellspacing + ' style=border-color:'+ borderColor +' WIDTH='+ tableWidth +'%>' // table settings
-  text += '<TH COLSPAN=7 HEIGHT=' + headerHeight + ' style=text-align:center;>' // create table header cell
-  text += '<FONT COLOR="' + headerColor + '" SIZE=' + headerSize + '>' // set font for table header
-  text += monthName + ' ' + year
-  text += '</FONT>' // close table header's font settings
-  text += '</TH>' // close header cell
-
-  // variables to hold constant settings
-  var openCol = '<TD WIDTH=' + colWidth + ' HEIGHT=' + dayCellHeight + '>'
-  openCol += '<FONT COLOR="' + dayColor + '">'
-  var closeCol = '</FONT></TD>'
-
-  // create array of abbreviated day names
-  var weekDay = new Array(7)
-  weekDay[0] = "Sun"
-  weekDay[1] = "Mon"
-  weekDay[2] = "Tues"
-  weekDay[3] = "Wed"
-  weekDay[4] = "Thu"
-  weekDay[5] = "Fri"
-  weekDay[6] = "Sat"
-
-  // create first row of table to set column width and specify week day
-  text += '<TR ALIGN="center" VALIGN="center">'
-  for (var dayNum = 0; dayNum < 7; ++dayNum) {
-    text += openCol + weekDay[dayNum] + closeCol
-  }
-  text += '</TR>'
-
-  // declaration and initialization of two variables to help with tables
-  var digit = 1
-  var curCell = 1
-
-  for (var row = 1; row <= Math.ceil((lastDate + firstDay - 1) / 7); ++row) {
-    text += '<TR ALIGN="center" VALIGN="center">'
-    for (var col = 1; col <= 7; ++col) {
-      if (digit > lastDate)
-        break
-      if (curCell < firstDay) {
-        text += '<TD></TD>';
-        curCell++
-      } else {
-        if (digit == date) { // current cell represent today's date
-          text += '<TD HEIGHT=' + cellHeight + '>'
-          //text += '<FONT COLOR="' + todayColor + '">'
-          text += digit
-          //text += '</FONT><BR>'
-          //text += '<FONT COLOR="' + timeColor + '" SIZE=2>'
-          //text += '<CENTER>' + getTime() + '</CENTER>'
-          //text += '</FONT>'
-          text += '</TD>'
-        } else
-          text += '<TD HEIGHT=' + cellHeight + '>' + digit + '</TD>'
-        digit++
-      }
-    }
-    text += '</TR>'
-  }
-
-  // close all basic table tags
-  text += '</TABLE>'
-  text += '</CENTER>'
-
-  // print accumulative HTML string
-  //document.write(text)
-  return text;
-}
-</script>
-
 @endsection
