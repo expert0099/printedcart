@@ -8,14 +8,14 @@
 		<style type="text/css">
 			#wrapper{ width: 80%; text-align: center; margin: 0 auto; }
 			.thumbimage {
-				float:left;
-				width:100px;
-				position:relative;
-				padding:5px;
+			float:left;
+			width:100px;
+			position:relative;
+			padding:5px;
 			}
 			nav.navbar:before, nav.navbar:after, nav.navbar .container:before, nav.navbar .container:after{display:none;}
 			html{
-				//font-size:inherit !important;
+			//font-size:inherit !important;
 			}
 		</style>
 		<!-- Bootstrap CSS -->
@@ -24,14 +24,12 @@
 		<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/custom.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/font-awesome.min.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/common-page.css') }}">
-			
 		<!-- Bootstrap Script -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://code.jquery.com/jquery-migrate-3.0.1.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="{{ URL::asset('public/js/jquery-3.2.1.slim.min.js') }}"></script>
 		<script type="text/javascript" src="{{ URL::asset('public/js/popper.min.js') }}"></script>
-		
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("div.bhoechie-tab-menu>div.list-group>a").click(function(e){
@@ -82,12 +80,10 @@
 		<header>
 			@include('layouts.partials.caleditorheader')
 		</header>
-		
 		@yield('main-content')
-		
 		<!-- photo dialog -->
 		<div id="addPhotoDialog" title="Add Photo">
-		{!! Form::open(['method' => 'POST', 'url' => ['photobooks/upload_new_images'],'enctype'=>'multipart/form-data']) !!}
+			{!! Form::open(['method' => 'POST', 'url' => ['photobooks/upload_new_images'],'enctype'=>'multipart/form-data']) !!}
 			<div class="row">
 				<div class="col-sm-12 form-group" style="text-align:left;">
 					{!! Form::label('album_name', 'Album Name', ['class' => 'control-label']) !!}
@@ -102,13 +98,12 @@
 				</div>
 			</div>
 			{!! Form::submit('Upload', ['class' => 'btn btn-primary', 'id'=>'photoUploadButton']) !!}
-		{!! Form::close() !!}
+			{!! Form::close() !!}
 		</div>
 		<!-- end photo dialog -->
-		
 		<!-- album dialog -->
 		<div id="addAlbumDialog" title="Add Album">
-		{!! Form::open(['method' => 'POST', 'url' => ['photobooks/add_new_album'],'id'=>'album_form']) !!}
+			{!! Form::open(['method' => 'POST', 'url' => ['photobooks/add_new_album'],'id'=>'album_form']) !!}
 			<div class="row">
 				<div class="col-sm-12 form-group" style="text-align:left;">
 					{!! Form::label('album_name', 'Album Name', ['class' => 'control-label']) !!}
@@ -116,10 +111,9 @@
 				</div>
 			</div>
 			{!! Form::button('ADD', ['class' => 'btn btn-primary', 'id'=>'album_button']) !!}
-		{!! Form::close() !!}
+			{!! Form::close() !!}
 		</div>
 		<!-- end album dialog -->
-		
 		<div id="addPhotoDirection" title="Upload">
 			<div class="row">
 				<div class="col-sm-12 form-group" style="text-align:center;">
@@ -137,128 +131,121 @@
 				</div>
 			</div>
 		</div>
-		
 		<div id="img_loader" style="display:none;"></div>
-		
 		@if(null!==Session::get('stdClassData'))
-			<?php 
+		<?php 
 			$stdClassData = Session::get('stdClassData');
 			?>
 		<div id="instagram_photos" title="Instagram Photos" style="display:none;">
 			{!! Form::open(['method' => 'POST', 'url' => ['user/add_insta_photo'],'enctype'=>'multipart/form-data']) !!}
-				<div class="row">
-					<input type="checkbox" id="checkAll"/> Check All
+			<div class="row">
+				<input type="checkbox" id="checkAll"/> Check All
+			</div>
+			<div class="row">
+				@if(count($stdClassData['data'])>0)
+				@foreach($stdClassData['data'] as $k => $o)
+				<div class="albumBack col-sm-6 col-md-2" style="padding-top:15px; padding-bottom:15px;">
+					<table class="albumtable" style="padding:0px 0px 5px 0px" cellspacing="0" cellpadding="0" border="0">
+						<tbody>
+							<tr>
+								<td class="albumcell">
+									<div class="albumlink position-relative">
+										<img src="{{$o['images']['low_resolution']['url']}}" style="vertical-align:middle;text-align:center; border-radius: 10px" p="{{$o['id']}}" rel="{{ $o['link'] }}" alt="Instagram Photo" class="fancybox coverImage">
+										<span><input type="checkbox" class="cb-element" name="insta_photo[{{$o['images']['low_resolution']['url']}}]"/></span>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<div class="row">
-					@if(count($stdClassData['data'])>0)
-						@foreach($stdClassData['data'] as $k => $o)
-							<div class="albumBack col-sm-6 col-md-2" style="padding-top:15px; padding-bottom:15px;">
-								<table class="albumtable" style="padding:0px 0px 5px 0px" cellspacing="0" cellpadding="0" border="0">
-									<tbody>
-										<tr>
-											<td class="albumcell">
-												<div class="albumlink position-relative">
-													<img src="{{$o['images']['low_resolution']['url']}}" style="vertical-align:middle;text-align:center; border-radius: 10px" p="{{$o['id']}}" rel="{{ $o['link'] }}" alt="Instagram Photo" class="fancybox coverImage">
-													<span><input type="checkbox" class="cb-element" name="insta_photo[{{$o['images']['low_resolution']['url']}}]"/></span>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						@endforeach
-						
-						<div>
-							{!! Form::label('album_name', 'Album Name', ['class' => 'control-label']) !!}
-							{!! Form::select('album_id', Session::get('album'), ['class' => 'form-control', 'required'=>'true']) !!}
-							
-							{!! Form::submit('Add photo', ['id' => 'insta_add','class' => 'btn btn-primary']) !!}
-						</div>
-					@else
-						<hr style="width:100%;"/>
-						<div style="color:red;text-align:center; min-height:300px;width:100%;">Instagram photos not found at this moment.</div>
-					@endif
+				@endforeach
+				<div>
+					{!! Form::label('album_name', 'Album Name', ['class' => 'control-label']) !!}
+					{!! Form::select('album_id', Session::get('album'), ['class' => 'form-control', 'required'=>'true']) !!}
+					{!! Form::submit('Add photo', ['id' => 'insta_add','class' => 'btn btn-primary']) !!}
 				</div>
+				@else
+				<hr style="width:100%;"/>
+				<div style="color:red;text-align:center; min-height:300px;width:100%;">Instagram photos not found at this moment.</div>
+				@endif
+			</div>
 			{!! Form::close() !!}
 		</div>
 		<script>
-		$(function(){
-			$("#instagram_photos").dialog({
-				autoOpen: false,
-				width: $(window).width() > 800 ? 800 : 'auto',
-				height: 'auto',
-				fluid: true,
-				responsive: true,
-				show: {
-					//effect: "blind",
-					duration: 1000
-				},
-				hide: {
-					//effect: "explode",
-					duration: 1000
-				}
-			});
-			$("#instagram_photos").dialog("open");
+			$(function(){
+				$("#instagram_photos").dialog({
+					autoOpen: false,
+					width: $(window).width() > 800 ? 800 : 'auto',
+					height: 'auto',
+					fluid: true,
+					responsive: true,
+					show: {
+						//effect: "blind",
+						duration: 1000
+					},
+					hide: {
+						//effect: "explode",
+						duration: 1000
+					}
+				});
+				$("#instagram_photos").dialog("open");
+				
+				$("#checkAll").change(function (){
+					$("input:checkbox").prop('checked', $(this).prop("checked"));
+				});
 			
-			$("#checkAll").change(function (){
-				$("input:checkbox").prop('checked', $(this).prop("checked"));
+				$("#insta_add").on('click',function(){
+					if($('.cb-element:checkbox:checked').length == 0){
+						//alert('Check Atleast One Checkbox');
+						swal("Oops!", "Check Atleast One Checkbox...!", "error");
+						return false;
+					}else{
+						return true;
+					}
+				});
 			});
-	
-			$("#insta_add").on('click',function(){
-				if($('.cb-element:checkbox:checked').length == 0){
-					//alert('Check Atleast One Checkbox');
-					swal("Oops!", "Check Atleast One Checkbox...!", "error");
-					return false;
-				}else{
-					return true;
-				}
-			});
-		});
 		</script>
 		@endif
-		
 		@if(null!==Session::get('list_album'))
-			<?php 
+		<?php 
 			$list_album = Session::get('list_album');
 			?>
-			<div id="google_photos" title="Google Photos" style="display:none;">
-				{!! Form::open(['method' => 'POST', 'url' => ['user/add_google_photo'],'enctype'=>'multipart/form-data']) !!}
-					<div class="row">
-						<input type="checkbox" id="checkAll"/> Check All
-					</div>
-					<div class="row">
-						@if(count($list_album)>0)
-							@foreach($list_album['Album'] as $k => $o)
-								<div class="albumBack col-sm-6 col-md-2" style="padding-top:15px; padding-bottom:15px;">
-									<table class="albumtable" style="padding:0px 0px 5px 0px" cellspacing="0" cellpadding="0" border="0">
-										<tbody>
-											<tr>
-												<td class="albumcell">
-													<div class="albumlink position-relative">
-														<img src="{{$o['media_items']['baseUrl']}}" style="vertical-align:middle;text-align:center; border-radius: 10px" p="{{$o['media_items']['id']}}" rel="{{ $o['media_items']['productUrl'] }}" alt="Google Photo" class="fancybox coverImage">
-														<span><input type="checkbox" class="cb-element" name="google_photo[{{$o['media_items']['baseUrl']}}]"/></span>
-													</div>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							@endforeach
-									
-							<div>
-								{!! Form::label('album_name', 'Album Name', ['class' => 'control-label']) !!}
-								{!! Form::select('album_id', Session::get('album'), ['class' => 'form-control', 'required'=>'true']) !!}
-								
-								{!! Form::submit('Add photo', ['id' => 'insta_add','class' => 'btn btn-primary']) !!}
-							</div>
-						@else
-							<hr style="width:100%;"/>
-							<div style="color:red;text-align:center; min-height:300px;width:100%;">Google photos not found at this moment.</div>
-						@endif
-					</div>
-				{!! Form::close() !!}
+		<div id="google_photos" title="Google Photos" style="display:none;">
+			{!! Form::open(['method' => 'POST', 'url' => ['user/add_google_photo'],'enctype'=>'multipart/form-data']) !!}
+			<div class="row">
+				<input type="checkbox" id="checkAll"/> Check All
 			</div>
-			<script>
+			<div class="row">
+				@if(count($list_album)>0)
+				@foreach($list_album['Album'] as $k => $o)
+				<div class="albumBack col-sm-6 col-md-2" style="padding-top:15px; padding-bottom:15px;">
+					<table class="albumtable" style="padding:0px 0px 5px 0px" cellspacing="0" cellpadding="0" border="0">
+						<tbody>
+							<tr>
+								<td class="albumcell">
+									<div class="albumlink position-relative">
+										<img src="{{$o['media_items']['baseUrl']}}" style="vertical-align:middle;text-align:center; border-radius: 10px" p="{{$o['media_items']['id']}}" rel="{{ $o['media_items']['productUrl'] }}" alt="Google Photo" class="fancybox coverImage">
+										<span><input type="checkbox" class="cb-element" name="google_photo[{{$o['media_items']['baseUrl']}}]"/></span>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				@endforeach
+				<div>
+					{!! Form::label('album_name', 'Album Name', ['class' => 'control-label']) !!}
+					{!! Form::select('album_id', Session::get('album'), ['class' => 'form-control', 'required'=>'true']) !!}
+					{!! Form::submit('Add photo', ['id' => 'insta_add','class' => 'btn btn-primary']) !!}
+				</div>
+				@else
+				<hr style="width:100%;"/>
+				<div style="color:red;text-align:center; min-height:300px;width:100%;">Google photos not found at this moment.</div>
+				@endif
+			</div>
+			{!! Form::close() !!}
+		</div>
+		<script>
 			$(function(){
 				$("#google_photos").dialog({
 					autoOpen: false,
@@ -280,7 +267,7 @@
 				$("#checkAll").change(function (){
 					$("input:checkbox").prop('checked', $(this).prop("checked"));
 				});
-		
+			
 				$("#insta_add").on('click',function(){
 					if($('.cb-element:checkbox:checked').length == 0){
 						//alert('Check Atleast One Checkbox');
@@ -291,29 +278,27 @@
 					}
 				});
 			});
-			</script>
+		</script>
 		@endif
-		
 		@if(null!==Session::get('response'))
-			<?php 
+		<?php 
 			$response = Session::get('response');
 			?>
-			<div id="fb_photos" title="Facebook Photos" style="display:none;">
-				@if($response['error'])
-					@foreach($response['error'] as $error)
-						<p class="alert alert-danger">
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="cursor:pointer;"><span aria-hidden="true">×</span></button>
-							{{ $error }}
-						</p>
-					@endforeach
-				@endif
-				
-				@if($response['success'])
-					<p>{{$response['success']['fb_name']}}</p>
-					<p>{{$response['success']['fb_id']}}</p>
-				@endif
-			</div>
-			<script>
+		<div id="fb_photos" title="Facebook Photos" style="display:none;">
+			@if($response['error'])
+			@foreach($response['error'] as $error)
+			<p class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="cursor:pointer;"><span aria-hidden="true">×</span></button>
+				{{ $error }}
+			</p>
+			@endforeach
+			@endif
+			@if($response['success'])
+			<p>{{$response['success']['fb_name']}}</p>
+			<p>{{$response['success']['fb_id']}}</p>
+			@endif
+		</div>
+		<script>
 			$(function(){
 				$("#fb_photos").dialog({
 					autoOpen: false,
@@ -335,7 +320,7 @@
 				$("#checkAll").change(function (){
 					$("input:checkbox").prop('checked', $(this).prop("checked"));
 				});
-		
+			
 				$("#insta_add").on('click',function(){
 					if($('.cb-element:checkbox:checked').length == 0){
 						//alert('Check Atleast One Checkbox');
@@ -346,204 +331,202 @@
 					}
 				});
 			});
-			</script>
+		</script>
 		@endif
 		<style>
-		#addPhotoDirection .socialSieText{padding:15px 0; background: #f5f5f5; font-size:14px;}
-		#addPhotoDirection .socialBtn{color:#fff;width:100%;}
-		#addPhotoDirection .socialBtn.instaBtn{background:#275f8e;}
-		#addPhotoDirection .socialBtn.googleBtn{background:#dc483c;}
-		#addPhotoDirection .socialBtn.facebookBtn{background:#3a5897;}
-		#addPhotoDirection .socialBtn i{margin-right:5px;display:inline-block;}
+			#addPhotoDirection .socialSieText{padding:15px 0; background: #f5f5f5; font-size:14px;}
+			#addPhotoDirection .socialBtn{color:#fff;width:100%;}
+			#addPhotoDirection .socialBtn.instaBtn{background:#275f8e;}
+			#addPhotoDirection .socialBtn.googleBtn{background:#dc483c;}
+			#addPhotoDirection .socialBtn.facebookBtn{background:#3a5897;}
+			#addPhotoDirection .socialBtn i{margin-right:5px;display:inline-block;}
 		</style>
 		<script type="text/javascript">
-		function show_error(){
-			$(".show_error_info").attr("style","display:block");
-		}
-		function hide_error(){
-			$(".show_error_info").attr("style","display:none");
-		}
-		var base_path = "<?php echo config('app.url');?>";
-		$(function(){
-			$("#addPhotoDialog").dialog({
-				autoOpen: false,
-				width: $(window).width() > 500 ? 500 : 'auto',
-				height: 'auto',
-				fluid: true,
-				responsive: true,
-				show: {
-					//effect: "blind",
-					duration: 1000
-				},
-				hide: {
-					//effect: "explode",
-					duration: 1000
-				}
+			function show_error(){
+				$(".show_error_info").attr("style","display:block");
+			}
+			function hide_error(){
+				$(".show_error_info").attr("style","display:none");
+			}
+			var base_path = "<?php echo config('app.url');?>";
+			$(function(){
+				$("#addPhotoDialog").dialog({
+					autoOpen: false,
+					width: $(window).width() > 500 ? 500 : 'auto',
+					height: 'auto',
+					fluid: true,
+					responsive: true,
+					show: {
+						//effect: "blind",
+						duration: 1000
+					},
+					hide: {
+						//effect: "explode",
+						duration: 1000
+					}
+				});
+				/* $( "#btnPopover" ).on( "click", function() {
+					$("#addPhotoDialog").dialog( "open" );
+				}); */
+				$("#addPhotoDirection").dialog({
+					autoOpen: false,
+					width: $(window).width() > 650 ? 650 : 'auto',
+					height: 'auto',
+					fluid: true,
+					responsive: true,
+					show: {
+						//effect: "blind",
+						duration: 1000
+					},
+					hide: {
+						//effect: "explode",
+						duration: 1000
+					}
+				});
+				$( "#btnPopover" ).on( "click", function() {
+					$("#addPhotoDirection").dialog( "open" );
+				}); 
+				$("#my_computer").on('click', function(){
+					$("#addPhotoDialog").dialog( "open" );
+					$("#addPhotoDirection").dialog( "close" );
+				});
+				$("#photoUploadButton").on('click',function(){
+					var files = $('input#input_files')[0].files;
+					if(files.length < 1){
+						swal("Oops!", "Please browse atleast one image...!", "error");
+					}else{
+						swal("Please Wait...!", "Photo Uploading...!", "warning");
+					}
+				});
+				
+				$("#addAlbumDialog").dialog({
+					autoOpen: false,
+					width: $(window).width() > 500 ? 500 : 'auto',
+					height: 'auto',
+					fluid: true,
+					responsive: true,
+					show: {
+						//effect: "blind",
+						duration: 1000
+					},
+					hide: {
+						//effect: "explode",
+						duration: 1000
+					}
+				});
+				$("#addalbum_inphotodialog").on("click", function(){
+					$("#addPhotoDialog").dialog( "close" );
+					$("#addAlbumDialog").dialog( "open" );
+				});
+				
+				$("#album_button").click(function(){
+					if($('#album_name').val() == ''){
+						$('#album_name').css('border','1px solid red');
+						$('#album_name').after("<span style='color:red'>Field can't be empty</span>");
+					}else{
+						var album_name = $('#album_name').val();
+						var base_path = "<?php echo config('app.url');?>";
+						$.ajaxSetup({ 
+							headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')} 
+						});
+						$.ajax({
+							url : base_path + 'user/my_photos/getExistAlbum',            
+							type : 'post',
+							data : {album_name:album_name},
+							beforeSend: function(){
+								//$('#img_loader').css('display','block');
+								//$('#img_loader').html("<img src='https://printedcart.com/printedcart/public/images/loader.gif'>");
+								swal("Please Wait...!", "Loading Data...!", "warning");
+							},
+							success : function(data){
+								//$('#img_loader').css('display','none');
+								if(data=='yes'){
+									var error_msg = '<p class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close" style="cursor:pointer;"><span aria-hidden="true">×</span></button>Oops! You already have an album with that name. Please try again with a different name.</p>';
+									$('#album_form .row').before(error_msg);
+								}else{
+									$('#album_form').submit();
+								} 
+							}
+						});
+						
+					}
+				});
+				
+				setTimeout(function(){
+					$('.alert-success').fadeOut('fast');
+				}, 10000); 
+				setTimeout(function(){
+					$('.alert-danger').fadeOut('fast');
+				}, 50000);
+				
 			});
-			/* $( "#btnPopover" ).on( "click", function() {
-				$("#addPhotoDialog").dialog( "open" );
-			}); */
-			$("#addPhotoDirection").dialog({
-				autoOpen: false,
-				width: $(window).width() > 650 ? 650 : 'auto',
-				height: 'auto',
-				fluid: true,
-				responsive: true,
-				show: {
-					//effect: "blind",
-					duration: 1000
-				},
-				hide: {
-					//effect: "explode",
-					duration: 1000
-				}
-			});
-			$( "#btnPopover" ).on( "click", function() {
-				$("#addPhotoDirection").dialog( "open" );
+			$("#albumListsLi li").click(function(){
+				var cid = $(this).attr("label");
+				var cln = $("#"+cid).html();
+				$("#SelectAlbumPics").html(cln);  
 			}); 
-			$("#my_computer").on('click', function(){
-				$("#addPhotoDialog").dialog( "open" );
-				$("#addPhotoDirection").dialog( "close" );
-			});
-			$("#photoUploadButton").on('click',function(){
-				var files = $('input#input_files')[0].files;
-				if(files.length < 1){
-					swal("Oops!", "Please browse atleast one image...!", "error");
-				}else{
-					swal("Please Wait...!", "Photo Uploading...!", "warning");
-				}
-			});
-			
-			$("#addAlbumDialog").dialog({
-				autoOpen: false,
-				width: $(window).width() > 500 ? 500 : 'auto',
-				height: 'auto',
-				fluid: true,
-				responsive: true,
-				show: {
-					//effect: "blind",
-					duration: 1000
-				},
-				hide: {
-					//effect: "explode",
-					duration: 1000
-				}
-			});
-			$("#addalbum_inphotodialog").on("click", function(){
-				$("#addPhotoDialog").dialog( "close" );
-				$("#addAlbumDialog").dialog( "open" );
-			});
-			
-			$("#album_button").click(function(){
-				if($('#album_name').val() == ''){
-					$('#album_name').css('border','1px solid red');
-					$('#album_name').after("<span style='color:red'>Field can't be empty</span>");
-				}else{
-					var album_name = $('#album_name').val();
-					var base_path = "<?php echo config('app.url');?>";
-					$.ajaxSetup({ 
-						headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')} 
-					});
-					$.ajax({
-						url : base_path + 'user/my_photos/getExistAlbum',            
-						type : 'post',
-						data : {album_name:album_name},
-						beforeSend: function(){
-							//$('#img_loader').css('display','block');
-							//$('#img_loader').html("<img src='https://printedcart.com/printedcart/public/images/loader.gif'>");
-							swal("Please Wait...!", "Loading Data...!", "warning");
-						},
-						success : function(data){
-							//$('#img_loader').css('display','none');
-							if(data=='yes'){
-								var error_msg = '<p class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close" style="cursor:pointer;"><span aria-hidden="true">×</span></button>Oops! You already have an album with that name. Please try again with a different name.</p>';
-								$('#album_form .row').before(error_msg);
-							}else{
-								$('#album_form').submit();
-							} 
-						}
-					});
-					
-				}
-			});
-			
-			setTimeout(function(){
-				$('.alert-success').fadeOut('fast');
-			}, 10000); 
-			setTimeout(function(){
-				$('.alert-danger').fadeOut('fast');
-			}, 50000);
-			
-		});
-		$("#albumListsLi li").click(function(){
-			var cid = $(this).attr("label");
-			var cln = $("#"+cid).html();
-			$("#SelectAlbumPics").html(cln);  
-		}); 
 		</script>
-
 		@if(session('album_id'))
 		<script>
-		$(function(){
-			//toastr.success("Album Added Successfully");
-			swal("Done", "Album Added Successfully", "success")
-			.then((value) => {
-				$("#addPhotoDialog").dialog( "open" );
+			$(function(){
+				//toastr.success("Album Added Successfully");
+				swal("Done", "Album Added Successfully", "success")
+				.then((value) => {
+					$("#addPhotoDialog").dialog( "open" );
+				});
 			});
-		});
 		</script>
 		@endif
 		<script>
-		var errors_massage = [];
+			var errors_massage = [];
 		</script>
 		@if(session('message'))
 		<?php 
-		$response = session('message');
-		?>
+			$response = session('message');
+			?>
 		@if(isset($response['success']) && !empty($response['success']))
-			<script>
+		<script>
 			var success = "<?php echo $response['success'];?>";
 			var success_msg = '<p class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close" style="cursor:pointer;"><span aria-hidden="true">×</span></button>'+success+'</p>';
 			errors_massage.push(success_msg);
-			</script>
+		</script>
 		@endif
 		@if(isset($response['error']) && !empty($response['error']))
-			<script>
+		<script>
 			var m_error = "<?php echo $response['err_msg'];?>";
 			var m_error_msg = '<p class="alert alert-danger"><a href="#" onclick="show_error()" class="show_error" style="color:#721c24;text-decoration:none;">'+m_error+'</a></p>';
 			errors_massage.push(m_error_msg);
 			
 			var error_info = '<div class="show_error_info alert alert-danger" style="display:none;"><span onclick="hide_error()" style="cursor:pointer;position:absolute;right:5px;top:5px;">X</span>';
-			</script>
-			@foreach($response['error'] as $k => $error)
-				<script>
-				var error = "<?php echo $error;?>";
-				error_info += '<p class="alert alert-danger">'+error+'</p>';
-				</script>
-			@endforeach
-			<script>
+		</script>
+		@foreach($response['error'] as $k => $error)
+		<script>
+			var error = "<?php echo $error;?>";
+			error_info += '<p class="alert alert-danger">'+error+'</p>';
+		</script>
+		@endforeach
+		<script>
 			error_info += "</div>";
 			errors_massage.push(error_info);
-			</script>
+		</script>
 		@endif
 		<script>
-		$(function(){
-			$('#addPhotoDialog .row').before(errors_massage);
-			$("#addPhotoDialog").dialog( "open" );
-		});
+			$(function(){
+				$('#addPhotoDialog .row').before(errors_massage);
+				$("#addPhotoDialog").dialog( "open" );
+			});
 		</script>
 		@endif
 		@if(session('photo_upload') && session('photo_upload')=='ok')
-			<script>
+		<script>
 			$(function(){
 				//toastr.success("Photo Added Successfully");
 				swal("Done", "Photo Added Successfully", "success");
 			});
-			</script>
+		</script>
 		@endif
-
 		<style>
-		#img_loader img {
+			#img_loader img {
 			position: absolute;
 			left: 50%;
 			top: 50%;
@@ -552,8 +535,8 @@
 			-webkit-transform: translateY(-50%) translateX(-50%);
 			-ms-transform: translateY(-50%) translateX(-50%);
 			-o-transform: translateY(-50%) translateX(-50%);
-		}
-		#img_loader {
+			}
+			#img_loader {
 			position: fixed;
 			top: 0;
 			height: 100%;
@@ -561,18 +544,19 @@
 			width: 100%;
 			background-color: rgba(0,0,0,0.1);
 			z-index: 99999;
-		}
+			}
 		</style>
 		<!-- Include CSS for JQuery Frontier Calendar plugin (Required for calendar plugin) -->
-		<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/frontierCalendar/jquery-frontier-cal-1.3.2.css') }}" />
+		<!--<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/frontierCalendar/jquery-frontier-cal-1.3.2.css') }}" />-->
 		<!-- Include CSS for color picker plugin (Not required for calendar plugin. Used for example.) -->
-		<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/colorpicker/colorpicker.css') }}" />
-		<link href='https://fonts.googleapis.com/css?family=Merienda+One|Aldrich|Nothing+You+Could+Do|Crete+Round|Karla:400,700|Original+Surfer|Salsa|Marmelad|Averia+Sans+Libre:700|Righteous|Sancreek|Alegreya+SC:900' rel='stylesheet' type='text/css'>
-		
-		<script type="text/javascript" src="{{ URL::asset('public/js/colorpicker/colorpicker.js') }}"></script>
-		<script type="text/javascript" src="{{ URL::asset('public/js/jquery-qtip-1.0.0-rc3140944/jquery.qtip-1.0.js') }}"></script>
-		<script type="text/javascript" src="{{ URL::asset('public/js/lib/jshashtable-2.1.js') }}"></script>
-		<script type="text/javascript" src="{{ URL::asset('public/js/frontierCalendar/jquery-frontier-cal-1.3.2.min.js') }}"></script>
-		
+		<!--<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/colorpicker/colorpicker.css') }}" />
+			<link href='https://fonts.googleapis.com/css?family=Merienda+One|Aldrich|Nothing+You+Could+Do|Crete+Round|Karla:400,700|Original+Surfer|Salsa|Marmelad|Averia+Sans+Libre:700|Righteous|Sancreek|Alegreya+SC:900' rel='stylesheet' type='text/css'>-->
+		<!--<script type="text/javascript" src="{{ URL::asset('public/js/colorpicker/colorpicker.js') }}"></script>
+			<script type="text/javascript" src="{{ URL::asset('public/js/jquery-qtip-1.0.0-rc3140944/jquery.qtip-1.0.js') }}"></script>
+			<script type="text/javascript" src="{{ URL::asset('public/js/lib/jshashtable-2.1.js') }}"></script>
+			<script type="text/javascript" src="{{ URL::asset('public/js/frontierCalendar/jquery-frontier-cal-1.3.2.min.js') }}"></script>-->
+		<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/fullcalendar.min.css') }}" />
+		<script type="text/javascript" src="{{ URL::asset('public/js/moment.min.js') }}"></script>
+		<script type="text/javascript" src="{{ URL::asset('public/js/fullcalendar.min.js') }}"></script>
 	</body>
 </html>
