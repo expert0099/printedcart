@@ -187,9 +187,15 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	
 	Route::get(config('laraadmin.adminRoute') . '/saved_project/view/{prj_id}/{order_id}', 'LA\SavedProjectController@show');
 	
+	Route::get(config('laraadmin.adminRoute') . '/saved_project/custom_view/{order_id}', 'LA\SavedProjectController@custom_show');
+	
 	Route::get(config('laraadmin.adminRoute') . '/saved_project/order_detail/{prj_id}/{order_id}', 'LA\SavedProjectController@order_detail');
 	
+	Route::get(config('laraadmin.adminRoute') . '/saved_project/custom_order_detail/{order_id}', 'LA\SavedProjectController@custom_order_detail');
+	
 	Route::get(config('laraadmin.adminRoute') . '/saved_project/view/pdf/{prj_id}/{order_id}', 'LA\SavedProjectController@download_pdf');
+	
+	Route::get(config('laraadmin.adminRoute') . '/saved_project/custom_view/pdf/{order_id}', 'LA\SavedProjectController@download_custom_pdf');
 	
 	Route::post(config('laraadmin.adminRoute') . '/saved_project/dt_ajax', 'LA\SavedProjectController@dtajax');
 	

@@ -151,10 +151,7 @@
 							
 							<span class="destroy_cart">
 								<input type="button" title="Remove" alt="Remove" class="btn btn-danger remove_cart" rel="{{$proj['id']}}" style="float:right;" value="X" onclick="return confirm_delete({{$proj['id']}},'{{$proj['project_name']}}');">
-							
-								<!--<a rel="{{$proj['project_name']}}" p="{{$proj['id']}}" class="delAlb" href="javascript:void(0)" style="color: red;font-size: 20px;padding-left: 8px;padding-right: 8px;padding-top: 0px;padding-bottom: 0px;margin-left: 115px;" title="Delete" alt="Delete">X</a>-->
 							</span>
-							
 						</td>
 					</tr>
 					<?php 
@@ -172,7 +169,6 @@
 							<input type="hidden" id="gtotal" name="gtotal" value="{{$total}}"/>
 							<input type="hidden" id="currenty_symbol" name="currency_symbol" value="{{$default_currency['currencysymbol']}}"/>
 							<input type="hidden" id="currency_code" name="currency_code" value="{{$default_currency['currencycode']}}"/>
-							<input type="hidden" id="project_id" name="project_id" value="{{$project_id}}"/>
 						</td>
 						<td>
 						{{ Form::submit('Checkout',['class'=>'btn btn-primary fz-18 font-weight-light border-0 rounded-0 px-3']) }}

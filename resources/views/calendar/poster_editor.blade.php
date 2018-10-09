@@ -974,19 +974,16 @@ $(document).ready(function() {
 			$.ajax({
 				url : base_path + 'calendars/save_project',            
 				type : 'POST',
-				data : {form_data:formData,flag:'College Poster',cmonth:month,cyear:year},
+				data : {form_data:formData,flag:'Calendar Poster',cmonth:month,cyear:year},
 				beforeSend: function(){
-					//toastr.success("Please Wait...! Loading Data...!");
 					swal("Please Wait...!", "Loading Data...!", "warning");
 				},
 				success : function(data){
 					if(data=='error'){
-						//toastr.error("Sorry! Project not create! Please try again...!");
 						swal("Oops!", "Project not create! Please try again...!", "error");
 					}else{
 						$('#project_id').val(data);
 						$('.ui-dialog-titlebar-close').trigger('click');
-						//toastr.success("Thanks! Project created successfully! Now save your project!");
 						swal("Thanks!", "Project created successfully! Now save your project!", "success");
 					}
 				}

@@ -22,7 +22,7 @@
 				@foreach($group as $k => $v)
 				<div class="col-md-4 mb-4 mb-md-0">
 					<div class="img-card">
-						<img class="card-img-top" src="{{URL::asset($v['feature_image'])}}" alt="feature-product">
+						<img class="card-img-top" src="{{URL::asset($v['feature_image'])}}" alt="feature-product" style="min-height:575px;">
 						<div class="overlay">
 							<div class="text text-center">
 								<h2 class="text-white">{!! $v['sizegroup'] !!}</h2>

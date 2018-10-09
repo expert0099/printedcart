@@ -630,7 +630,7 @@ class CalendarsController extends Controller
 			return redirect('user/login');
 		} 
 		/** check project data **/
-		$ep = DB::table('projects')->whereRaw("user_id = '".$user_id."' AND size_id = '".$size_id."' AND calendar_style_id = '".$calendar_id."' AND calendar_category_id = '".$calendar_category_id."' AND flag = 'College Poster'")->orderBy('id','DESC')->first();
+		$ep = DB::table('projects')->whereRaw("user_id = '".$user_id."' AND size_id = '".$size_id."' AND calendar_style_id = '".$calendar_id."' AND calendar_category_id = '".$calendar_category_id."' AND flag = 'Calendar Poster'")->orderBy('id','DESC')->first();
 		if(!empty($ep->id)){
 			$project_id = $ep->id;
 		}else{
@@ -675,7 +675,7 @@ class CalendarsController extends Controller
 		}
 		$background_ids = str_replace('[','',str_replace(']','',$pbg['background_image']));
 		if(empty($background_ids)){
-			return redirect()->back()->withErrors(['error'=>'College Poster Background Missing.']);
+			return redirect()->back()->withErrors(['error'=>'Calendar Poster Background Missing.']);
 		}
 		$upload_b = DB::table('uploads')->select('path')->whereRaw("id IN(".$background_ids.")")->get();
 		foreach($upload_b as $k => $value){

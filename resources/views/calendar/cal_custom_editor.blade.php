@@ -1,6 +1,7 @@
 @extends("layouts.calendareditor")
 @section("main-content")
 <?php 
+
 	//$calendar_size = '5x11';
 	$ex = explode('x',$calendar_size);
 	if($ex[0]>$ex[1]){
@@ -15,6 +16,7 @@
 	$cal_part_actual_height = (40/100)*$calendar_frame_height;
 	$addClass = 'cal_'.$calendar_size;
 	?>
+
 <div class="container-fluid px-0 editor-holder">
 	<div class="left-sidebar-section">
 		<div class="tab-width px-0 left-icon-tab">
@@ -129,11 +131,13 @@
 					<ol class="carousel-pagination">
 						<li data-target="#transition-timer-carousel" data-month="0" data-slide-to="0" rel="0">Cover <span></span></li>
 						@foreach($monthArr as $k => $val)
+
 						@if($k+1 == $month)
 						<li data-target="#transition-timer-carousel" data-month="{{$k}}" data-slide-to="{{$k+1}}" rel="{{$k+1}}" class="active">{{$val}} <span></span></li>
 						@else
 						<li data-target="#transition-timer-carousel" data-month="{{$k}}" data-slide-to="{{$k+1}}" rel="{{$k+1}}">{{$val}} <span></span></li>
 						@endif
+
 						@endforeach
 					</ol>
 					<div class="left-right">
@@ -153,6 +157,7 @@
 						</div>
 						@endforeach
 						@else
+
 						@foreach($demo_content as $key => $page)
 						<div class="item @if($key == $month) active @endif" id="item_{{$page->id}}" rel="{{$page->id}}">
 							{!! $page->page_content !!}
@@ -163,6 +168,7 @@
 								</script>-->
 						</div>
 						@endforeach
+
 						@endif
 						<input type="hidden" name="project_id" id="project_id" value="{{$project_id}}"/>
 					</div>
@@ -434,6 +440,8 @@
 	</div>
 	<!-- end image crop dialog -->
 </div>
+
+
 <!-- include js for undo-redo -->
 <script src="{{URL::asset('public/js/undo_redo/JSYG.Events.js')}}"></script>
 <script src="{{URL::asset('public/js/undo_redo/JSYG.StdConstruct.js')}}"></script>
@@ -1280,6 +1288,7 @@
 </style>
 <!-- show calendar under calendar layout -->
 <script>
+
 	function leapYear(year){
 		if(year % 4 == 0) // basic rule
 	    return true // is leap year
@@ -1413,6 +1422,7 @@
 </script>
 <style>
 	table{
+
 	font-family: arial;
 	}
 	#ModalCarousel .modal-dialog{
@@ -1485,6 +1495,7 @@
 	float: left;
 	}
 </style>
+
 <style>
 	#calendar {
 	width: 700px;
@@ -1509,6 +1520,7 @@
     width: 10%;
     height: 300px;
 }
+
 
 /* Style the buttons inside the tab */
 .tab button {
@@ -1592,6 +1604,7 @@
 				$('#modalLoginForm').modal('show');
 			} */
 		});
+
 	});
 	
 	
@@ -1637,4 +1650,5 @@ function eventTab(evt, cityName) {
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 </script>
+
 @endsection

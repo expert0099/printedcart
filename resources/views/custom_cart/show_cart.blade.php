@@ -17,7 +17,7 @@
 
 	<!-- cart section -->
 	@if(count($cartData)>0)
-	{!! Form::open(['method' => 'POST','url'=>'payment_process','name'=>'style_form']) !!}
+	{!! Form::open(['method' => 'POST','url'=>'custom_payment_process','name'=>'style_form']) !!}
 	<section class="cart-info-box" style="margin-top: 10em;">
 		<div class="container">
 			<div class="row">
@@ -111,9 +111,11 @@
 							<div class="row">
 								<div class="col-12 col-md-3"><img src="{{URL::asset('public/'.$cd->image_path)}}" alt="..." class="img-responsive"/></div>
 							</div>
+							<input type="hidden" name="custom_cart_id[]" id="custom_cart_id" value="{{$cd->id}}"/>
 						</td>
 						<td data-th="print_of_set">
 							{{$cd->size}}
+							<input type="hidden" name="item[]" id="item" value="{{$cd->size}}"/>
 						</td>
 						<td data-th="Price">		
 							{{$default_currency['currencysymbol']}}{{$cd->price}}
@@ -147,7 +149,7 @@
 							<input type="hidden" id="currency_code" name="currency_code" value="{{$default_currency['currencycode']}}"/>
 						</td>
 						<td>
-						{{ Form::button('Checkout',['class'=>'btn btn-primary fz-18 font-weight-light border-0 rounded-0 px-3']) }}
+						{{ Form::submit('Checkout',['class'=>'btn btn-primary fz-18 font-weight-light border-0 rounded-0 px-3']) }}
 						</td>
 					</tr>
 				</tfoot>
@@ -180,8 +182,6 @@
 
 <script type="text/javascript">
 function confirm_delete(cart_id,print_of_set){
-	alert(cart_id);
-	alert(print_of_set);
 	var base_path = "<?php echo config('app.url');?>";
 	var project_name = print_of_set;
 	var message = "Are you sure want to remove item ("+project_name+") from cart?"
@@ -292,7 +292,7 @@ $(document).ready(function(){
 			var basePath = "<?php echo env('APP_URL');?>";
 			var email = "<?php echo $email; ?>";
 			$.ajax({
-				url : basePath + 'payments/resend_verify_mail/'+email,            
+				url : basePath + 'prints/resend_verify_mail/'+email,            
 				type : 'GET',
 				beforeSend: function(){
 					$('#img_loader').css('display','block');
@@ -355,7 +355,7 @@ $(document).ready(function(){
 		$(function(){
 			var basePath = "<?php echo env('APP_URL');?>";
 			$.ajax({
-				url : basePath + 'payments/verify_mail_confirm',            
+				url : basePath + 'prints/verify_mail_confirm',            
 				type : 'GET',
 				beforeSend: function(){
 					$("#verified_yes").dialog({

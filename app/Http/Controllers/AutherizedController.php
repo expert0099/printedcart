@@ -45,9 +45,18 @@ class AutherizedController extends Controller {
 		$amount 		= $post_data['amount'];
 		$shipping_amt 	= $post_data['shipping'];
 		$item_name 		= $post_data['item_name'];
-		$project_id 	= $post_data['project_id'];
+		if(isset($post_data['project_id']) && !empty($post_data['project_id'])){
+			$project_id = $post_data['project_id'];
+		}else{
+			$project_id = '';
+		}
 		$qty 			= $post_data['qty'];
 		$address_id		= $post_data['address_id'];
+		if(isset($post_data['custom_cart_id']) && !empty($post_data['custom_cart_id'])){
+			$custom_cart_id	= $post_data['custom_cart_id'];
+		}else{
+			$custom_cart_id	= "";
+		}
 		
 		$merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
 		$merchantAuthentication->setName(\net\authorize\api\constants\ANetEnvironment::MERCHANT_LOGIN_ID);
@@ -150,16 +159,23 @@ class AutherizedController extends Controller {
 						'txn_id' => $transaction_id,
 						'auth_code' => $auth_code,
 						'address_id' => $address_id,
+						'custom_cart_id' => $custom_cart_id,
 						'status' => 'Success'
 					);
 					$insert = Order::insertGetId($insArr);
 					if($insert){
 						$up = array('status' => 1);
-						$proj = explode(',',$project_id);
-						foreach($proj as $k => $v){
-							Cart::whereRaw("user_id='". Auth::user()->id ."' AND project_id='".$v."'")->update($up);
+						if(isset($custom_cart_id) && !empty($custom_cart_id)){
+							$proj = explode(',',$custom_cart_id);
+							foreach($proj as $k => $v){
+								DB::table('custom_carts')->whereRaw("user_id='". Auth::user()->id ."' AND id='".$v."'")->update($up);
+							}
+						}else{
+							$proj = explode(',',$project_id);
+							foreach($proj as $k => $v){
+								Cart::whereRaw("user_id='". Auth::user()->id ."' AND project_id='".$v."'")->update($up);
+							}
 						}
-				
 						/* mail send to customer */
 						$configs = DB::table('la_configs')->get();
 						$default_email = 'expertteam11@gmail.com';
@@ -171,20 +187,36 @@ class AutherizedController extends Controller {
 						$user = Auth::user();
 						$order = DB::table('orders')->where('id',$insert)->first();
 						$quantity = explode(',',$order->qty);
-						$projects = explode(',',$order->project_id);
-						foreach($projects as $k => $project){
-							$projectsArr[$k] = DB::table('projects')->where('id',$project)->first();
+						if(isset($order->project_id) && !empty($order->project_id)){
+							$projects = explode(',',$order->project_id);
+							foreach($projects as $k => $project){
+								$projectsArr[$k] = DB::table('projects')->where('id',$project)->first();
+							}
+							/* Mail::send('emails.order', ['user'=>$user,'order'=>$order,'project'=>$projectsArr,'qty'=>$quantity,'userInfo'=>$userInfo], function ($m) use ($user,$default_email){
+								$m->from($default_email, 'Admin');
+								$m->to('expertteam11@gmail.com', $user->name)->subject('Order Proceed : Printed Cart');
+							}); */
+							/* end mail send to customer */
+						}				
+						if(isset($order->custom_cart_id) && !empty($order->custom_cart_id)){
+							$custom_cart_id = explode(',',$order->custom_cart_id);
+							foreach($custom_cart_id as $k => $cci){
+								$projectsArr[$k] = DB::table('custom_carts')->where('id',$cci)->first();
+							}
+							/* Mail::send('emails.custom_order', ['user'=>$user,'order'=>$order,'project'=>$projectsArr,'qty'=>$quantity,'userInfo'=>$userInfo], function ($m) use ($user,$default_email){
+								$m->from($default_email, 'Admin');
+								$m->to('expertteam11@gmail.com', $user->name)->subject('Order Proceed : Printed Cart');
+							}); */
+							/* end mail send to customer */
 						}
-										
-						/* Mail::send('emails.order', ['user'=>$user,'order'=>$order,'project'=>$projectsArr,'qty'=>$quantity,'userInfo'=>$userInfo], function ($m) use ($user,$default_email){
-							$m->from($default_email, 'Admin');
-							$m->to('expertteam11@gmail.com', $user->name)->subject('Order Proceed : Printed Cart');
-						}); */
-						/* end mail send to customer */
 				
 						return redirect('/home')->with('success','Your order is successfully proceed.');
 					}else{
-						return redirect('payments/cart')->withErrors(['error'=>'Something went wrong.']);
+						if(isset($project_id) && !empty($project_id)){
+							return redirect('payments/cart')->withErrors(['error'=>'Something went wrong.']);
+						}else{
+							return redirect('custom_cart')->withErrors(['error'=>'Something went wrong.']);
+						}
 					}
 					/* end save data into order table */
 					
@@ -194,7 +226,11 @@ class AutherizedController extends Controller {
 						$error[] = " Error Code  : " . $tresponse->getErrors()[0]->getErrorCode();
 						$error[] = " Error Message : " . $tresponse->getErrors()[0]->getErrorText();
 					}
-					return redirect('payments/cart')->withErrors(['error'=>$error]);
+					if(isset($project_id) && !empty($project_id)){
+						return redirect('payments/cart')->withErrors(['error'=>$error]);
+					}else{
+						return redirect('custom_cart')->withErrors(['error'=>$error]);
+					}
 				}
 				// Or, print errors if the API request wasn't successful
 			}else{
@@ -208,10 +244,18 @@ class AutherizedController extends Controller {
 					$error[] = " Error Code  : " . $response->getMessages()->getMessage()[0]->getCode();
 					$error[] = " Error Message : " . $response->getMessages()->getMessage()[0]->getText();
 				}
-				return redirect('payments/cart')->withErrors(['error'=>$error]);
+				if(isset($project_id) && !empty($project_id)){
+					return redirect('payments/cart')->withErrors(['error'=>$error]);
+				}else{
+					return redirect('custom_cart')->withErrors(['error'=>$error]);
+				}
 			}
 		}else{
-			return redirect('payments/cart')->withErrors(['error'=>'No response returned.']);
+			if(isset($project_id) && !empty($project_id)){
+				return redirect('payments/cart')->withErrors(['error'=>'No response returned.']);
+			}else{
+				return redirect('custom_cart')->withErrors(['error'=>'No response returned.']);
+			}
 		}
 		
 	}

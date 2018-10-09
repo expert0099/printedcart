@@ -51,10 +51,23 @@
 							<a href="{{ url(config('laraadmin.adminRoute') . '/saved_project/view/'.$val->project_id.'/'.$v->id) }}"><button class="btn btn-success btn-xs" type="submit">View <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button></a>
 							|
 							<a href="{{ url(config('laraadmin.adminRoute') . '/saved_project/order_detail/'.$val->project_id.'/'.$v->id) }}"><button class="btn btn-success btn-xs" type="submit">Order Detail <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button></a>
-							<!--<a href="{{ url(config('laraadmin.adminRoute') . '/saved_project/'.$v->id) }}"><button class="btn btn-danger btn-xs" type="submit" onclick="return confirm('Are you sure?');return false;"><i class="fa fa-times"></i></button></a>-->
 						</td>
 					</tr>
 					@endforeach
+				@endforeach
+				@foreach($custom_orders as $k => $val)
+					<tr>
+						<td>{!! $i !!}</td>
+						<td>Print of set</td>
+						<td>{!! $val->name !!}</td>
+						<td>{!! $val->amt+$val->shipping_amt !!} {!! $val->currency_code !!}</td>
+						<td>{!! $val->created_at !!}</td>
+						<td>
+							<a href="{{ url(config('laraadmin.adminRoute') . '/saved_project/custom_view/'.$val->id) }}"><button class="btn btn-success btn-xs" type="submit">View <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button></a>
+							|
+							<a href="{{ url(config('laraadmin.adminRoute') . '/saved_project/custom_order_detail/'.$val->id) }}"><button class="btn btn-success btn-xs" type="submit">Order Detail <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button></a>
+						</td>
+					</tr>
 				@endforeach
 			</tbody>
 		</table>

@@ -56,9 +56,16 @@ class SavedProjectController extends Controller
 					->whereIn('user_saved_projects.project_id',$e)->where('user_saved_projects.deleted_at','=','0000-00-00 00:00:00')
 					->distinct()->get(['project_id']);
 				$val->user_saved_projects = $doiusp;
+				
 			}
 		}
-		return view('la.savedproject.index',compact('order')); 
+		$custom_orders = DB::table('orders')
+			->select("orders.*",'users.id as user_id','users.name')
+			->join('users','orders.user_id','=','users.id')
+			->whereRaw("custom_cart_id!='' AND status = 'Success'")
+			->get();
+			
+		return view('la.savedproject.index',compact('order','custom_orders')); 
 	}
 
 	/**
@@ -98,7 +105,6 @@ class SavedProjectController extends Controller
 		}else{
 			$identifierClass = str_replace(' ','',$project['flag']).'_'.$calendar_size;
 		}
-		//$identifierClass = str_replace(' ','',$project['flag']);
 		if($project['flag']=='Photobook'){
 			$thisUR = DB::table('user_saved_projects')->whereRaw("project_id = '".$project_id."'")->get();
 			$cntR = count($thisUR);
@@ -106,11 +112,14 @@ class SavedProjectController extends Controller
 		}else{
 			$savedProj = DB::table('user_saved_projects')->whereRaw("project_id = '".$project_id."'")->get();
 		}
-		/* $thisUR = DB::table('user_saved_projects')->whereRaw("project_id = '".$project_id."'")->get();
-		$cntR = count($thisUR);
-		$savedProj = DB::table('user_saved_projects')->whereRaw("project_id = '".$project_id."'")->skip(2)->take($cntR-4)->get(); */
-		
 		return view('la.savedproject.show', compact('savedProj','','project_id','calendar_size','calendar_category_id','order_id','identifierClass','project'));
+	}
+	
+	public function custom_show($order_id=null){
+		$order = DB::table('orders')->where('id',$order_id)->first();
+		$custom_cart_id = explode(',',$order->custom_cart_id);
+		$savedProj = DB::table('custom_carts')->whereIn('id',$custom_cart_id)->get();
+		return view('la.savedproject.custom_show', compact('savedProj','order_id'));
 	}
 	
 	public function order_detail($project_id=null,$order_id=null){
@@ -118,6 +127,13 @@ class SavedProjectController extends Controller
 		$user = DB::table('users')->where('id',$order->user_id)->first();
 		$userinfo = DB::table('user_address_infos')->whereRaw("user_id = '". $order->user_id ."' AND id = '". $order->address_id ."'")->first();
 		return view('la.savedproject.order_detail', compact('order','user','userinfo'));
+	}
+	
+	public function custom_order_detail($order_id=null){
+		$order = DB::table('orders')->where('id',$order_id)->first();
+		$user = DB::table('users')->where('id',$order->user_id)->first();
+		$userinfo = DB::table('user_address_infos')->whereRaw("user_id = '". $order->user_id ."' AND id = '". $order->address_id ."'")->first();
+		return view('la.savedproject.custom_order_detail', compact('order','user','userinfo'));
 	}
 
 	/**
@@ -204,16 +220,12 @@ class SavedProjectController extends Controller
 	
 	public function download_pdf($project_id=null,$order_id=null){
 		ini_set('max_execution_time', 300);
-		//$error_level = error_reporting();
-		//error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
-		
-		
+				
 		ini_set('display_errors',1); // enable php error display for easy trouble shooting
 		error_reporting(E_ALL); // set error display to all
 		
 		$order_pdf = DB::table('ordered_pdf_images')->whereRaw("project_id = '".$project_id."' AND order_id = '".$order_id."'")->orderBy('page_id','ASC')->get();
 		
-		//$pd = DB::table('projects')->where('id',$project_id)->first();
 		$pd = Project::with('Size')->where('id',$project_id)->first();
 		$user_id = $pd->user_id;
 		$size = $pd->Size['Size'];
@@ -227,9 +239,6 @@ class SavedProjectController extends Controller
 			$page_width = round($ratio);
 			$page_height = 100;
 		}
-		/* $pw = ($page_width/100)*$page_default_width;
-		$ph = ($page_height/100)*$page_default_height; */
-		/* page content */
 		
 		if($pd->flag=='Photobook'){
 			$thisUR = DB::table('user_saved_projects')->whereRaw("project_id = '".$project_id."'")->get();
@@ -242,14 +251,6 @@ class SavedProjectController extends Controller
 		} 
 		/* end page content */
 		$html = view('la.savedproject.download_pdf', compact('order_pdf','user_id','savedProj','pd','identifierClass'));
-		//$html = view('la.savedproject.pdf');
-		
-		/* $html = "";
-		foreach($savedProj as $k => $val){
-			$html .= $val->page_content;
-		}  
-		echo $html;exit; */   
-		//['utf-8', array(290,236)] //width & height
 		
 		if($pd->flag=='Photobook'){
 			if($size == '11x14'){
@@ -281,7 +282,6 @@ class SavedProjectController extends Controller
 			if($size == '12x12'){
 				$page_default_width = 335;
 				$page_default_height = 335;
-				//$html = str_replace('Text Here','',$html);
 				$html = str_replace('style="display: block;"','style="display: none;"',$html);
 				$html = str_replace('style="height: 40vh;"','style="height: 40%;"',$html);
 			}elseif($size == '8x11'){
@@ -334,50 +334,65 @@ class SavedProjectController extends Controller
 		}
 		
 		$mpdf = new \Mpdf\Mpdf(['format' => [$page_default_width, $page_default_height]]);
-		//$mpdf->useDefaultCSS2 = true;
-		//$mpdf->use_kwt = true;
-		//$mpdf->useSubstitutions = true;
-		//$mpdf->ignore_invalid_utf8 = true;
-		//$mpdf->SetDisplayMode('fullpage');
-		
-		//$mpdf->SetDisplayMode('default');
-		
-		//$mpdf->SetDisplayMode('fullpage','two');
-		/* $stylesheet = file_get_contents('public/css/photobook_custom_editor.css');
-		$mpdf->WriteHTML($stylesheet,1);
-		$stylesheet2 = file_get_contents('public/css/display_pdf.css');
-		$mpdf->WriteHTML($stylesheet2,1); */
-		
-		/* if($pd->flag == 'Photobook'){
-			$mpdf->AddPageByArray([
-                //'orientation' => 'L',
-               // 'sheet-size'=>'A4',
-				//'format' => [230, 160]
-            ]);
-		}else{
-			$mpdf->AddPageByArray([
-                //'orientation' => 'P',
-                //'sheet-size'=>'A4',
-				//'format' => [460, 330]
-            ]);
-		} */
-		
-		
 		$mpdf->WriteHTML($html);
-		//$mpdf->WriteHTML($html);
-		
 		$mpdf->Output();
-		//unset($mpdf);
 		exit;
-
-		/* $pdf = \App::make('dompdf.wrapper');		
-		$pdf = PDF::loadView('la.savedproject.download_pdf' ,compact('order_pdf','user_id','savedProj'));
-		//$pdf->setPaper('a4', 'portrait');
-		if($pd->flag == 'Photobook'){
-			$pdf->setPaper(array(0,0,450,250), 'portrait');
-		}else{
-			$pdf->setPaper(array(0,0,450,400), 'portrait');
-		}
-		return $pdf->stream('pdf_'.$project_id.'_'.$order_id.'.pdf')->header('Content-Type','application/pdf');  */
 	}
+	
+	public function download_custom_pdf($order_id=null){
+		ini_set('max_execution_time', 300);
+				
+		ini_set('display_errors',1); // enable php error display for easy trouble shooting
+		error_reporting(E_ALL); // set error display to all
+		
+		$order = DB::table('orders')->where('id',$order_id)->first();
+		$user_id = $order->user_id;
+		$custom_cart_id = explode(',',$order->custom_cart_id);
+		$savedProj = DB::table('custom_carts')->whereIn('id',$custom_cart_id)->get();
+		
+			
+		$sizes = DB::table('sizes')->where('id',$savedProj[0]->size_id)->first();
+		$size = $sizes->Size;
+		$ex = explode('x',$size);
+		if($ex[0]>$ex[1]){
+			$ratio = $ex[1]/$ex[0]*100;
+			$page_width = 100;
+			$page_height = round($ratio);
+		}else{
+			$ratio = $ex[0]/$ex[1]*100;
+			$page_width = round($ratio);
+			$page_height = 100;
+		}
+		
+	
+		if($size == '20x30'){
+			$page_default_width = 538;
+			$page_default_height = 794.8;
+		}elseif($size == '8x8'){
+			$page_default_width = 233;
+			$page_default_height = 234.3;
+		}elseif($size == '8x10'){
+			$page_default_width = 233;
+			$page_default_height = 285;
+		}elseif($size == '11x14'){
+			$page_default_width = 309.2;
+			$page_default_height = 386.3;
+		}elseif($size == '12x12'){
+			$page_default_width = 334.7;
+			$page_default_height = 334.7;
+		}elseif($size == '16x20'){
+			$page_default_width = 436.3;
+			$page_default_height = 538.3;
+		}
+		$html = view('la.savedproject.download_custom_pdf', compact('savedProj'));
+		
+		$mpdf = new \Mpdf\Mpdf(['format' => [$page_default_width, $page_default_height]]);
+		$mpdf->WriteHTML($html);
+		$mpdf->Output();
+		exit;
+		
+		
+		
+	}
+	
 }
