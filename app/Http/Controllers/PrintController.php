@@ -354,8 +354,13 @@ class PrintController extends Controller
 		}else{
 			return redirect('user/login');
 		}
-		
-		$project_id = '';
+		/** check project data **/
+		$ep = DB::table('projects')->whereRaw("user_id = '".$user_id."' AND size_id = '".$size_id."' AND calendar_style_id = '".$poster_id."' AND flag = 'College Poster'")->orderBy('id','DESC')->first();
+		if(!empty($ep->id)){
+			$project_id = $ep->id;
+		}else{
+			$project_id = '';
+		}
 		/** end check project data **/
 		
 		/* Album Lists*/

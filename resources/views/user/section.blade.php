@@ -160,14 +160,14 @@ $(function(){
 															<span class="contentInfo" id="albumDetail_{{$value->id}}" title="{{$value->id}}">Created: {{date('m-d-Y',strtotime($value->created_at))}}</span>
 														</div>
 														<div class="box-btn">
-															<!--<a href="{{URL::asset('user/delete_project/'.$value->id .'/'.$value['flag'])}}" onclick="return confirm('Are you sure?');return false;" class="btn bg-danger fz-15 font-weight-light border-0 rounded-0 px-3 mt-2 text-white" title="Delete" alt="Delete">Delete</a>-->
-															
 															<a rel="{{$value->project_name}}" p="{{URL::asset('user/delete_project/'.$value->id .'/'.$value['flag'])}}" class="delAlb btn bg-danger fz-15 font-weight-light border-0 rounded-0 px-3 mt-2 text-white" href="javascript:void(0)" title="Delete" alt="Delete">Delete</a>
 															
 															@if($value['flag'] == 'Photobook')
 																<a href="{{ URL::asset('photobooks/custom_path/project/'.$value->id) }}" class="btn btn-primary fz-15 font-weight-light border-0 rounded-0 px-3 mt-2 text-white" title="Edit" alt="Edit" onclick="swalAlert();">Edit</a>
-															@elseif($value['flag'] == 'College Poster')
+															@elseif($value['flag'] == 'Calendar Poster')
 																<a href="{{ URL::asset('calendars/poster_editor/'.$value->calendar_style_id .'/'.$value->size_id .'/'. $value->calendar_category_id .'/'.$value->cyear) }}" class="btn btn-primary fz-15 font-weight-light border-0 rounded-0 px-3 mt-2 text-white" title="Edit" alt="Edit" onclick="swalAlert();">Edit</a>
+															@elseif($value['flag'] == 'College Poster')
+																<a href="{{ URL::asset('prints/poster_editor/'.$value->calendar_style_id .'/'.$value->size_id) }}" class="btn btn-primary fz-15 font-weight-light border-0 rounded-0 px-3 mt-2 text-white" title="Edit" alt="Edit" onclick="swalAlert();">Edit</a>
 															@else
 															<a href="{{ URL::asset('calendars/cal_editor/'.$value->calendar_style_id .'/'.$value->size_id .'/'.$value->calendar_category_id .'/'.$value->cmonth .'/'.$value->cyear) }}" class="btn btn-primary fz-15 font-weight-light border-0 rounded-0 px-3 mt-2 text-white" title="Edit" alt="Edit" onclick="swalAlert();">Edit</a>
 															@endif

@@ -68,7 +68,7 @@
 					<a class="nav-link @if(Request::segment(1)=='photobooks') active @endif" href="{{URL::asset('photobooks')}}">Photobooks</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link @if(Request::segment(1)=='calendars' && Request::segment(2)=='calendar_posters' || Request::segment(2)=='colposview') active @endif" href="{{URL::asset('calendars')}}">Calendars</a>
+					<a class="nav-link @if(Request::segment(1)=='calendars') active @endif" href="{{URL::asset('calendars')}}">Calendars</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link @if(Request::segment(1)=='posters' || Request::segment(2)=='collage_posters') active @endif" href="{{URL::asset('posters')}}">Posters</a>
