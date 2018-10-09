@@ -212,7 +212,6 @@ class CollegePosterLayoutsController extends Controller
 		$values = DB::table('collegeposterlayouts')->select($this->listing_cols)->whereNull('deleted_at');
 		$out = Datatables::of($values)->make();
 		$data = $out->getData();
-		
 		foreach($data->data as $k => $v){
 			$img = '';
 			if($v[2]!=0){
