@@ -1608,6 +1608,7 @@ table{
 .colpick {
   z-index: 9999;
 }
+.fc-right{display: none;}
 </style>
 <!-- end show calendar under calendar layout -->
 <script>
