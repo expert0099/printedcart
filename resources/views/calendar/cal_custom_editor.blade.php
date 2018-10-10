@@ -1613,8 +1613,6 @@ table{
 <script>
 
 function setCalFullCal(year,month,id){
-	//var received_events = $("#received_events").val();
-	//alert(received_events);
 	if(month<=9){
 		if(month==0){
 			var month = '01';
