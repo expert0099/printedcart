@@ -190,7 +190,7 @@
 		<!-- Open bootstrap modal to add calendar events -->
 		<div id="createEventModal" class="modal fade">
 			<div class="modal-dialog">
-				<div class="modal-content">
+				<div class="modal-content" style="height: 500px;">
 					<div id="modalBody" class="modal-body">
 						<button style="padding: 15px;font-size: 30px;" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
 					<!-- Adding sidebar stripe -->
@@ -211,21 +211,86 @@
 
 						<div id="Events" class="tabcontent">
 							<h4 style="position: absolute;margin-top: 2%;" id="modalTitle" class="modal-title"></h4>
-							<div class="mt-20">
-								<div class="form-group">
-									<input class="form-control" type="text" placeholder="Event Name" name="eventName" id="eventName">
+							<div class="row mt-12">
+								<div class="col-md-6">
+									<div class="form-group">
+										<input class="form-control" type="text" placeholder="Event Name" name="eventName" id="eventName">
+									</div>
+									<div class="form-group">
+										<select class="form-control" style="height: 34px;">
+											<option>Every Year</option>
+											<option>One time event</option>
+											<option>Every Year</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<select class="form-control" style="height: 34px;">
+											<option>Occasion</option>
+											<option>Anniversary</option>
+											<option>Birthday</option>
+											<option>Graduation</option>
+											<option>Wedding</option>
+											<option>Party/Celebration</option>
+											<option>Bar/Bat Mitzvah</option>
+											<option>Vacation</option>
+											<option>Other Event</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<select class="form-control" style="height: 34px;">
+											<option>Relationship</option>
+											<option>My Own</option>
+											<option>Significant other</option>
+											<option>Child</option>
+											<option>Mother</option>
+											<option>Father</option>
+											<option>Sibling</option>
+											<option>Grandparent</option>
+											<option>Aunt/Uncle</option>
+											<option>Friend</option>
+											<option>Teacher</option>
+											<option>Other</option>
+										</select>
+									</div>
 								</div>
 							</div>
 						</div>
 
 						<div id="TextStyle" class="tabcontent">
-							  <h3>Text Style</h3>
-							  <p>Anything will come here</p> 
+							  <h4 style="position: absolute;margin-top: 2%;">Event Text Style</h4>
+							  <div class="row mt-12">
+								<div class="col-md-6">
+									<div class="form-group">
+										<select class="form-control" style="height: 34px;">
+											<option>Every Year</option>
+											<option>One time event</option>
+											<option>Every Year</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<select class="form-control" style="height: 34px;">
+											<option>Occasion</option>
+											<option>Anniversary</option>
+											<option>Birthday</option>
+											<option>Graduation</option>
+											<option>Wedding</option>
+											<option>Party/Celebration</option>
+											<option>Bar/Bat Mitzvah</option>
+											<option>Vacation</option>
+											<option>Other Event</option>
+										</select>
+									</div>
+								</div>
+							</div>
 						</div>
 
 						<div id="EditPhoto" class="tabcontent">
-							  <h3>Tokyo</h3>
-							  <p>Tokyo is the capital of Japan.</p>
+							  <h3>Edit Photo</h3>
+							  <p>Anything will come here.</p>
 						</div>
 					<!-- ends -->
 
@@ -1518,7 +1583,7 @@
     border: 1px solid #ccc;
     background-color: #f1f1f1;
     width: 10%;
-    height: 300px;
+    height: 445px;
 }
 
 
@@ -1551,14 +1616,14 @@
 .tabcontent {
     float: left;
     padding: 0px 12px;
-    width: 50%;
+    width: 82%;
     border-left: none;
     height: 300px;
 }
 
 .modal-body {padding: 0px;}
 .fz-8 {font-size: 8px;margin-left: 10px;}
-.mt-20 {margin-top: 20%;}
+.mt-12 {margin-top: 12%;}
 </style>
 <!-- end show calendar under calendar layout -->
 <script>
@@ -1570,6 +1635,7 @@
 			displayEventTime: false,
 			selectHelper: true,
 			editable: true,
+			showNonCurrentDates: false,
 			select: function (start, end, allDay) {
 				//do something when space selected
 				//Show 'add event' modal
@@ -1592,6 +1658,7 @@
 			},
 			// Render Event
 			eventRender: function (event, element, view) {
+				
 				$(element).tooltip({title: event.title});
 			},
 			//Activating modal for 'when an event is clicked'
@@ -1633,7 +1700,7 @@
 </script>
 
 <script>
-function eventTab(evt, cityName) {
+function eventTab(evt, eventName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -1643,12 +1710,16 @@ function eventTab(evt, cityName) {
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    document.getElementById(cityName).style.display = "block";
+    document.getElementById(eventName).style.display = "block";
     evt.currentTarget.className += " active";
 }
 
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
+
+$(".modal").on("hidden.bs.modal", function(){
+    $(".modal-body input").val("");
+});
 </script>
 
 @endsection
