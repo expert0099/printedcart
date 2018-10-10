@@ -194,7 +194,7 @@
 		<!-- Open bootstrap modal to add calendar events -->
 		<div id="createEventModal" class="modal fade">
 			<div class="modal-dialog">
-				<div class="modal-content" style="height: 500px;">
+				<div class="modal-content">
 					<div id="modalBody" class="modal-body">
 						<button style="padding: 15px;font-size: 30px;" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
 					<!-- Adding sidebar stripe -->
@@ -267,26 +267,14 @@
 							  <div class="row mt-12">
 								<div class="col-md-6">
 									<div class="form-group">
-										<select class="form-control" style="height: 34px;">
-											<option>Every Year</option>
-											<option>One time event</option>
-											<option>Every Year</option>
-										</select>
+										<input class="form-control colpick" type="color" value="" id="colorTexto" name="colorTexto">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<select class="form-control" style="height: 34px;">
-											<option>Occasion</option>
-											<option>Anniversary</option>
-											<option>Birthday</option>
-											<option>Graduation</option>
-											<option>Wedding</option>
-											<option>Party/Celebration</option>
-											<option>Bar/Bat Mitzvah</option>
-											<option>Vacation</option>
-											<option>Other Event</option>
-										</select>
+										<button id="up">+</button>
+											<p id="font-size"></p>
+										 <button id="down">-</button>
 									</div>
 								</div>
 							</div>
@@ -1574,7 +1562,7 @@ table{
     border: 1px solid #ccc;
     background-color: #f1f1f1;
     width: 10%;
-    height: 445px;
+    height: 300px;
 }
 /* Style the buttons inside the tab */
 .tab button {
@@ -1613,6 +1601,9 @@ table{
 .modal-body {padding: 0px;}
 .fz-8 {font-size: 8px;margin-left: 10px;}
 .mt-12 {margin-top: 12%;}
+.colpick {
+  z-index: 9999;
+}
 </style>
 <!-- end show calendar under calendar layout -->
 <script>
@@ -1643,10 +1634,17 @@ function setCalFullCal(year,month,id){
 			$('#createEventModal').modal('show');
 			
 			$('#submitButton').on('click',function(){
-			   var mockEvent = {title: $('#eventName').val(), start: $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss")};
+			   var mockEvent = {title: $('#eventName').val(), start: $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss"), textColor: $('#colorTexto').val(), textSize: $('#font-size').val()};
 				$('.calendaer').fullCalendar('renderEvent', mockEvent);
 				$('#submitButton').unbind('click');
 				$('#createEventModal').modal('hide');
+				//$('.fc-event').attr('style', 'font-size: 1.85em !important');
+				$('.fc-event').each(function(i, e){
+					$('<div id="font-size"></div>', {
+						"class": "arr",
+						"id": "id_" + i
+					}).appendTo(this);
+				});
 			});
 		},
 		//When u drop an event in the calendar do the following:
@@ -1673,13 +1671,11 @@ function setCalFullCal(year,month,id){
 		} */
 	});
 }
-
 	
-	
-	function displayMessage(message) {
+	/* function displayMessage(message) {
 		$(".response").html("<div class='success'>"+message+"</div>");
 		setInterval(function() { $(".success").fadeOut(); }, 1000);
-	}
+	} */
 	
 	$('.left-right a#leftprev').click(function() {
 	  $('.calendaer').fullCalendar('prev');
@@ -1702,22 +1698,6 @@ function displayMessage(message) {
 	$(".response").html("<div class='success'>"+message+"</div>");
 	setInterval(function() { $(".success").fadeOut(); }, 1000);
 }
-/* $('.left-right a#leftprev').click(function() {
-	$('.calendaer').fullCalendar('prev');
-	var prevmonth = $(this).attr('data-slide');
-});
-$('.left-right a#rightnext').click(function() {
-	$('.calendaer').fullCalendar('next');
-	var month = $(this).attr('data-slide');
-	var nextmonth = $(this).attr('data-slide');
-});
-$('.carousel-pagination li').click(function() {
-	var month = $(this).attr('data-month');
-	var m = moment([moment().year(), month, 1]);
-	$('.calendaer').fullCalendar('gotoDate', m );
-}); */
-
-
 
 function eventTab(evt, eventName) {
     var i, tabcontent, tablinks;
@@ -1734,10 +1714,38 @@ function eventTab(evt, eventName) {
 }
 // Get the element with id="defaultOpen" and click on it
 
-//document.getElementById("defaultOpen").click();
+document.getElementById("defaultOpen").click();
 
 $(".modal").on("hidden.bs.modal", function(){
     $(".modal-body input").val("");
+});
+
+// When + or - buttons are clicked the font size of the h1 is increased/decreased by 2
+// The max is set to 50px for this demo, the min is set by min font in the user's style sheet
+
+function getSize() {
+  size = $(".fc-event").css("font-size");
+  size = 10;
+  $("#font-size").text(size);
+}
+
+//get inital font size
+getSize();
+
+$("#up").on("click", function() {
+
+  // parse font size, if less than 50 increase font size
+  if ((size + 2) <= 50) {
+    $(".fc-event").css("font-size", "+=2");
+    $("#font-size" ).text(size += 2);
+  }
+});
+
+$("#down").on("click", function() {
+  if ((size - 2) >= 12) {
+    $(".fc-event").css("font-size", "-=2");
+    $("#font-size").text(size -= 2);
+  }
 });
 
 </script>

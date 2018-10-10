@@ -546,8 +546,10 @@
 			z-index: 99999;
 			}
 		</style>
+		<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/colorpicker/colorpicker.css') }}" />
 		<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/fullcalendar.min.css') }}" />
 		<script type="text/javascript" src="{{ URL::asset('public/js/moment.min.js') }}"></script>
 		<script type="text/javascript" src="{{ URL::asset('public/js/fullcalendar.min.js') }}"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.js"></script>
 	</body>
 </html>
