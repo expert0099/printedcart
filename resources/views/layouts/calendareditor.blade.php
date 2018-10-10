@@ -26,7 +26,7 @@
 		<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/common-page.css') }}">
 		<!-- Bootstrap Script -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://code.jquery.com/jquery-migrate-3.0.1.js"></script>
+		<!--<script src="https://code.jquery.com/jquery-migrate-3.0.1.js"></script>-->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="{{ URL::asset('public/js/jquery-3.2.1.slim.min.js') }}"></script>
 		<script type="text/javascript" src="{{ URL::asset('public/js/popper.min.js') }}"></script>
@@ -546,15 +546,6 @@
 			z-index: 99999;
 			}
 		</style>
-		<!-- Include CSS for JQuery Frontier Calendar plugin (Required for calendar plugin) -->
-		<!--<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/frontierCalendar/jquery-frontier-cal-1.3.2.css') }}" />-->
-		<!-- Include CSS for color picker plugin (Not required for calendar plugin. Used for example.) -->
-		<!--<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/colorpicker/colorpicker.css') }}" />
-			<link href='https://fonts.googleapis.com/css?family=Merienda+One|Aldrich|Nothing+You+Could+Do|Crete+Round|Karla:400,700|Original+Surfer|Salsa|Marmelad|Averia+Sans+Libre:700|Righteous|Sancreek|Alegreya+SC:900' rel='stylesheet' type='text/css'>-->
-		<!--<script type="text/javascript" src="{{ URL::asset('public/js/colorpicker/colorpicker.js') }}"></script>
-			<script type="text/javascript" src="{{ URL::asset('public/js/jquery-qtip-1.0.0-rc3140944/jquery.qtip-1.0.js') }}"></script>
-			<script type="text/javascript" src="{{ URL::asset('public/js/lib/jshashtable-2.1.js') }}"></script>
-			<script type="text/javascript" src="{{ URL::asset('public/js/frontierCalendar/jquery-frontier-cal-1.3.2.min.js') }}"></script>-->
 		<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/fullcalendar.min.css') }}" />
 		<script type="text/javascript" src="{{ URL::asset('public/js/moment.min.js') }}"></script>
 		<script type="text/javascript" src="{{ URL::asset('public/js/fullcalendar.min.js') }}"></script>

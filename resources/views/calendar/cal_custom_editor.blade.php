@@ -133,9 +133,9 @@
 						@foreach($monthArr as $k => $val)
 
 						@if($k+1 == $month)
-						<li data-target="#transition-timer-carousel" data-month="{{$k}}" data-slide-to="{{$k+1}}" rel="{{$k+1}}" class="active">{{$val}} <span></span></li>
+						<li data-target="#transition-timer-carousel" data-month="{{$k}}" data-slide-to="{{$k+1}}" rel="{{$k+1}}" p="{{$year}}" class="active">{{$val}} <span></span></li>
 						@else
-						<li data-target="#transition-timer-carousel" data-month="{{$k}}" data-slide-to="{{$k+1}}" rel="{{$k+1}}">{{$val}} <span></span></li>
+						<li data-target="#transition-timer-carousel" data-month="{{$k}}" data-slide-to="{{$k+1}}" rel="{{$k+1}}" p="{{$year}}">{{$val}} <span></span></li>
 						@endif
 
 						@endforeach
@@ -157,20 +157,24 @@
 							</div>
 							@endforeach
 						@else
-
 							@foreach($demo_content as $key => $page)
 							<div class="item @if($key == $month) active @endif" id="item_{{$page->id}}" rel="{{$page->id}}">
 								{!! $page->page_content !!}
-								<!--<script>
+								<script>
 									$(function(){
-										setCal({{$year}},{{$key-1}},'item_{{$page->id}}');
+										setCalFullCal({{$year}},{{$key}},'item_{{$page->id}}');
 									});
-									</script>-->
+								</script>
 							</div>
 							@endforeach
-
 						@endif
 						<input type="hidden" name="project_id" id="project_id" value="{{$project_id}}"/>
+						<script>
+						$(function(){
+							var m = moment([{{$year}}, {{$month-1}}, 1]);
+							$('.calendaer').fullCalendar('gotoDate', m );
+						});
+						</script>
 					</div>
 					<!-- Controls -->
 				</div>
@@ -190,7 +194,7 @@
 		<!-- Open bootstrap modal to add calendar events -->
 		<div id="createEventModal" class="modal fade">
 			<div class="modal-dialog">
-				<div class="modal-content">
+				<div class="modal-content" style="height: 500px;">
 					<div id="modalBody" class="modal-body">
 						<button style="padding: 15px;font-size: 30px;" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
 					<!-- Adding sidebar stripe -->
@@ -211,21 +215,86 @@
 
 						<div id="Events" class="tabcontent">
 							<h4 style="position: absolute;margin-top: 2%;" id="modalTitle" class="modal-title"></h4>
-							<div class="mt-20">
-								<div class="form-group">
-									<input class="form-control" type="text" placeholder="Event Name" name="eventName" id="eventName">
+							<div class="row mt-12">
+								<div class="col-md-6">
+									<div class="form-group">
+										<input class="form-control" type="text" placeholder="Event Name" name="eventName" id="eventName">
+									</div>
+									<div class="form-group">
+										<select class="form-control" style="height: 34px;">
+											<option>Every Year</option>
+											<option>One time event</option>
+											<option>Every Year</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<select class="form-control" style="height: 34px;">
+											<option>Occasion</option>
+											<option>Anniversary</option>
+											<option>Birthday</option>
+											<option>Graduation</option>
+											<option>Wedding</option>
+											<option>Party/Celebration</option>
+											<option>Bar/Bat Mitzvah</option>
+											<option>Vacation</option>
+											<option>Other Event</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<select class="form-control" style="height: 34px;">
+											<option>Relationship</option>
+											<option>My Own</option>
+											<option>Significant other</option>
+											<option>Child</option>
+											<option>Mother</option>
+											<option>Father</option>
+											<option>Sibling</option>
+											<option>Grandparent</option>
+											<option>Aunt/Uncle</option>
+											<option>Friend</option>
+											<option>Teacher</option>
+											<option>Other</option>
+										</select>
+									</div>
 								</div>
 							</div>
 						</div>
 
 						<div id="TextStyle" class="tabcontent">
-							  <h3>Text Style</h3>
-							  <p>Anything will come here</p> 
+							  <h4 style="position: absolute;margin-top: 2%;">Event Text Style</h4>
+							  <div class="row mt-12">
+								<div class="col-md-6">
+									<div class="form-group">
+										<select class="form-control" style="height: 34px;">
+											<option>Every Year</option>
+											<option>One time event</option>
+											<option>Every Year</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<select class="form-control" style="height: 34px;">
+											<option>Occasion</option>
+											<option>Anniversary</option>
+											<option>Birthday</option>
+											<option>Graduation</option>
+											<option>Wedding</option>
+											<option>Party/Celebration</option>
+											<option>Bar/Bat Mitzvah</option>
+											<option>Vacation</option>
+											<option>Other Event</option>
+										</select>
+									</div>
+								</div>
+							</div>
 						</div>
 
 						<div id="EditPhoto" class="tabcontent">
-							  <h3>Tokyo</h3>
-							  <p>Tokyo is the capital of Japan.</p>
+							  <h3>Edit Photo</h3>
+							  <p>Anything will come here.</p>
 						</div>
 					<!-- ends -->
 
@@ -1505,7 +1574,7 @@ table{
     border: 1px solid #ccc;
     background-color: #f1f1f1;
     width: 10%;
-    height: 300px;
+    height: 445px;
 }
 /* Style the buttons inside the tab */
 .tab button {
@@ -1536,18 +1605,29 @@ table{
 .tabcontent {
     float: left;
     padding: 0px 12px;
-    width: 50%;
+    width: 82%;
     border-left: none;
     height: 300px;
 }
 
 .modal-body {padding: 0px;}
 .fz-8 {font-size: 8px;margin-left: 10px;}
-.mt-20 {margin-top: 20%;}
+.mt-12 {margin-top: 12%;}
 </style>
 <!-- end show calendar under calendar layout -->
 <script>
-$(document).ready(function () {
+function setCalFullCal(year,month,id){
+	if(month<=9){
+		if(month==0){
+			var month = '01';
+		}else{
+			var month = '0'+month;
+		}
+	}else{
+		var month = month;
+	}
+	var displayCalendar = year+'-'+month+'-01';
+	
 	var calendar = $('.calendaer').fullCalendar({
 		aspectRatio: 2.2,
 		editable: true,
@@ -1556,14 +1636,14 @@ $(document).ready(function () {
 		selectHelper: true,
 		editable: true,
 		showNonCurrentDates: false,
-		defaultDate: moment('2019-10-01'),
+		defaultDate: moment(displayCalendar),
 		select: function (start, end, allDay) {
 			//do something when space selected
 			//Show 'add event' modal
 			$('#createEventModal').modal('show');
 			
 			$('#submitButton').on('click',function(){
-				var mockEvent = {title: $('#eventName').val(), start: $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss")};
+			   var mockEvent = {title: $('#eventName').val(), start: $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss")};
 				$('.calendaer').fullCalendar('renderEvent', mockEvent);
 				$('#submitButton').unbind('click');
 				$('#createEventModal').modal('hide');
@@ -1579,6 +1659,7 @@ $(document).ready(function () {
 		},
 		// Render Event
 		eventRender: function (event, element, view) {
+			
 			$(element).tooltip({title: event.title});
 		},
 		//Activating modal for 'when an event is clicked'
@@ -1591,12 +1672,37 @@ $(document).ready(function () {
 			$('#modalLoginForm').modal('show');
 		} */
 	});
-});
+}
+
+	
+	
+	function displayMessage(message) {
+		$(".response").html("<div class='success'>"+message+"</div>");
+		setInterval(function() { $(".success").fadeOut(); }, 1000);
+	}
+	
+	$('.left-right a#leftprev').click(function() {
+	  $('.calendaer').fullCalendar('prev');
+	  var prevmonth = $(this).attr('data-slide');
+	});
+	$('.left-right a#rightnext').click(function() {
+	  $('.calendaer').fullCalendar('next');
+	  var month = $(this).attr('data-slide');
+	  var nextmonth = $(this).attr('data-slide');
+	});
+	$('.carousel-pagination li').click(function() {
+		var month = $(this).attr('data-month');
+		var year = $(this).attr('p');
+		var m = moment([year, month, 1]);
+		$('.calendaer').fullCalendar('gotoDate', m );
+
+	});
+
 function displayMessage(message) {
 	$(".response").html("<div class='success'>"+message+"</div>");
 	setInterval(function() { $(".success").fadeOut(); }, 1000);
 }
-$('.left-right a#leftprev').click(function() {
+/* $('.left-right a#leftprev').click(function() {
 	$('.calendaer').fullCalendar('prev');
 	var prevmonth = $(this).attr('data-slide');
 });
@@ -1609,9 +1715,11 @@ $('.carousel-pagination li').click(function() {
 	var month = $(this).attr('data-month');
 	var m = moment([moment().year(), month, 1]);
 	$('.calendaer').fullCalendar('gotoDate', m );
-});
+}); */
 
-function eventTab(evt, cityName) {
+
+
+function eventTab(evt, eventName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -1621,11 +1729,17 @@ function eventTab(evt, cityName) {
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    document.getElementById(cityName).style.display = "block";
+    document.getElementById(eventName).style.display = "block";
     evt.currentTarget.className += " active";
 }
 // Get the element with id="defaultOpen" and click on it
+
 //document.getElementById("defaultOpen").click();
+
+$(".modal").on("hidden.bs.modal", function(){
+    $(".modal-body input").val("");
+});
+
 </script>
 
 @endsection
