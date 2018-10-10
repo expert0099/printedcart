@@ -125,6 +125,7 @@
 		?>
 		<div class="container">
 			<div class="row">
+				<input type="hidden" name="received_events" id="received_events" value='<?php echo $events_with_limit_attr;?>'>
 				<!-- The carousel -->
 				<div id="transition-timer-carousel" class="carousel slide transition-timer-carousel {{$addClass}}" data-ride="carousel" data-interval="false">
 					<!-- Indicators -->
@@ -150,6 +151,9 @@
 					</div>
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner vertical">
+					<?php 
+					//echo $events_with_limit_attr;
+					?>
 						@if($savedProj && Session::has('CurrentProjectData'))
 							@foreach($savedProj as $key => $page)
 							<div class="item @if($key == $month) active @endif" id="item_{{$page->id}}">
@@ -161,9 +165,9 @@
 							<div class="item @if($key == $month) active @endif" id="item_{{$page->id}}" rel="{{$page->id}}">
 								{!! $page->page_content !!}
 								<script>
-									$(function(){
-										setCalFullCal({{$year}},{{$key}},'item_{{$page->id}}');
-									});
+								$(function(){
+									setCalFullCal({{$year}},{{$key}},'item_{{$page->id}}');
+								});
 								</script>
 							</div>
 							@endforeach
@@ -1616,7 +1620,10 @@ table{
 </style>
 <!-- end show calendar under calendar layout -->
 <script>
+
 function setCalFullCal(year,month,id){
+	//var received_events = $("#received_events").val();
+	//alert(received_events);
 	if(month<=9){
 		if(month==0){
 			var month = '01';
@@ -1643,7 +1650,7 @@ function setCalFullCal(year,month,id){
 			$('#createEventModal').modal('show');
 			
 			$('#submitButton').on('click',function(){
-			   var mockEvent = {title: $('#eventName').val(), start: $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss")};
+				var mockEvent = {title: $('#eventName').val(), start: $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss")};
 				$('.calendaer').fullCalendar('renderEvent', mockEvent);
 				$('#submitButton').unbind('click');
 				$('#createEventModal').modal('hide');
@@ -1657,17 +1664,17 @@ function setCalFullCal(year,month,id){
 		eventResize: function (event, delta, revertFunc) {
 			//do something when event is resized
 		},
+		events: <?php echo $events_with_limit_attr;?>,
 		// Render Event
 		eventRender: function (event, element, view) {
-			
 			$(element).tooltip({title: event.title});
 		},
 		//Activating modal for 'when an event is clicked'
-		dayClick: function (event) {
+		dayClick: function (event, cell){
 			$('#modalTitle').text(event.format());
 			$('#modalBody').html(event.description);
 			$('#createEventModal').modal();
-		}
+		},
 		/* dayClick: function(date, jsEvent, view) {
 			$('#modalLoginForm').modal('show');
 		} */
