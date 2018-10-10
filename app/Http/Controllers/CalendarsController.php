@@ -159,6 +159,14 @@ class CalendarsController extends Controller
 	public function cal_editor($calendar_id = null, $calendar_size_id = null, $calendar_category_id=null,$month=null,$year=null){
 		if(Auth::check()){
 			$user_id = Auth::user()->id;
+			/** events **/
+			$events_with_limit_attr = json_encode(DB::table('calendar_events')
+				->select('calendar_events.event_title as title','calendar_events.event_date as start','calendar_events.font_color as textColor')
+				->whereRaw("calendar_id = '".$calendar_id."' AND calendar_size_id = '".$calendar_size_id."' AND calendar_category = '".$calendar_category_id."' AND event_month = '".$month."' AND event_year = '".$year."' AND user_id = '".$user_id."'")->get());
+			$events_with_all_attr = DB::table('calendar_events')
+				->whereRaw("calendar_id = '".$calendar_id."' AND calendar_size_id = '".$calendar_size_id."' AND calendar_category = '".$calendar_category_id."' AND event_month = '".$month."' AND event_year = '".$year."' AND user_id = '".$user_id."'")->get();
+			
+			/** end events **/
 			/** check project data **/
 			$ep = DB::table('projects')->whereRaw("user_id = '".$user_id."' AND size_id = '".$calendar_size_id."' AND calendar_style_id = '".$calendar_id."' AND calendar_category_id = '".$calendar_category_id."' AND flag = 'Calendar'")->orderBy('id','DESC')->first();
 			
@@ -250,7 +258,7 @@ class CalendarsController extends Controller
 				Session::forget('flag_albumphoto_url');
 			}
 			Session::put('flag_calendar_url',str_replace('/printedcart/','/',$_SERVER['REDIRECT_URL']));
-			return view('calendar.cal_custom_editor',compact('albums','album_list','photos','layout','background_image','demo_content','calendar_size','item_count','project_id','calendar_id','calendar_size_id','price','month','year','calendar_category_id','savedProj'));
+			return view('calendar.cal_custom_editor',compact('albums','album_list','photos','layout','background_image','demo_content','calendar_size','item_count','project_id','calendar_id','calendar_size_id','price','month','year','calendar_category_id','savedProj','events_with_limit_attr','events_with_all_attr'));
 		}else{
 			return redirect('user/login');
 		}
