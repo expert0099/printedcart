@@ -25,8 +25,44 @@
 		<div><b>Order Amount :- </b>{{$order->currency_code.$order->amt}}</div>
 		<div><b>Order Shipping Amount :- </b>{{$order->currency_code.$order->shipping_amt}}</div>
 		<div><b>Order Total :- </b>{{$order->currency_code.($order->amt+$order->shipping_amt)}}</div>
-		<!--<div><b>Order Quantity :-</b> {{$order->qty}}</div>-->
 		<div><b>Order Date :-</b> {{$order->created_at}}</div>
+		<hr/>
+		<h3>Print of set</h3>
+		<?php 
+		/* echo '<pre>';
+		print_r($savedProj); */
+		?>
+		<table style="width:100%;border:1px solid #ccc;">
+			<tr style="line-height: 30px; background-color: #ccc; font-weight: bold;">
+				<td></td>
+				<td>print of set</td>
+				<td>qty.</td>
+				<td>price</td>
+				<td>type</td>
+				<td>border color</td>
+				<td>border</td>
+				<td>print message</td>
+			</tr>
+			@foreach($savedProj as $k => $pset)
+			<?php 
+			if($k%2 == 0){
+				$class = 'even';
+			}else{
+				$class = 'odd';
+			}
+			?>
+			<tr class="{{$class}}">
+				<td><img src="{{URL::asset('public/'.$pset->image_path)}}" style="width:100px;"></td>
+				<td>{{$pset->size}}</td>
+				<td>{{$pset->qty}}</td>
+				<td>{{$pset->price}}</td>
+				<td>{{$pset->size_type}}</td>
+				<td>{{$pset->border_color}}</td>
+				<td>{{$pset->border}}</td>
+				<td>{{$pset->print_message}}</td>
+			</tr>
+			@endforeach
+		</table>
 		<hr/>
 		<h3>Customer Detail</h3>
 		<div><b>Name :-</b>{{$userinfo->first_name}} {{$userinfo->last_name}}</div>
@@ -34,5 +70,9 @@
 		<div><b>Address :-</b>{{$userinfo->street}}, {{$userinfo->city}}<br>{{$userinfo->state}}, {{$userinfo->zipcode}}, {{$userinfo->country}}</div>
 	</div>
 </div>
-
+<style>
+.odd{
+	background-color:#f9f9f9;
+}
+</style>
 @endsection

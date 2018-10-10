@@ -131,9 +131,13 @@ class SavedProjectController extends Controller
 	
 	public function custom_order_detail($order_id=null){
 		$order = DB::table('orders')->where('id',$order_id)->first();
+		
+		$custom_cart_id = explode(',',$order->custom_cart_id);
+		$savedProj = DB::table('custom_carts')->whereIn('id',$custom_cart_id)->get();
+		
 		$user = DB::table('users')->where('id',$order->user_id)->first();
 		$userinfo = DB::table('user_address_infos')->whereRaw("user_id = '". $order->user_id ."' AND id = '". $order->address_id ."'")->first();
-		return view('la.savedproject.custom_order_detail', compact('order','user','userinfo'));
+		return view('la.savedproject.custom_order_detail', compact('order','user','userinfo','savedProj'));
 	}
 
 	/**
