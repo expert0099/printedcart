@@ -174,10 +174,10 @@
 						@endif
 						<input type="hidden" name="project_id" id="project_id" value="{{$project_id}}"/>
 						<script>
-						$(function(){
+						/* $(function(){
 							var m = moment([{{$year}}, {{$month-1}}, 1]);
 							$('.calendaer').fullCalendar('gotoDate', m );
-						});
+						}); */
 						</script>
 					</div>
 					<!-- Controls -->
@@ -1629,7 +1629,7 @@ function setCalFullCal(year,month,id){
 	}
 	var displayCalendar = year+'-'+month+'-01';
 	
-	var calendar = $('.calendaer').fullCalendar({
+	var calendar = $('#'+id+' .calendaer').fullCalendar({
 		aspectRatio: 2.2,
 		editable: true,
 		selectable: true,
@@ -1715,14 +1715,24 @@ function setCalFullCal(year,month,id){
 		setInterval(function() { $(".success").fadeOut(); }, 1000);
 	} */
 	
-	$('.left-right a#leftprev').click(function() {
-	  $('.calendaer').fullCalendar('prev');
-	  var prevmonth = $(this).attr('data-slide');
+	$('.left-right a#leftprev').click(function(){
+		var month = $('.carousel-pagination li.active').attr('data-month');
+		$('.carousel-pagination li.active').removeClass('active').previous('.carousel-pagination li').addClass('active');
+		var year = $(this).attr('p');
+		var m = moment([year, month-1, 1]);
+		$('.calendaer').fullCalendar('gotoDate', m );
+		//$('.calendaer').fullCalendar('prev');
+		//var prevmonth = $(this).attr('data-slide');
 	});
-	$('.left-right a#rightnext').click(function() {
-	  $('.calendaer').fullCalendar('next');
-	  var month = $(this).attr('data-slide');
-	  var nextmonth = $(this).attr('data-slide');
+	$('.left-right a#rightnext').click(function(){
+		var month = $('.carousel-pagination li.active').attr('data-month');
+		$('.carousel-pagination li.active').removeClass('active').next('.carousel-pagination li').addClass('active');
+		var year = $(this).attr('p');
+		var m = moment([year, month+1, 1]);
+		$('.calendaer').fullCalendar('gotoDate', m );
+		//$('.calendaer').fullCalendar('next');
+		//var month = $(this).attr('data-slide');
+		//var nextmonth = $(this).attr('data-slide');
 	});
 	$('.carousel-pagination li').click(function() {
 		var month = $(this).attr('data-month');
