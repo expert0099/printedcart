@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,7 +10,6 @@
 |
 */
 Route::auth();
-
 /* Route::group(['domain' => '{account_alias}.'.env('APP_URL_NAME')], function () {
     Route::group([ 'prefix' => 'app', 'middleware' => 'auth', 'middleware' => 'auth.manager' ], function() {
         Route::get('dashboard', 'DashController@index');
@@ -24,10 +22,8 @@ Route::group(['domain' => '{subdomain}.printedcart.com'], function(){
 	Route::post('/upload_pictures', 'SubdomainedController@upload_pictures');
 	Route::post('/upload_videos', 'SubdomainedController@upload_videos');
 });
-
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
-
 Route::get('/user/login', 'Auth\AuthController@showLoginForm');
 Route::get('/user/register', 'Auth\AuthController@showRegistrationForm');
 Route::get('/user/my_photos', 'UserController@my_photos');
@@ -42,47 +38,34 @@ Route::get('/user/logout_verify','HomeController@logout_verify');
 Route::get('/user/section', 'UserController@section');
 Route::get('/user/section/pdfview/{prj_id}', 'UserController@pdfview');
 Route::get('/user/section/pdfview/{prj_id}/{order_id}', 'UserController@download_pdf');
-
 Route::post('/user/add_album', 'UserController@add_album');
 Route::post('/user/add_photo', 'UserController@add_photo');
 Route::post('/user/edit_photo', 'UserController@edit_photo');
 Route::get('/user/my_photos/album/{album}', 'UserController@get_album_photos');
 Route::post('/user/my_photos/getExistAlbum', 'UserController@getExistAlbum');
-
 Route::post('/user/save_info', 'UserController@save_info');
 Route::post('/user/account_info', 'UserController@account_info');
-
 Route::get('/user/del_album/{id}', 'UserController@del_album');
 Route::get('/user/del_photo/{id}', 'UserController@del_photo');
-
 Route::get('/user/feedback', 'UserController@feedback');
 Route::post('/user/feedback', 'UserController@feedback_post');
-
 Route::get('/user/account_activate/{email}', 'UserController@account_verify');
-
-
 /* =============== paypal =============== */
 Route::post('/paywithpaypal', 'PaypalController@paywithpaypal');
 Route::get('/paypal/return', 'PaypalController@paypalReturn');
 Route::get('/paypal/cancel', 'PaypalController@paypalCancel');
-
 Route::post('/paywithautherized', 'AutherizedController@paywithautherized');
-
 Route::get('/payments/success', 'PaypalController@success');
 Route::post('/payment_process', 'PaymentController@payment_process');
-
 /* ================ newsletter subscriber ================ */
 Route::post('/newsletter', 'HomeController@newsletter');
 /* =============== request quote =============== */
 Route::post('/request_quote', 'HomeController@request_quote');
-
 /* ========= sitemap ========== */
 Route::get('/sitemap', 'SitemapController@sitemap');
-
 /* ============ search ============= */
 Route::get('typeahead-response',array('as'=>'typeahead.response','uses'=>'SearchController@typeahead'));
 Route::post('/search', 'SearchController@search_submit');
-
 /* =============== payments ================ */
 Route::group(['prefix' => 'payments', 'as' => 'payments.'], function(){
 	Route::post('/shipping_address', 'PaymentController@shipping_address');
@@ -95,15 +78,12 @@ Route::group(['prefix' => 'payments', 'as' => 'payments.'], function(){
 	Route::get('verify_mail_confirm', 'PaymentController@verify_mail_confirm');
 	Route::get('account_activate/{email}', 'PaymentController@account_verify');
 });
-
 /* =============upload image============ */
 Route::post('/uploadFile', 'UserController@uploadFile');
-
 /* ================ Cart ===============*/
 Route::group(['prefix' => 'cart', 'as' => 'cart.'], function(){
 	Route::post('/add_to_cart', 'CartController@add_to_cart');
 });
-
 /* ================= Share Site ====================*/
 Route::group(['prefix' => 'sharesite', 'as' => 'sharesite.'], function(){
 	Route::get('/', 'SharesiteController@sharesite');
@@ -116,7 +96,6 @@ Route::group(['prefix' => 'sharesite', 'as' => 'sharesite.'], function(){
 	Route::post('/choose_design', 'SharesiteController@choose_design_post');
 	
 });
-
 /* ================== Calendars ================== */
 Route::group(['prefix' => 'calendars', 'as' => 'calendars.'], function(){
 	Route::get('/', 'CalendarsController@index');
@@ -152,9 +131,10 @@ Route::group(['prefix' => 'calendars', 'as' => 'calendars.'], function(){
 	Route::get('/htmltopdfview/{project_id}/{pdf}',array('as'=>'htmltopdfview','uses'=>'CalendarsController@htmltopdfview'));
 	
 	Route::post('/crop_image', 'CalendarsController@crop_image');
+	Route::post('/cal_save', 'CalendarsController@cal_save');
+
 	
 });
-
 /* ================== Photobooks ================== */
 Route::group(['prefix' => 'photobooks', 'as' => 'photobooks.'], function(){
 	Route::get('/', 'PhotobookController@index');
@@ -197,12 +177,10 @@ Route::group(['prefix' => 'photobooks', 'as' => 'photobooks.'], function(){
 	Route::get('/shipping_price', 'PhotobookController@shipping_price');
 	Route::get('/cover_pricing_detail','PhotobookController@cover_pricing_detail');
 });
-
 /* ================== Posters ================== */
 Route::group(['prefix' => 'posters', 'as' => 'posters.'], function(){
 	Route::get('/', 'PosterController@index');
 });
-
 /* ================== Prints ================== */
 Route::group(['prefix' => 'prints', 'as' => 'prints.'], function(){
 	Route::get('/', 'PrintController@index');
@@ -223,29 +201,23 @@ Route::group(['prefix' => 'prints', 'as' => 'prints.'], function(){
 	
 	Route::post('/add_to_cart', 'PrintController@add_to_cart');
 });
-
 /* ================== Custom Cart ==================== */
 Route::get('/custom_cart', 'CustomCartController@show_cart');
 Route::post('/custom_cart_remove', 'CustomCartController@custom_cart_remove');
 Route::post('/custom_payment_process', 'CustomCartController@custom_payment_process');
-
 /* ================== Pages ================== */
 Route::group(['prefix' => 'pages', 'as' => 'pages.'], function(){
 	Route::get('/{page_slug}', 'PagesController@pages');
 	Route::post('/contact', 'PagesController@contact');
 });
-
 /* ============== social routes ============== */
 Route::get('/user/instagram', 'UserController@instagram_authentication');
 Route::get('/user/instagram_photo', 'UserController@instagram_photo');
 Route::post('/user/add_insta_photo', 'UserController@add_insta_photo');
-
 Route::get('/user/glogin',array('uses'=>'UserController@googleLogin'));
 Route::post('/user/add_google_photo', 'UserController@add_google_photo');
 //Route::get('/user/google-user',array('uses'=>'UserController@listGoogleUserPhoto'));
-
 Route::get('user/login/callback',array('as'=>'user.fblogin','uses'=>'UserController@fbSignUp'));
 Route::get('user/facebook/login',array('as'=>'user.facebook.login','uses'=>'UserController@facebookLogin'));
-
 /* ================== Admin Routes ================== */
 require __DIR__.'/admin_routes.php';
