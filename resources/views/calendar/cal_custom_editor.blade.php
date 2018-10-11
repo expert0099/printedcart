@@ -1650,37 +1650,7 @@ function setCalFullCal(year,month,id){
 				$('#submitButton').unbind('click');
 				$('#createEventModal').modal('hide');
 				// starts
-				/*var base_path = "<?php echo config('app.url');?>";
-				var month = "<?php echo $month;?>";
-				var year = "<?php echo $year;?>";
-				//var formData = $('#calrecords').serialize() + "&par1=1&par2=2&par3=232";
-				var myform = document.getElementById("calrecords");
-				var fd = new FormData(myform);
 				
-				$.ajaxSetup({ 
-					headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')} 
-				});
-				$.ajax({
-					url : base_path + 'calendars/cal_save',            
-					type : 'POST',
-					data : fd,
-					beforeSend: function(){
-						//toastr.success("Please Wait...! Saving Data");
-						swal("Please Wait...!", "Loading Data...!", "warning");
-					},
-					success : function(data){
-						if(data=='error'){
-							//toastr.error("Sorry! Project not create! Please try again...!");
-							swal("Oops!", "Project not create! Please try again...!", "error");
-						}else{
-							//$('#project_id').val(data);
-							$('.ui-dialog-titlebar-close').trigger('click');
-							//toastr.success("Thanks! Project Created Successfully! Now save your project!");
-							swal("Thanks!", "Project created successfully! Now save your project!", "success");
-						}
-					}
-				});
-				return false;*/
 				
 			});
 			// ends
@@ -1693,7 +1663,7 @@ function setCalFullCal(year,month,id){
 		eventResize: function (event, delta, revertFunc) {
 			//do something when event is resized
 		},
-		events: <?php echo $events_with_limit_attr;?>,
+		
 		// Render Event
 		eventRender: function (event, element, view) {
 			$(element).tooltip({title: event.title});

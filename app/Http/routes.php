@@ -131,7 +131,6 @@ Route::group(['prefix' => 'calendars', 'as' => 'calendars.'], function(){
 	Route::get('/htmltopdfview/{project_id}/{pdf}',array('as'=>'htmltopdfview','uses'=>'CalendarsController@htmltopdfview'));
 	
 	Route::post('/crop_image', 'CalendarsController@crop_image');
-	Route::post('/cal_save', 'CalendarsController@cal_save');
 
 	
 });
