@@ -197,6 +197,7 @@
 		<!-- Open bootstrap modal to add calendar events -->
 		<div id="createEventModal" class="modal fade">
 			<div class="modal-dialog">
+			
 				<div class="modal-content">
 					<div id="modalBody" class="modal-body">
 						<button style="padding: 15px;font-size: 30px;" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
@@ -210,7 +211,7 @@
 								<img style="margin-left: 10px;" src="{{ URL::asset('public/images/RomanText.png') }}" /><br />
 								<p class="fz-8">Text Style</p>
 							</button>
-							<button class="tablinks" onclick="eventTab(event, 'EditPhoto')" disabled>
+							<button class="tablinks" onclick="eventTab(event, 'EditPhoto')">
 								<img style="margin-left: 10px;" src="{{ URL::asset('public/images/gallery.png') }}" /><br />
 								<p class="fz-8">Edit Photo</p>
 							</button>
@@ -221,10 +222,10 @@
 							<div class="row mt-12">
 								<div class="col-md-6">
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Event Name" name="eventName" id="eventName">
+										<input class="form-control" type="text" placeholder="Event Name" name="event_title" id="eventName">
 									</div>
 									<div class="form-group">
-										<select class="form-control" style="height: 34px;">
+										<select class="form-control" name="event_type" style="height: 34px;">
 											<option>Every Year</option>
 											<option>One time event</option>
 											<option>Every Year</option>
@@ -233,7 +234,7 @@
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<select class="form-control" style="height: 34px;">
+										<select class="form-control" name="occasion" style="height: 34px;">
 											<option>Occasion</option>
 											<option>Anniversary</option>
 											<option>Birthday</option>
@@ -246,7 +247,7 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<select class="form-control" style="height: 34px;">
+										<select class="form-control" name="relationship" style="height: 34px;">
 											<option>Relationship</option>
 											<option>My Own</option>
 											<option>Significant other</option>
@@ -270,13 +271,15 @@
 							  <div class="row mt-12">
 								<div class="col-md-6">
 									<div class="form-group">
-										<input class="form-control colpick" type="color" value="" id="colorTexto" name="colorTexto">
+										<input class="form-control colpick" type="color" value="" id="colorTexto" name="font_color">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
 										<button id="up">+</button>
-											<p id="font-size"></p>
+											<p id="font-size">
+											<input class="form-control colpick" type="hidden" id="colorTexto" name="font_size">
+											</p>
 										 <button id="down">-</button>
 									</div>
 								</div>
@@ -284,17 +287,22 @@
 						</div>
 
 						<div id="EditPhoto" class="tabcontent">
-							  <h3>Edit Photo</h3>
-							  <p>Anything will come here.</p>
+							 <h3>Edit Photo</h3>
+							<p>
+								<input type="file" name="event_image" id="event_image">
+								<input type="hidden" name="fileInput" id="fileInput">
+							</p>
 						</div>
 					<!-- ends -->
 
 					</div>
 					<div class="modal-footer">
 						<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-						<button type="submit" class="btn btn-primary" id="submitButton">Save</button>
+						<button type="button" class="btn btn-primary" id="submitButton">Save</button>
 					</div>
+					
 				</div>
+				
 			</div>
 		</div>
 		<!-- modal ends -->
@@ -1607,6 +1615,47 @@ table{
 </style>
 <!-- end show calendar under calendar layout -->
 <script>
+$(function(){
+	$("#event_image").on('change',function(){
+		var fileReader = new FileReader();
+		fileReader.onload = function () {
+			var data = fileReader.result;  // data <-- in this var you have the file data in Base64 format
+			$("#fileInput").val(data);
+		};
+		fileReader.readAsDataURL($('#event_image').prop('files')[0]);
+	});
+	/* $('#submitButton').click(function){
+		var month = "<?php echo $month;?>";
+		var year = "<?php echo $year;?>";
+		var calendar_id = "<?php echo $calendar_id;?>";
+		var calendar_size_id = "<?php echo $calendar_size_id;?>";
+		var calendar_category = "<?php echo $calendar_category_id;?>";
+		var form = $("#event_form");
+		var url = form.attr('action');
+		var method = form.attr('method');
+		var form_data = form.serialize();
+		$.ajaxSetup({ 
+			headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')} 
+		});
+		$.ajax({
+			url : url,            
+			type : method,
+			data : {form_data:form_data,month:month,year:year,calendar_id:calendar_id,calendar_size_id:calendar_size_id,calendar_category:calendar_category},
+			beforeSend: function(){
+				swal("Please Wait...!", "Loading Data...!", "warning");
+			},
+			success : function(data){
+				if(data=='error'){
+					swal("Oops!", "Project not create! Please try again...!", "error");
+				}else{
+					$('.ui-dialog-titlebar-close').trigger('click');
+					swal("Thanks!", "Project created successfully! Now save your project!", "success");
+				}
+			}
+		});
+		return false;
+	}); */
+});
 function setCalFullCal(year,month,id){
 	if(month<=9){
 		if(month==0){
@@ -1629,23 +1678,49 @@ function setCalFullCal(year,month,id){
 		showNonCurrentDates: false,
 		defaultDate: moment(displayCalendar),
 		select: function (start, end, allDay) {
-			//do something when space selected
-			//Show 'add event' modal
 			$('#createEventModal').modal('show');
-			
 			$('#submitButton').on('click',function(){
-			   var mockEvent = {title: $('#eventName').val(), start: $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss"), textColor: $('#colorTexto').val(), textSize: $('#font-size').val()};
+				var mockEvent = {title: $('#eventName').val(), start: $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss"), textColor: $('#colorTexto').val(), textSize: $('#font-size').val()};
 				$('.calendaer').fullCalendar('renderEvent', mockEvent);
 				$('#submitButton').unbind('click');
 				$('#createEventModal').modal('hide');
-
-				//$('.fc-event').attr('style', 'font-size: 1.85em !important');
-				$('.fc-event').each(function(i, e){
-					$('<div id="font-size"></div>', {
-						"class": "arr",
-						"id": "id_" + i
-					}).appendTo(this);
+				
+				var month = "<?php echo $month;?>";
+				var year = "<?php echo $year;?>";
+				var calendar_id = "<?php echo $calendar_id;?>";
+				var calendar_size_id = "<?php echo $calendar_size_id;?>";
+				var calendar_category = "<?php echo $calendar_category_id;?>";
+				var event_title = $('input[name=event_title]').val();
+				var occasion = $('select[name=occasion]').val();
+				var event_type = $('select[name=event_type]').val();
+				var relationship = $('select[name=relationship]').val();
+				var font_color = $('input[name=font_color]').val();
+				var font_size = $('input[name=font_size]').val();
+				var event_image = $("#fileInput").val();
+				//var event_image = document.getElementById("event_image").files[0]; 
+				
+				var event_date = start.format();
+				var base_url = "<?php echo config('app.url');?>";
+				$.ajaxSetup({ 
+					headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')} 
 				});
+				$.ajax({
+					url : base_url+'calendars/cal_save',            
+					type : 'post',
+					data : {month:month,year:year,calendar_id:calendar_id,calendar_size_id:calendar_size_id,calendar_category:calendar_category,event_title:event_title,occasion:occasion,event_type:event_type,relationship:relationship,font_color:font_color,font_size:font_size,event_image:event_image,event_date:event_date},
+					beforeSend: function(){
+						swal("Please Wait...!", "Loading Data...!", "warning");
+					},
+					success : function(data){
+						if(data=='error'){
+							swal("Oops!", "Project not create! Please try again...!", "error");
+						}else{
+							$('.ui-dialog-titlebar-close').trigger('click');
+							swal("Thanks!", "Event saved successfully!", "success");
+						}
+					}
+				});
+				
 			});
 		},
 		//When u drop an event in the calendar do the following:
@@ -1656,7 +1731,7 @@ function setCalFullCal(year,month,id){
 		eventResize: function (event, delta, revertFunc) {
 			//do something when event is resized
 		},
-		
+		events: <?php echo $events_with_limit_attr;?>,
 		// Render Event
 		eventRender: function (event, element, view) {
 			$(element).tooltip({title: event.title});

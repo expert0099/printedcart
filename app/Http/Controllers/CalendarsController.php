@@ -160,11 +160,12 @@ class CalendarsController extends Controller
 		if(Auth::check()){
 			$user_id = Auth::user()->id;
 			/** events **/
-			$events_with_limit_attr = DB::table('calendar_events')
+			$events_with_limit_attr2 = DB::table('calendar_events')
 				->select('calendar_events.event_title as title','calendar_events.event_date as start','calendar_events.font_color as textColor')
 				//->whereRaw("calendar_id = '".$calendar_id."' AND calendar_size_id = '".$calendar_size_id."' AND calendar_category = '".$calendar_category_id."' AND event_month = '".$month."' AND event_year = '".$year."' AND user_id = '".$user_id."'")
 				->get();
-			$events_with_limit_attr = json_encode($events_with_limit_attr);
+			$events_with_limit_attr = json_encode($events_with_limit_attr2);
+			
 			$events_with_all_attr = DB::table('calendar_events')
 				->whereRaw("calendar_id = '".$calendar_id."' AND calendar_size_id = '".$calendar_size_id."' AND calendar_category = '".$calendar_category_id."' AND event_month = '".$month."' AND event_year = '".$year."' AND user_id = '".$user_id."'")->get();
 			
@@ -967,4 +968,45 @@ class CalendarsController extends Controller
 			}
 		}
 	}
+	
+	/** event save **/
+	public function cal_save(Request $request){
+		$post_data = $request->all();
+		$user_id = Auth::user()->id;
+		$destinationPath = 'users_upload/'.$user_id.'/events/';
+		
+		$img = $post_data['event_image'];
+		$img = str_replace('data:image/png;base64,', '', $img);
+		$img = str_replace('data:image/jpg;base64,', '', $img);
+		$img = str_replace('data:image/jpeg;base64,', '', $img);
+		$img = str_replace(' ', '+', $img);
+		$data = base64_decode($img);
+		$file = $destinationPath.rand(). time() . ".png";
+		$success = file_put_contents('public/'.$file, $data);
+		
+		
+		$insertArr = array(
+			'event_title' => $post_data['event_title'],
+			'occasion' => $post_data['occasion'],
+			'event_type' => $post_data['event_type'],
+			'relationship' => $post_data['relationship'],
+			'font_color' => $post_data['font_color'],
+			'font_size' => 12,//$post_data['font_size'],
+			'background_image' => $file,
+			'event_date' => $post_data['event_date'],
+			'calendar_id' => $post_data['calendar_id'],
+			'calendar_size_id' => $post_data['calendar_size_id'],
+			'calendar_category' => $post_data['calendar_category'],
+			'event_month' => $post_data['month'],
+			'event_year' => $post_data['year'],
+			'user_id' => $user_id
+		);
+		$insert = DB::table('calendar_events')->insert($insertArr);
+		if($insert){
+			return 'success';
+		}else{
+			return 'error';
+		}
+	}
+	/** end event save **/
 }

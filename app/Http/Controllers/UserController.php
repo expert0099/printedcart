@@ -799,6 +799,8 @@ class UserController extends Controller
 	
 	public function add_insta_photo(Request $request){
 		$post_data = $request->all();
+		echo '<pre>';
+		print_r($post_data);exit;
 		foreach($post_data['insta_photo'] as $k => $image){
 			$data = file_get_contents($k);
 			$fArr = explode('/',$k);
