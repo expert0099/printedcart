@@ -183,6 +183,7 @@ class CalendarsController extends Controller
 			$albums = DB::table("albums")->where("user_id",$user_id)->where('deleted_at','=','0000-00-00 00:00:00')->get();
 			$album_list = DB::table("albums")->where('user_id',$user_id)->where('deleted_at','=','0000-00-00 00:00:00')->pluck('album_name','id');
 			/*album photos*/
+			
 			$photos = array();
 			foreach($albums as $album){
 				$albums_ps = DB::table("user_uploads")->where("album_id",$album->id)->where('deleted_at','=','0000-00-00 00:00:00')->get();
@@ -257,12 +258,33 @@ class CalendarsController extends Controller
 			if(null!==Session::get('flag_albumphoto_url')){
 				Session::forget('flag_albumphoto_url');
 			}
+			
 			Session::put('flag_calendar_url',str_replace('/printedcart/','/',$_SERVER['REDIRECT_URL']));
 			return view('calendar.cal_custom_editor',compact('albums','album_list','photos','layout','background_image','demo_content','calendar_size','item_count','project_id','calendar_id','calendar_size_id','price','month','year','calendar_category_id','savedProj','events_with_limit_attr','events_with_all_attr'));
 		}else{
 			return redirect('user/login');
 		}
 	}
+	
+	/******* wall calendar save events *******/
+	public function cal_save(Request $request){
+		$user_id = Auth::user()->id;
+		$data = array();
+
+		/* $insArr = array(
+			'user_id' => $user_id,
+			'event_title' => $data['eventName']
+		); */
+		$calendarEvent = DB::table('calendar_events')->insert($insArr);
+		//console.log($calendarEvent);exit;
+		if($calendarEvent){
+			return 'success';
+		}
+		else{
+			return 'error';
+		}
+	}
+	
 	/******* end wall calendar activities *******/
 	
 	public function save_project(Request $request){

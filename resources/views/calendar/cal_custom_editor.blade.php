@@ -199,98 +199,102 @@
 		<div id="createEventModal" class="modal fade">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<div id="modalBody" class="modal-body">
-						<button style="padding: 15px;font-size: 30px;" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
-					<!-- Adding sidebar stripe -->
-						<div class="tab">
-							<button class="tablinks" onclick="eventTab(event, 'Events')" id="defaultOpen">
-								<img style="margin-left: 10px;" src="{{ URL::asset('public/images/Calendar-512.png') }}" /><br />
-								<p class="fz-8">Events</p>
-							</button>
-							<button class="tablinks" onclick="eventTab(event, 'TextStyle')">
-								<img style="margin-left: 10px;" src="{{ URL::asset('public/images/RomanText.png') }}" /><br />
-								<p class="fz-8">Text Style</p>
-							</button>
-							<button class="tablinks" onclick="eventTab(event, 'EditPhoto')" disabled>
-								<img style="margin-left: 10px;" src="{{ URL::asset('public/images/gallery.png') }}" /><br />
-								<p class="fz-8">Edit Photo</p>
-							</button>
-						</div>
+					<form name="calrecords" id="calrecords" method="post" enctype="multipart/form-data">
+						<div id="modalBody" class="modal-body">
+							<button style="padding: 15px;font-size: 30px;" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
+						<!-- Adding sidebar stripe -->
+							<div class="tab">
+								<button class="tablinks" onclick="eventTab(event, 'Events')" id="defaultOpen">
+									<img style="margin-left: 10px;" src="{{ URL::asset('public/images/Calendar-512.png') }}" /><br />
+									<p class="fz-8">Events</p>
+								</button>
+								<button class="tablinks" onclick="eventTab(event, 'TextStyle')">
+									<img style="margin-left: 10px;" src="{{ URL::asset('public/images/RomanText.png') }}" /><br />
+									<p class="fz-8">Text Style</p>
+								</button>
+								<button class="tablinks" onclick="eventTab(event, 'EditPhoto')" disabled>
+									<img style="margin-left: 10px;" src="{{ URL::asset('public/images/gallery.png') }}" /><br />
+									<p class="fz-8">Edit Photo</p>
+								</button>
+							</div>
 
-						<div id="Events" class="tabcontent">
-							<h4 style="position: absolute;margin-top: 2%;" id="modalTitle" class="modal-title"></h4>
-							<div class="row mt-12">
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Event Name" name="eventName" id="eventName">
+							<div id="Events" class="tabcontent">
+								<h4 style="position: absolute;margin-top: 2%;" id="modalTitle" class="modal-title"></h4>
+								<div class="row mt-12">
+									<div class="col-md-6">
+										<div class="form-group">
+											<input class="form-control" type="text" placeholder="Event Name" name="event_title" id="eventName">
+											<input type="hidden" name="event_date" />
+										</div>
+										<div class="form-group">
+											<select class="form-control" name="event_type" style="height: 34px;">
+												<option>Every Year</option>
+												<option>One time event</option>
+												<option>Every Year</option>
+											</select>
+										</div>
 									</div>
-									<div class="form-group">
-										<select class="form-control" style="height: 34px;">
-											<option>Every Year</option>
-											<option>One time event</option>
-											<option>Every Year</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<select class="form-control" style="height: 34px;">
-											<option>Occasion</option>
-											<option>Anniversary</option>
-											<option>Birthday</option>
-											<option>Graduation</option>
-											<option>Wedding</option>
-											<option>Party/Celebration</option>
-											<option>Bar/Bat Mitzvah</option>
-											<option>Vacation</option>
-											<option>Other Event</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<select class="form-control" style="height: 34px;">
-											<option>Relationship</option>
-											<option>My Own</option>
-											<option>Significant other</option>
-											<option>Child</option>
-											<option>Mother</option>
-											<option>Father</option>
-											<option>Sibling</option>
-											<option>Grandparent</option>
-											<option>Aunt/Uncle</option>
-											<option>Friend</option>
-											<option>Teacher</option>
-											<option>Other</option>
-										</select>
+									<div class="col-md-6">
+										<div class="form-group">
+											<select class="form-control" name="occasion" style="height: 34px;">
+												<option>Occasion</option>
+												<option>Anniversary</option>
+												<option>Birthday</option>
+												<option>Graduation</option>
+												<option>Wedding</option>
+												<option>Party/Celebration</option>
+												<option>Bar/Bat Mitzvah</option>
+												<option>Vacation</option>
+												<option>Other Event</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<select class="form-control" name="relationship" style="height: 34px;">
+												<option>Relationship</option>
+												<option>My Own</option>
+												<option>Significant other</option>
+												<option>Child</option>
+												<option>Mother</option>
+												<option>Father</option>
+												<option>Sibling</option>
+												<option>Grandparent</option>
+												<option>Aunt/Uncle</option>
+												<option>Friend</option>
+												<option>Teacher</option>
+												<option>Other</option>
+											</select>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
-						<div id="TextStyle" class="tabcontent">
-							  <h4 style="position: absolute;margin-top: 2%;">Event Text Style</h4>
-							  <div class="row mt-12">
-								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control colpick" type="color" value="" id="colorTexto" name="colorTexto">
+							<div id="TextStyle" class="tabcontent">
+								  <h4 style="position: absolute;margin-top: 2%;">Event Text Style</h4>
+								  <div class="row mt-12">
+									<div class="col-md-6">
+										<div class="form-group">
+											<input class="form-control colpick" type="color" value="" id="colorTexto" name="font_color" />
+										</div>
 									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<button id="up">+</button>
-											<p id="font-size"></p>
-										 <button id="down">-</button>
+									<div class="col-md-6">
+										<div class="form-group">
+											<button id="up">+</button>
+												<p id="font-size"></p>
+												<input type="hidden" name="font_size" />
+											 <button id="down">-</button>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
-						<div id="EditPhoto" class="tabcontent">
-							  <h3>Edit Photo</h3>
-							  <p>Anything will come here.</p>
-						</div>
-					<!-- ends -->
+							<div id="EditPhoto" class="tabcontent">
+								  <h3>Edit Photo</h3>
+								  <input type="file" name="background_image"/>
+							</div>
+						<!-- ends -->
 
-					</div>
+						</div>
+					</form>
 					<div class="modal-footer">
 						<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
 						<button type="submit" class="btn btn-primary" id="submitButton">Save</button>
@@ -1645,14 +1649,41 @@ function setCalFullCal(year,month,id){
 				$('.calendaer').fullCalendar('renderEvent', mockEvent);
 				$('#submitButton').unbind('click');
 				$('#createEventModal').modal('hide');
-				//$('.fc-event').attr('style', 'font-size: 1.85em !important');
-				$('.fc-event').each(function(i, e){
-					$('<div id="font-size"></div>', {
-						"class": "arr",
-						"id": "id_" + i
-					}).appendTo(this);
+				// starts
+				/*var base_path = "<?php echo config('app.url');?>";
+				var month = "<?php echo $month;?>";
+				var year = "<?php echo $year;?>";
+				//var formData = $('#calrecords').serialize() + "&par1=1&par2=2&par3=232";
+				var myform = document.getElementById("calrecords");
+				var fd = new FormData(myform);
+				
+				$.ajaxSetup({ 
+					headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')} 
 				});
+				$.ajax({
+					url : base_path + 'calendars/cal_save',            
+					type : 'POST',
+					data : fd,
+					beforeSend: function(){
+						//toastr.success("Please Wait...! Saving Data");
+						swal("Please Wait...!", "Loading Data...!", "warning");
+					},
+					success : function(data){
+						if(data=='error'){
+							//toastr.error("Sorry! Project not create! Please try again...!");
+							swal("Oops!", "Project not create! Please try again...!", "error");
+						}else{
+							//$('#project_id').val(data);
+							$('.ui-dialog-titlebar-close').trigger('click');
+							//toastr.success("Thanks! Project Created Successfully! Now save your project!");
+							swal("Thanks!", "Project created successfully! Now save your project!", "success");
+						}
+					}
+				});
+				return false;*/
+				
 			});
+			// ends
 		},
 		//When u drop an event in the calendar do the following:
 		eventDrop: function (event, delta, revertFunc) {
