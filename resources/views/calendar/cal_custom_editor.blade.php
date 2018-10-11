@@ -180,6 +180,8 @@
 						</script>
 					</div>
 					<!-- Controls -->
+					
+					
 				</div>
 			</div>
 			<!-- Calender functionality starts -->
@@ -275,9 +277,12 @@
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<button id="up">+</button>
-											<p id="font-size"></p>
-										 <button id="down">-</button>
+										<button id="up" class="plus">+</button>
+											<input type="text" id="fontSizeBig" value="0" />
+										<button id="down" class="minus">-</button>
+									</div>
+									<div class="form-group">
+										<div class="form-control" id="fontFamily" name="fontFamily"></div>
 									</div>
 								</div>
 							</div>
@@ -1639,12 +1644,17 @@ function setCalFullCal(year,month,id){
 				$('#submitButton').unbind('click');
 				$('#createEventModal').modal('hide');
 				//$('.fc-event').attr('style', 'font-size: 1.85em !important');
-				$('.fc-event').each(function(i, e){
-					$('<div id="font-size"></div>', {
-						"class": "arr",
-						"id": "id_" + i
-					}).appendTo(this);
-				});
+				
+				/* $('#fontSizeBig').on('change', function () {
+					$('#calendar').fullCalendar('refetchEvents')
+					$('#calendar').fullCalendar('refetchResources');
+				}); */
+				var sizef = $('#fontSizeBig').val();
+				$('.fc-title').attr('style', 'font-size:'+sizef+'px !important');
+				
+				var fontfamily = $('#fontFamily').val();
+				$('.fc-title').attr('style', 'font-family:'+fontfamily+'!important');
+				
 			});
 		},
 		//When u drop an event in the calendar do the following:
@@ -1669,6 +1679,7 @@ function setCalFullCal(year,month,id){
 		/* dayClick: function(date, jsEvent, view) {
 			$('#modalLoginForm').modal('show');
 		} */
+		
 	});
 }
 	
@@ -1747,6 +1758,32 @@ $("#down").on("click", function() {
     $("#font-size").text(size -= 2);
   }
 });
+
+$("input").keyup(function(){
+    if( parseInt($(this).val()) < 10 ) {
+        $("#warning").text("Your font is smaller than 10px");
+    } else {
+        $("#warning").text("");
+        $('.fc-title').css('font-size', $(this).val() + 'px');
+    }
+});
+
+$(function() {
+    $(".plus").click(function() {
+        var text = $(this).next(":text");
+        text.val(parseInt(text.val(), 10) + 1);
+    });
+
+    $(".minus").click(function() {
+        var text = $(this).prev(":text");
+        text.val(parseInt(text.val(), 10) - 1);
+    });
+});
+
+
+$(function(){
+        $('#fontFamily').fontselect();
+      });
 </script>
 
 @endsection
