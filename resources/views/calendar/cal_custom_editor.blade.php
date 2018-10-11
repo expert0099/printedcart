@@ -1684,7 +1684,7 @@ function setCalFullCal(year,month,id){
 		setInterval(function() { $(".success").fadeOut(); }, 1000);
 	} */
 	
-	$('.left-right a#leftprev').click(function(){
+	/* $('.left-right a#leftprev').click(function(){
 		var month = $('.carousel-pagination li.active').attr('data-month');
 		$('.carousel-pagination li.active').removeClass('active').previous('.carousel-pagination li').addClass('active');
 		var year = $(this).attr('p');
@@ -1702,7 +1702,7 @@ function setCalFullCal(year,month,id){
 		//$('.calendaer').fullCalendar('next');
 		//var month = $(this).attr('data-slide');
 		//var nextmonth = $(this).attr('data-slide');
-	});
+	}); */
 	$('.carousel-pagination li').click(function() {
 		var month = $(this).attr('data-month');
 		var year = $(this).attr('p');
