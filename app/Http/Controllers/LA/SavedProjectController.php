@@ -125,7 +125,8 @@ class SavedProjectController extends Controller
 	public function order_detail($project_id=null,$order_id=null){
 		$order = DB::table('orders')->where('id',$order_id)->first();
 		$user = DB::table('users')->where('id',$order->user_id)->first();
-		$userinfo = DB::table('user_address_infos')->whereRaw("user_id = '". $order->user_id ."' AND id = '". $order->address_id ."'")->first();
+		$userinfo = DB::table('user_address_infos')->whereRaw("id = '". $order->address_id ."' AND user_id = '". $order->user_id ."'")->first();
+		
 		return view('la.savedproject.order_detail', compact('order','user','userinfo'));
 	}
 	
@@ -137,6 +138,7 @@ class SavedProjectController extends Controller
 		
 		$user = DB::table('users')->where('id',$order->user_id)->first();
 		$userinfo = DB::table('user_address_infos')->whereRaw("user_id = '". $order->user_id ."' AND id = '". $order->address_id ."'")->first();
+		
 		return view('la.savedproject.custom_order_detail', compact('order','user','userinfo','savedProj'));
 	}
 
@@ -343,6 +345,7 @@ class SavedProjectController extends Controller
 		$mpdf->WriteHTML($html);
 		$mpdf->Output();
 		exit;
+			
 	}
 	
 	public function download_custom_pdf($order_id=null){

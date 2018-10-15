@@ -19,12 +19,12 @@
 </div>
 
 <div class="profile2 content-body" style="overflow-x: auto; padding-top:20px;">
+	
 	<div>
 		<h3>Order Detail</h3>
-		<div><b>Order Amount :- </b>{{$order->currency_code.$order->amt}}</div>
-		<div><b>Order Shipping Amount :- </b>{{$order->currency_code.$order->shipping_amt}}</div>
-		<div><b>Order Total :- </b>{{$order->currency_code.($order->amt+$order->shipping_amt)}}</div>
-		<!--<div><b>Order Quantity :-</b> {{$order->qty}}</div>-->
+		<div><b>Order Amount :- </b>{{$order->currency_code}}{{$order->amt}}</div>
+		<div><b>Order Shipping Amount :- </b>{{$order->currency_code}}{{$order->shipping_amt}}</div>
+		<div><b>Order Total :- </b>{{$order->currency_code}}{{$order->amt+$order->shipping_amt}}</div>
 		<div><b>Order Date :-</b> {{$order->created_at}}</div>
 		<hr/>
 		<h3>Customer Detail</h3>
