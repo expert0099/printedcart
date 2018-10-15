@@ -279,7 +279,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<button id="up" class="plus">+</button>
-											<input type="text" id="fontSizeBig" name="font_size" value="0" />
+										<input type="text" id="fontSizeBig" name="font_size" value="10"/>
 										<button id="down" class="minus">-</button>
 									</div>
 									<div class="form-group">
@@ -1615,8 +1615,16 @@ table{
   z-index: 9999;
 }
 .fc-right{display: none;}
+
+.fc-scroller {
+    overflow: hidden !important;
+}
+.fc-toolbar h2{
+	font-size:18px !important;
+}
 </style>
 <!-- end show calendar under calendar layout -->
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Anonymous+Pro" />
 <script>
 $(function(){
 	$("#event_image").on('change',function(){
@@ -1641,7 +1649,7 @@ function setCalFullCal(year,month,id){
 	var displayCalendar = year+'-'+month+'-01';
 	
 	var calendar = $('#'+id+' .calendaer').fullCalendar({
-		aspectRatio: 2.2,
+		aspectRatio: 2.0,
 		editable: true,
 		selectable: true,
 		displayEventTime: false,
@@ -1649,19 +1657,21 @@ function setCalFullCal(year,month,id){
 		editable: true,
 		showNonCurrentDates: false,
 		defaultDate: moment(displayCalendar),
-		select: function (start, end, allDay) {
+		select: function (start, end, allDay){
 			$('#createEventModal').modal('show');
 			$('#submitButton').on('click',function(){
 				var mockEvent = {title: $('#eventName').val(), start: $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss"), textColor: $('#colorTexto').val(), textSize: $('#font-size').val()};
 				$('.calendaer').fullCalendar('renderEvent', mockEvent);
 				$('#submitButton').unbind('click');
 				$('#createEventModal').modal('hide');
-
-				var sizef = $('#fontSizeBig').val();
-				$('.fc-title').attr('style', 'font-size:'+sizef+'px !important');
 				
+				var sizef = $('#fontSizeBig').val();
+				//$('.fc-title').attr('style', 'font-size:'+sizef+'px!important');
 				var fontfamily = $('#fontFamily').val();
-				$('.fc-title').attr('style', 'font-family:'+fontfamily+'!important');
+				fontfamily = fontfamily.replace("+"," ");
+				//$('[data-date='+start.format()+']').css({"font-family": fontfamily+"!important", "font-size": sizef+"px!important"});				
+							
+				$('.fc-title').attr('style', 'font-family:'+fontfamily+'!important; font-size:'+sizef+'px !important');
 				
 				var month = "<?php echo $month;?>";
 				var year = "<?php echo $year;?>";
@@ -1694,9 +1704,8 @@ function setCalFullCal(year,month,id){
 						if(data=='error'){
 							swal("Oops!", "Project not create! Please try again...!", "error");
 						}else{
-							//alert(data);
 							var bgImage = base_url+'public/'+data;
-							$('.fc-event-container').attr('style', 'background-image:url('+bgImage+')!important');
+							$('.fc-event-container').attr('style', 'background-image:url('+bgImage+');   min-height: 36px; min-width: 36px;');
 							$('.ui-dialog-titlebar-close').trigger('click');
 							swal("Thanks!", "Event saved successfully!", "success");
 						}
@@ -1725,48 +1734,23 @@ function setCalFullCal(year,month,id){
 			$('#modalBody').html(event.description);
 			$('#createEventModal').modal();
 		},
-		/* dayClick: function(date, jsEvent, view) {
-			$('#modalLoginForm').modal('show');
-		} */
-		
+				
 	});
 }
 	
-	/* function displayMessage(message) {
-		$(".response").html("<div class='success'>"+message+"</div>");
-		setInterval(function() { $(".success").fadeOut(); }, 1000);
-	} */
+$('.carousel-pagination li').click(function() {
+	var month = $(this).attr('data-month');
+	var year = $(this).attr('p');
+	var m = moment([year, month, 1]);
+	$('.calendaer').fullCalendar('gotoDate', m );
+	
+});
 
-	/* $('.left-right a#leftprev').click(function(){
-		var month = $('.carousel-pagination li.active').attr('data-month');
-		$('.carousel-pagination li.active').removeClass('active').previous('.carousel-pagination li').addClass('active');
-		var year = $(this).attr('p');
-		var m = moment([year, month-1, 1]);
-		$('.calendaer').fullCalendar('gotoDate', m );
-		//$('.calendaer').fullCalendar('prev');
-		//var prevmonth = $(this).attr('data-slide');
-	});
-	$('.left-right a#rightnext').click(function(){
-		var month = $('.carousel-pagination li.active').attr('data-month');
-		$('.carousel-pagination li.active').removeClass('active').next('.carousel-pagination li').addClass('active');
-		var year = $(this).attr('p');
-		var m = moment([year, month+1, 1]);
-		$('.calendaer').fullCalendar('gotoDate', m );
-		//$('.calendaer').fullCalendar('next');
-		//var month = $(this).attr('data-slide');
-		//var nextmonth = $(this).attr('data-slide');
-	}); */
-
-	$('.carousel-pagination li').click(function() {
-		var month = $(this).attr('data-month');
-		var year = $(this).attr('p');
-		var m = moment([year, month, 1]);
-		$('.calendaer').fullCalendar('gotoDate', m );
-	});
 function displayMessage(message) {
 	$(".response").html("<div class='success'>"+message+"</div>");
 	setInterval(function() { $(".success").fadeOut(); }, 1000);
 }
+
 function eventTab(evt, eventName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -1780,6 +1764,7 @@ function eventTab(evt, eventName) {
     document.getElementById(eventName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 $(".modal").on("hidden.bs.modal", function(){
@@ -1794,30 +1779,19 @@ function getSize() {
 }
 //get inital font size
 getSize();
-$("#up").on("click", function() {
-  // parse font size, if less than 50 increase font size
-  if ((size + 2) <= 50) {
-    $(".fc-event").css("font-size", "+=2");
-    $("#font-size" ).text(size += 2);
-  }
-});
-$("#down").on("click", function() {
-  if ((size - 2) >= 12) {
-    $(".fc-event").css("font-size", "-=2");
-    $("#font-size").text(size -= 2);
-  }
-});
 
-$("input").keyup(function(){
+
+
+/* $("input").keyup(function(){
     if( parseInt($(this).val()) < 10 ) {
         $("#warning").text("Your font is smaller than 10px");
     } else {
         $("#warning").text("");
         $('.fc-title').css('font-size', $(this).val() + 'px');
     }
-});
+}); */
 
-$(function() {
+/* $(function() {
     $(".plus").click(function() {
         var text = $(this).next(":text");
         text.val(parseInt(text.val(), 10) + 1);
@@ -1827,12 +1801,40 @@ $(function() {
         var text = $(this).prev(":text");
         text.val(parseInt(text.val(), 10) - 1);
     });
-});
+}); */
 
 
 $(function(){
-        $('#fontFamily').fontselect();
-      });
+	$('#fontFamily').fontselect();
+	
+	/** set by-default font size input for event **/
+	var size = 10;
+	$("#fontSizeBig").val(size);
+	/** end set by-default font size input for event **/
+	
+	/** event size input behave plus, minus button **/
+	$("#up").on("click", function(){
+		var size = $("#fontSizeBig").val();
+		if(size < 50){
+			size = parseInt(size)+1;
+			$(".fc-event").css("font-size", size);
+			$("#fontSizeBig").val(size);
+		}else{
+			swal("Oops!","Maximum font size 50 allowed.","error");
+		}
+	});
+	$("#down").on("click", function(){
+		var size = $("#fontSizeBig").val();
+		if(size >= 11){
+			size = parseInt(size)-1;
+			$(".fc-event").css("font-size", size);
+			$("#fontSizeBig").val(size);
+		}else{
+			swal("Oops!","Manimum font size 10 allowed.","error");
+		}
+	});
+	/** end event size input behave plus, minus button **/
+});
 </script>
 
 @endsection

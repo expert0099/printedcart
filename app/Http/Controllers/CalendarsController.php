@@ -161,9 +161,10 @@ class CalendarsController extends Controller
 			$user_id = Auth::user()->id;
 			/** events **/
 			$events_with_limit_attr2 = DB::table('calendar_events')
-				->select('calendar_events.event_title as title','calendar_events.event_date as start','calendar_events.font_color as textColor')
-				//->whereRaw("calendar_id = '".$calendar_id."' AND calendar_size_id = '".$calendar_size_id."' AND calendar_category = '".$calendar_category_id."' AND event_month = '".$month."' AND event_year = '".$year."' AND user_id = '".$user_id."'")
+				->select('calendar_events.event_title as title','calendar_events.event_date as start','calendar_events.font_color as textColor','calendar_events.font_size as textSize','calendar_events.font_family','calendar_events.background_image')
+				->whereRaw("calendar_id = '".$calendar_id."' AND calendar_size_id = '".$calendar_size_id."' AND calendar_category = '".$calendar_category_id."' AND event_month = '".$month."' AND event_year = '".$year."' AND user_id = '".$user_id."'")
 				->get();
+			
 			$events_with_limit_attr = json_encode($events_with_limit_attr2);
 			
 			$events_with_all_attr = DB::table('calendar_events')

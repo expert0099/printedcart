@@ -468,7 +468,8 @@
 .transition-timer-carousel.cal_12x12 .carousel-inner {
     max-width:864px !important;
     width:864px !important;
-    height:864px !important;
+	height: auto;
+    /* height:864px !important; */
 }
 .cal_12x12 .calendar-text, .cal_8x11 .calendar-text,
 .page_item .calendar-text {
@@ -496,7 +497,8 @@ display: -webkit- flex !important;
 .transition-timer-carousel.cal_12x12 .row.rowHeight {
 	width: 100%;
 	float: none;
-	height:450px;
+	height: 40%;
+	/* height:450px; */
 	margin-right: 0;
 }
 

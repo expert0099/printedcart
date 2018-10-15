@@ -21,6 +21,10 @@
 <!--<script src="{{URL::asset('public/js/crop/html2canvas.min.js')}}"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.svg.js"></script>
+
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/fullcalendar.min.css')}}" media="all">
+<script type="text/javascript" src="{{ URL::asset('public/js/fullcalendar.min.js') }}"></script>
+		
 <style>
 .textinside{
 	display: none;
@@ -436,7 +440,9 @@
 #page-content_Photobook_11x8 .imageContent {
     height: 100% !important;
 }
-
+.fc-scroller {
+    overflow: hidden !important;
+}
 </style>
 
 <div style="width:100%;float:left;">

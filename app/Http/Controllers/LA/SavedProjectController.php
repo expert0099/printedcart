@@ -229,6 +229,8 @@ class SavedProjectController extends Controller
 		error_reporting(E_ALL); // set error display to all
 		
 		$order_pdf = DB::table('ordered_pdf_images')->whereRaw("project_id = '".$project_id."' AND order_id = '".$order_id."'")->orderBy('page_id','ASC')->get();
+		/* echo '<pre>';
+		print_r($order_pdf);exit; */
 		
 		$pd = Project::with('Size')->where('id',$project_id)->first();
 		$user_id = $pd->user_id;

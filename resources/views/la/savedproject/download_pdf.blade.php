@@ -4,6 +4,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>Printed Cart :: Download PDF</title>
 		<link rel="stylesheet" type="text/css" href="{{URL::asset('public/css/display_pdf.css')}}" media="all">
+		
+		<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/fullcalendar.min.css')}}">
+		<script type="text/javascript" src="{{ URL::asset('public/js/fullcalendar.min.js') }}"></script>
 	</head>
 	<body>
 		<div id="page-content_{{$identifierClass}}" class="profile2 content-body" style="overflow-x: auto;">
@@ -22,10 +25,28 @@
 				<div id="cal_{{$page->id}}" class="page_item">
 					<div class="crop-border">{!! $page->page_content !!}</div>
 				</div>
-			@endforeach   
+			@endforeach  
+			<?php /*@foreach($order_pdf as $k => $page)
+				<div id="cal_{{$page->id}}" class="page_item">
+					<div class="crop-border"><img src="{{URL::asset('public/canvas_upload/'.$page->user_id.'/'.$page->image_name)}}"></div>
+				</div>
+			@endforeach*/?> 
 		@endif
 		
 		</div>
 	</body>
 </html>
+<style>
+.fc-scroller {
+    overflow: hidden !important;
+}
+.fc-toolbar h2{
+	font-size:18px !important;
+}
+</style>
+<script>
+$(function(){
+	
+});
+</script>
 <?php //exit;?>
