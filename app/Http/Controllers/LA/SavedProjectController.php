@@ -345,7 +345,7 @@ class SavedProjectController extends Controller
 		$mpdf->WriteHTML($html);
 		$mpdf->Output();
 		exit;
-			
+				
 	}
 	
 	public function download_custom_pdf($order_id=null){
@@ -399,9 +399,7 @@ class SavedProjectController extends Controller
 		$mpdf->WriteHTML($html);
 		$mpdf->Output();
 		exit;
-		
-		
-		
+			
 	}
 	
 }

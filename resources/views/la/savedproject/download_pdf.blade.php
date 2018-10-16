@@ -4,11 +4,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>Printed Cart :: Download PDF</title>
 		<link rel="stylesheet" type="text/css" href="{{URL::asset('public/css/display_pdf.css')}}" media="all">
-
 		
 		<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/full_calendar_unminify.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/css/jquery-ui/smoothness/jquery-ui-1.8.1.custom.css')}}">
 		<!--<script type="text/javascript" src="{{ URL::asset('public/js/fullcalendar.min.js') }}"></script>-->
-		
 	</head>
 	<body>
 		<div id="page-content_{{$identifierClass}}" class="profile2 content-body" style="overflow-x: auto;">
